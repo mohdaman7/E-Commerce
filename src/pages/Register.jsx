@@ -75,7 +75,7 @@ function Register() {
                   pattern="^[A-Za-z0-9].{4,}"
                   name="username"
                   placeholder="username"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-black focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border 2px solid black"
                   onChange={handleChange}
                   value={inputs.username}
                   onBlur={()=>{
@@ -102,7 +102,7 @@ function Register() {
                   pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
                   name="email"
                   placeholder="Email ID"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border 2px solid blac"
                   onChange={handleChange}
                   value={inputs.email}
                   onBlur={()=>{
@@ -128,7 +128,7 @@ function Register() {
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                   name="password"
                   placeholder="password"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border 2px solid blac"
                   onChange={handleChange}
                   value={inputs.password}
                   onBlur={()=>{
@@ -156,7 +156,7 @@ function Register() {
                   name="cpassword"
                   placeholder="Confirm Password"
                   // pattern={values.password}
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border 2px solid blac"
                   onChange={handleChange}
                   value={inputs.cpassword}
                   onBlur={()=>{
