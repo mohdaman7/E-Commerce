@@ -1,6 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
+// import Validation from "../Validation";
+import './Register.css'
+
 
 function Register() {
+  // const [values,setValues] = useState({
+  //   name:'',
+  //   email:'',
+  //   password:'',
+  //   cpassword:''
+  // })
+
+
+  // const [errors,setErrors] = useState({})
+
+  // function handleInput(event) {
+  //   const newObj = {...values,[event.target.name]: event.target.value}
+  //   setValues(newObj)
+  // }
+
+  // function handleValidation(event){
+  //   event.preventDefault();
+  //   setErrors(Validation(values));
+  // }
+
+
+  const [inputs,setInputs] = useState({
+    username:'',
+    email:'',
+    password:'',
+    cpassword:''
+  })
+
+
+  const [focus,setFocus] = useState({
+    errName : false,
+    errEmail : false,
+    errPass : false,
+    errCpass : false
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputs({...inputs,[name]:value})
+  }
+
+
   return (
     <div>
       <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
@@ -10,20 +60,33 @@ function Register() {
           </a>
         </div>
         <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700 undefined"
+  
               >
-                Name
+                Username
               </label>
               <div className="flex flex-col items-start">
                 <input
                   type="text"
-                  name="name"
+                  pattern="^[A-Za-z0-9].{4,}"
+                  name="username"
+                  placeholder="username"
                   className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onChange={handleChange}
+                  value={inputs.username}
+                  onBlur={()=>{
+                    setFocus({...focus,errName:true})
+                  }}
+                  focus = {focus.errName.toString()}
+                  required
+                 
                 />
+                 <span>Username should have 3-16 characters</span>   
+                {/* {errors.name && <p style={{color:"red"}}>{errors.name}</p>} */}
               </div>
             </div>
             <div className="mt-4">
@@ -36,9 +99,20 @@ function Register() {
               <div className="flex flex-col items-start">
                 <input
                   type="email"
+                  pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
                   name="email"
+                  placeholder="Email ID"
                   className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onChange={handleChange}
+                  value={inputs.email}
+                  onBlur={()=>{
+                    setFocus({...focus,errEmail:true})
+                  }}
+                  focus = {focus.errEmail.toString()}
+                  required
                 />
+                 <span>Enter a valid Email ID</span>
+                {/* {errors.email && <p style={{color:"red"}}>{errors.email}</p>} */}
               </div>
             </div>
             <div className="mt-4">
@@ -51,9 +125,21 @@ function Register() {
               <div className="flex flex-col items-start">
                 <input
                   type="password"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                   name="password"
+                  placeholder="password"
                   className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onChange={handleChange}
+                  value={inputs.password}
+                  onBlur={()=>{
+                    setFocus({...focus,errPass:true})
+                  }}
+                  focus = {focus.errPass.toString()}
+                  required
+                  
                 />
+                 <span>Password must have minimum 8 characters and include atleast 1 uppercase, 1 digit and 1 special character</span>
+                {/* {errors.password && <p style={{color:"red"}}>{errors.password}</p>}  */}
               </div>
             </div>
             <div className="mt-4">
@@ -66,11 +152,24 @@ function Register() {
               <div className="flex flex-col items-start">
                 <input
                   type="password"
-                  name="password_confirmation"
+                  pattern={inputs.password}
+                  name="cpassword"
+                  placeholder="Confirm Password"
+                  // pattern={values.password}
                   className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onChange={handleChange}
+                  value={inputs.cpassword}
+                  onBlur={()=>{
+                    setFocus({...focus,errCpass:true})
+                  }}
+                  focus = {focus.errCpass.toString()} 
+                  required 
                 />
+                <span>Password is not matching</span>
+                 {/* {errors.cpassword && <p style={{color:"red"}}>{errors.cpassword}</p>}  */}
               </div>
             </div>
+
             
             <div className="flex items-center justify-end mt-4">
               <a
