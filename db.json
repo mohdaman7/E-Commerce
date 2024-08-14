@@ -1,0 +1,165 @@
+ {
+   "datass":[
+     {
+      "id": "1",
+      "price":99.99,
+      "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/1b1785a7-b7b2-4b09-915f-257fd37b7653/AIR+JORDAN+1+MID.png",
+      "name": "Air Jordan 1 Mid SE",
+      "color": "Black/Red",
+      "size": "10"
+    },
+    {
+      "id": "2",
+      "price":79.99,
+      "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/16beefaf-17ac-4f2d-a88b-b2083821ae8d/W+NIKE+ZOOM+VOMERO+5.png",
+      "name": "Nike Zoom Vomero 5",
+      "color": "White",
+      "size": "8"
+    },
+    {
+      "id": "3",
+      "price":120.00,
+      "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/3f3e7049-5c99-428c-abcd-e246b086f2ed/AIR+FORCE+1+%2707.png",
+      "name": "Nike Air Force 1",
+      "color": "Blue",
+      "size": "11"
+    },
+    {
+      "id": "4",
+      "price":89.99,
+      "img": "https://www.superkicks.in/cdn/shop/files/1_655b3af1-cea0-4ab6-878c-eff7097d0f82.jpg?v=1720439145&width=600",
+      "name": "Sizike Low",
+      "color": "Gray",
+      "size": "9"
+    },
+    {
+      "id": "5",
+      "price":115.00,
+      "img": "https://www.superkicks.in/cdn/shop/files/1_6c6a2a75-68df-4bf1-9288-b6b9e3c3aefa.jpg?v=1713793427&width=600",
+      "name": "New Balance",
+      "color": "Navy",
+      "size": "12"
+    },
+    {
+      "id": "6",
+      "price":65.00,
+      "img": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/cd8662cc-1947-4ead-b02f-a474142e7430/air-max-dn-se-shoes-MZ6hPZ.png",
+      "name": " Nike Air Max Dn SE ",
+      "color": "Green",
+      "size": "7"
+    },
+    {
+      "id": "7",
+      "price":110.00,
+      "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c614fd42-4f10-475c-b791-00d61e801a07/LEGEND+10+CLUB+FG%2FMG.png",
+      "name": "Nike Tiempo Legend 10 Club",
+      "color": "Black/White",
+      "size": "10"
+    },
+    {
+      "id": "8",
+      "price":140.00,
+      "img": "https://assets.ajio.com/medias/sys_master/root/20240716/jiip/669656661d763220fac1a52e/-473Wx593H-700041379-blue-MODEL2.jpg",
+      "name": "Men Round-Toe Lace-Up Shoes",
+      "color": "Purple",
+      "size": "11"
+    },
+    {
+      "id": "9",
+      "price":105.00,
+      "img": "https://assets.ajio.com/medias/sys_master/root/20230413/uZ1k/6437f228907deb497adef379/-473Wx593H-450155968-black-MODEL2.jpg",
+      "name": "Men Leather Round-Toe Derbys",
+      "color": "Beige",
+      "size": "9"
+    },
+    {
+      "id": "10",
+      "price":85.00,
+      "img": "https://assets.ajio.com/medias/sys_master/root/20240731/NwwY/66aa696a6f60443f31de387f/-473Wx593H-700202434-black-MODEL.jpg",
+      "name": "Men Round-Toe Derbys",
+      "color": "Charcoal",
+      "size": "8"
+    },
+    {
+      "id": "11",
+      "price":98.00,
+      "img": "https://example.com/images/shoe11.jpg",
+      "name": "Under Armour HOVR",
+      "color": "Red",
+      "size": "10"
+    },
+    {
+      "id": "12",
+      "price":75.00,
+      "img": "https://example.com/images/shoe12.jpg",
+      "name": "Nike SB Dunk Low",
+      "color": "Brown",
+      "size": "7"
+    },
+    {
+      "id": "13",
+      "price":125.00,
+      "img": "https://example.com/images/shoe13.jpg",
+      "name": "Adidas Yeezy Boost 350",
+      "color": "White",
+      "size": "12"
+    },
+    {
+      "id": "14",
+      "price":60.00,
+      "img": "https://example.com/images/shoe14.jpg",
+      "name": "Champion Reverse Weave",
+      "color": "Black",
+      "size": "9"
+    },
+    {
+      "id": "15",
+      "price":130.00,
+      "img": "https://example.com/images/shoe15.jpg",
+      "name": "Nike Air Max 97",
+      "color": "Gold",
+      "size": "11"
+    },
+    {
+      "id": "16",
+      "price":70.00,
+      "img": "https://example.com/images/shoe16.jpg",
+      "name": "Fila Disruptor II",
+      "color": "White",
+      "size": "8"
+    },
+    {
+      "id": "17",
+      "price":90.00,
+      "img": "https://example.com/images/shoe17.jpg",
+      "name": "Saucony Grid SD",
+      "color": "Orange",
+      "size": "10"
+    },
+    {
+      "id": "18",
+      "price":82.00,
+      "img": "https://example.com/images/shoe18.jpg",
+      "name": "Hoka One One Bondi",
+      "color": "Blue",
+      "size": "9"
+    },
+    {
+      "id": "19",
+      "price":150.00,
+      "img": "https://example.com/images/shoe19.jpg",
+      "name": "Balenciaga Triple S",
+      "color": "Gray",
+      "size": "11"
+    },
+    {
+      "id": "20",
+      "price":77.00,
+      "img": "https://example.com/images/shoe20.jpg",
+      "name": "Dr. Martens 1460",
+      "color": "Cherry Red",
+      "size": "8"
+    }
+  ]
+}
+  

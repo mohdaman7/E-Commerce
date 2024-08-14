@@ -20,7 +20,7 @@ function Login() {
     if (!email) {
       error.email = "Email is Required";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      error.email = "Email not Matched";
+      error.email = "Email not Matched"
     } else {
       error.email = "";
     }
