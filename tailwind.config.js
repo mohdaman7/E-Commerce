@@ -13,7 +13,7 @@ module.exports = withMT({
         'formal-bg':"url('https://cdn.pixelbin.io/v2/black-bread-289bfa/-6ZJSm/original/clarks-cms_images/1707809251Web_Banner_Size_Web_Banner_705x397_Clarks_Feb_24_Banners_120224.webp')",
         'women-bg':"url('https://www.jennexplores.com/wp-content/uploads/2020/06/Wasootch-Ridge-Hike-4-768x960.jpg')",
         'men-bg':"url('https://static.wixstatic.com/media/818f01_0531e27a3bb14a4dba365aec4daad2dc~mv2.jpg/v1/fill/w_963,h_722,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/818f01_0531e27a3bb14a4dba365aec4daad2dc~mv2.jpg')",
-        'kid-bg':"url('https://klasvanjuflinda.nl/wp-content/uploads/2017/08/22404117_xl-768x1152.jpg')"
+        'kid-bg':"url('https://marcusandmack.com/wp-content/uploads/2024/05/Screen-Shot-2024-05-13-at-4.31.09-PM.png')"
       }
     },
   },
