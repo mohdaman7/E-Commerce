@@ -51,15 +51,15 @@
     {
       "id": "7",
       "price":110.00,
-      "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c614fd42-4f10-475c-b791-00d61e801a07/LEGEND+10+CLUB+FG%2FMG.png",
-      "name": "Nike Tiempo Legend 10 Club",
+      "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/05d712c8-6a44-43aa-88fc-0f36a36c505a/JORDAN+LUKA+3+TB+PF.png",
+      "name": "NLuka 3 PF Team Bank",
       "color": "Black/White",
       "size": "10"
     },
     {
       "id": "8",
       "price":140.00,
-      "img": "https://assets.ajio.com/medias/sys_master/root/20240716/jiip/669656661d763220fac1a52e/-473Wx593H-700041379-blue-MODEL2.jpg",
+      "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/93ca90bff2984e27a8b0ae2b0050402f_9366/Grand_Court_TD_Lifestyle_Court_Casual_Shoes_Black_GW9251_01_standard.jpg",
       "name": "Men Round-Toe Lace-Up Shoes",
       "color": "Purple",
       "size": "11"
@@ -67,8 +67,8 @@
     {
       "id": "9",
       "price":105.00,
-      "img": "https://assets.ajio.com/medias/sys_master/root/20230413/uZ1k/6437f228907deb497adef379/-473Wx593H-450155968-black-MODEL2.jpg",
-      "name": "Men Leather Round-Toe Derbys",
+      "img": "https://th.bing.com/th/id/OIP.gjH8Wwo-h_ZCG945rN1FeAAAAA?rs=1&pid=ImgDetMain",
+      "name": "Black Patent Leather Thick Sole Mens",
       "color": "Beige",
       "size": "9"
     },

@@ -4,6 +4,7 @@ import Navibar from "../component/Navibar";
 import ProductCard from "../component/ProductCard";
 import axios from "axios";
 import { contexts } from "../App";
+import Banner2 from "../Home/Banner2";
 
 
 function Home() {
@@ -25,6 +26,9 @@ function Home() {
       <div className="m-auto">
         <h1 className="bold text-2xl m-14">Our Best Seller</h1>
         <ProductCard />
+      </div>
+      <div className="m-auto">
+        <Banner2/>
       </div>
     </div>
   );

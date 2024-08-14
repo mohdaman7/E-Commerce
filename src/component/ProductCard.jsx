@@ -14,20 +14,20 @@ const ProductCard = () => {
               <div className="bg-white shadow-md rounded-lg h-full flex flex-col dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                   <img
-                    className="rounded-t-lg object-cover h-49 w-full"
+                    className="rounded-t-lg object-cover h-56 w-full"
                     src={item.img}
                     alt="product image"
                   />
                 </a>
-                <div className="px-5 pb-5 flex flex-col flex-grow">
+                <div className="px-5 pb-5 flex flex-col flex-grow m-4">
                   <a href="#">
                     <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">
                       {item.name}
                     </h3>
                   </a>
-                  <div className="flex items-center mt-2.5 mb-5">
+                  <div className="flex items-center mt-2.5 mb-5 h-1">
                     <svg
-                      className="w-5 h-5 text-yellow-300"
+                      className="w-5 h-4 text-yellow-300"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
