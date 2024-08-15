@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Navibar() {
   return (
@@ -8,48 +9,70 @@ function Navibar() {
           {/* <!-- navbar --> */}
           <nav className="flex justify-between bg-gray-900 text-white w-screen">
             <div className="px-5 xl:px-12 py-6 flex w-full items-center">
-              <a className="text-3xl font-bold font-heading" href="#">
+              <NavLink to='/' className="text-3xl font-bold font-heading" href="#">
                 <h3 className="font-semibold">FOOTZONE</h3>
-              </a>
+              </NavLink>
               {/* <!-- Nav Links --> */}
 
               <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
                 <li>
-                  <a className="hover:text-gray-200" href="#">
+                  <NavLink to="latest" className="hover:text-gray-200" href="#">
                     LATEST
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="hover:text-gray-200" href="#">
+                  <NavLink to="mens" className="hover:text-gray-200" href="#">
                     MENS
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="hover:text-gray-200" href="#">
+                  <NavLink to="womens" className="hover:text-gray-200" href="#">
                     WOMENS
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="hover:text-gray-200" href="#">
+                  <NavLink to="kids" className="hover:text-gray-200" href="#">
                     KIDS
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="hover:text-gray-200" href="#">
+                  <NavLink to="collections" className="hover:text-gray-200" href="#">
                     COLLECTIONS
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="hover:text-gray-200" href="#">
+                  <NavLink to="contact" className="hover:text-gray-200" href="#">
                     CONTACT
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
+
+              <div className="relative mx-4 hidden md:block">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="w-full px-4 py-2 bg-gray-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-gray-600"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="absolute top-2 right-4 h-5 w-5 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M11 4a7 7 0 11-7 7 7 7 0 017-7zM21 21l-4.35-4.35"
+                  />
+                </svg>
+              </div>
               
 
               {/* <!-- Header Icons --> */}
               <div className="hidden xl:flex items-center space-x-5">
-                <a className="hover:text-gray-200" href="#">
+                <NavLink className="hover:text-gray-200" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -64,8 +87,8 @@ function Navibar() {
                       d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                     />
                   </svg>
-                </a>
-                <a className="flex items-center hover:text-gray-200" href="#">
+                </NavLink>
+                <NavLink className="flex items-center hover:text-gray-200" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -84,9 +107,9 @@ function Navibar() {
                     <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
                   </span>
-                </a>
+                </NavLink>
                 {/* <!-- Sign In / Register      --> */}
-                <a className="flex items-center hover:text-gray-200" href="#">
+                <NavLink className="flex items-center hover:text-gray-200" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 hover:text-gray-200"
@@ -101,11 +124,11 @@ function Navibar() {
                       d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                </a>
+                </NavLink>
               </div>
             </div>
             {/* <!-- Responsive navbar --> */}
-            <a className="xl:hidden flex mr-6 items-center" href="#">
+            <NavLink className="xl:hidden flex mr-6 items-center" href="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 hover:text-gray-200"
@@ -124,8 +147,8 @@ function Navibar() {
                 <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
               </span>
-            </a>
-            <a className="navbar-burger self-center mr-12 xl:hidden" href="#">
+            </NavLink>
+            <NavLink className="navbar-burger self-center mr-12 xl:hidden" href="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 hover:text-gray-200"
@@ -140,26 +163,10 @@ function Navibar() {
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-            </a>
+            </NavLink>
           </nav>
         </section>
       </div>
-      {/* <!-- Does this resource worth a follow? --> */}
-      {/* <div class="absolute bottom-0 right-0 mb-4 mr-4 z-10">
-        <div>
-          <a
-            title="Follow me on twitter"
-            href="https://www.twitter.com/asad_codes"
-            target="_blank"
-            class="block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12"
-          >
-            <img
-              class="object-cover object-center w-full h-full rounded-full"
-              src="https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2019/12/twitter-logo.jpg"
-            />
-          </a>
-        </div>
-      </div> */}
     </div>
   );
 }
