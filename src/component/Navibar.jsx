@@ -21,27 +21,27 @@ function Navibar() {
                 </li>
                 <li>
                   <a className="hover:text-gray-200" href="#">
-                    MEN
+                    MENS
                   </a>
                 </li>
                 <li>
                   <a className="hover:text-gray-200" href="#">
-                    WOMEN
+                    WOMENS
                   </a>
                 </li>
                 <li>
                   <a className="hover:text-gray-200" href="#">
-                    COLLECTION
+                    KIDS
                   </a>
                 </li>
                 <li>
                   <a className="hover:text-gray-200" href="#">
-                    LOOKBOOK
+                    COLLECTIONS
                   </a>
                 </li>
                 <li>
                   <a className="hover:text-gray-200" href="#">
-                    SALE
+                    CONTACT
                   </a>
                 </li>
               </ul>

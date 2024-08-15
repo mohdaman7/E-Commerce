@@ -5,6 +5,9 @@ import ProductCard from "../component/ProductCard";
 import axios from "axios";
 import { contexts } from "../App";
 import Banner2 from "../Home/Banner2";
+import Banner3 from "../Home/Banner3";
+import { Link } from "react-router-dom";
+import Banner4 from "../Home/Banner4";
 
 
 function Home() {
@@ -23,12 +26,16 @@ function Home() {
     <div className="bg-gray-200">
       <Navibar />
       <Banner />
-      <div className="m-auto">
-        <h1 className="bold text-2xl m-14">Our Best Seller</h1>
+      <Banner2/>
+      <div className="m-auto">      
+        <h1 className="font-bold text-2xl m-14 pl-24">  Best-Selling Men's Shoes</h1>
         <ProductCard />
       </div>
+      <div>
+        <Banner4/>
+      </div>
       <div className="m-auto">
-        <Banner2/>
+        <Banner3/>
       </div>
     </div>
   );
