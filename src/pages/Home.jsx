@@ -8,6 +8,7 @@ import Banner2 from "../Home/Banner2";
 import Banner3 from "../Home/Banner3";
 import { Link } from "react-router-dom";
 import Banner4 from "../Home/Banner4";
+import Footer from "../component/Footer";
 
 
 function Home() {
@@ -37,6 +38,7 @@ function Home() {
       <div className="m-auto">
         <Banner3/>
       </div>
+      <Footer/>
     </div>
   );
 }
