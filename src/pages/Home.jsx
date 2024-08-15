@@ -26,7 +26,7 @@ function Home() {
 
   return (
     <div className="bg-gray-200">
-      <Navibar />
+      {/* <Navibar /> */}
       <Banner />
       <Banner2 />
       <div className="m-auto">
@@ -53,7 +53,7 @@ function Home() {
       <div className="bg-white"> 
       <Logos/>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }
