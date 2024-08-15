@@ -75,48 +75,48 @@
     {
       "id": "10",
       "price":85.00,
-      "img": "https://assets.ajio.com/medias/sys_master/root/20240731/NwwY/66aa696a6f60443f31de387f/-473Wx593H-700202434-black-MODEL.jpg",
-      "name": "Men Round-Toe Derbys",
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/400996/01/sv01/fnd/IND/fmt/png/Mayze-UT-Reflect-Women's-Sneakers",
+      "name": "Mayze UT Reflect Women's Sneakers",
       "color": "Charcoal",
       "size": "8"
     },
     {
       "id": "11",
       "price":98.00,
-      "img": "https://example.com/images/shoe11.jpg",
-      "name": "Under Armour HOVR",
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/381168/04/sv01/fnd/IND/fmt/png/Camo-Women's-Sneakers",
+      "name": "Camo Women's Sneakers",
       "color": "Red",
       "size": "10"
     },
     {
       "id": "12",
       "price":75.00,
-      "img": "https://example.com/images/shoe12.jpg",
-      "name": "Nike SB Dunk Low",
+      "img": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a751495d-1cb9-4976-ab4f-9a2189464e8f/blazer-mid-77-shoes-pDwZfH.png",
+      "name": "Nike Blazer Mid '77",
       "color": "Brown",
       "size": "7"
     },
     {
       "id": "13",
       "price":125.00,
-      "img": "https://example.com/images/shoe13.jpg",
-      "name": "Adidas Yeezy Boost 350",
+      "img": "https://media-us.landmarkshops.in/cdn-cgi/image/h=831,w=615,q=85,fit=cover/max-new/1000013391879-White-WHITE-1000013391879_01-2100.jpg",
+      "name": "Women Colourblocked Lace-Up Sneakers",
       "color": "White",
       "size": "12"
     },
     {
       "id": "14",
       "price":60.00,
-      "img": "https://example.com/images/shoe14.jpg",
-      "name": "Champion Reverse Weave",
+      "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0f492b03-ba89-4908-8095-2844cbf3347b/WMNS+AIR+JORDAN+1+LOW+SE.png",
+      "name": "Air Jordan 1 Low SE",
       "color": "Black",
       "size": "9"
     },
     {
       "id": "15",
       "price":130.00,
-      "img": "https://example.com/images/shoe15.jpg",
-      "name": "Nike Air Max 97",
+      "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e745acb29cd248e8994a6820a4ac6a29_9366/GAZELLE_BOLD_SHOES_Yellow_IF5937_01_standard.jpg",
+      "name": "Gazelle Bold Shoe",
       "color": "Gold",
       "size": "11"
     },

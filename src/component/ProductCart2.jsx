@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { contexts } from "../App";
 
-const ProductCard = () => {
+const ProductCard2 = () => {
   const { data, setData } = useContext(contexts);
 
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-center">
-        {data.slice(0, 9).map((item) => {
+        {data.slice(9, 15).map((item) => {
           const [isLiked, setIsLiked] = useState(false);
 
           const handleHeartClick = () => {
@@ -79,4 +79,4 @@ const ProductCard = () => {
   );
 };
 
-export default ProductCard;
+export default ProductCard2;
