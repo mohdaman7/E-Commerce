@@ -13,6 +13,7 @@ import Mens from "./pages/Mens";
 import Womens from "./pages/Womens";
 import Collections from "./pages/collections";
 import Footer from "./component/Footer";
+import Kids from "./pages/Kids";
 
 export const contexts = createContext();
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/mens" element={<Mens />} />
           <Route path="/womens" element={<Womens />} />
           <Route path="/collections" element={<Collections />} />
+          <Route path="/kids" element={<Kids/>}/>
         </Routes>
       </contexts.Provider>
       <Footer/>

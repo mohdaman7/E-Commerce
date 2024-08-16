@@ -123,32 +123,32 @@
     {
       "id": "16",
       "price": 70.00,
-      "img": "https://example.com/images/shoe16.jpg",
-      "name": "Fila Disruptor II",
-      "brand": "Fila",
-      "category": ""
+      "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/97c6d020-831f-400b-b9a6-176671f89a19/JORDAN+1+RETRO+HIGH+OG+%28TD%29.png",
+      "name": "Jordan 1 Retro High OG 'Latte'",
+      "brand": "Nike",
+      "category": "kids"
     },
     {
       "id": "17",
       "price": 90.00,
-      "img": "https://example.com/images/shoe17.jpg",
-      "name": "Saucony Grid SD",
-      "brand": "Saucony",
-      "category": ""
+      "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c852da49-18c8-4548-80f6-c5dbcdfc5363/FORCE+1+LOW+EASYON+%28TD%29.png",
+      "name": "Nike Force 1 Low EasyOn",
+      "brand": "Nike",
+      "category": "kids"
     },
     {
       "id": "18",
       "price": 82.00,
-      "img": "https://example.com/images/shoe18.jpg",
-      "name": "Hoka One One Bondi",
+      "img": "https://nb.scene7.com/is/image/NB/psb480gh_nb_02_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440",
+      "name": "kids 480",
       "brand": "Hoka One One",
-      "category": "9"
+      "category": "kids"
     },
     {
       "id": "19",
       "price":150.00,
       "img": "https://example.com/images/shoe19.jpg",
-      "name": "Balenciaga Triple S",
+      "name": "Balenciaga Triple ",
       "brand": "Gray",
       "category": "11"
     },

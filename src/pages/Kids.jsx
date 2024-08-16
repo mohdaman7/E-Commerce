@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { contexts } from "../App";
 import axios from "axios";
 
-function Mens() {
+function Kids() {
   // const { data, setData } = useContext(contexts);
   // const [state, setState] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
@@ -19,7 +19,6 @@ function Mens() {
     };
     fn();
   }, []);
-  console.log(data,'its the data')
 
 
   // useEffect(() => {
@@ -30,9 +29,9 @@ function Mens() {
   // console.log(state,"jajhfdkajdf");
   return (
     <div className="bg-white m-10">
-      <h1 className="text-2xl font-bold leading-7 m-10 ml-40">Men's</h1>
+      <h1 className="text-2xl font-bold leading-7 m-10 ml-40">Kid's</h1>
       <div className="flex flex-wrap gap-5 justify-center">
-        {data.filter((item)=>item.category==='men').map((item) => {
+        {data.filter((item)=>item.category==='kids').map((item) => {
 
           return (
             <div
@@ -133,4 +132,4 @@ function Mens() {
   );
 }
 
-export default Mens;
+export default Kids;
