@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import Validation from "../Validation";
 import './Register.css'
+import axios from "axios";
 
 
 function Register() {
@@ -39,16 +40,21 @@ function Register() {
     errPass : false,
     errCpass : false
   })
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  }
-
+  
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInputs({...inputs,[name]:value})
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:3000/users",inputs)
+    
+  }
+  console.log(inputs)
+
+
 
 
   return (

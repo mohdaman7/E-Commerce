@@ -1,5 +1,5 @@
- {
-   "datass":[
+{
+  "datass": [
     {
       "id": "1",
       "price": 99.99,
@@ -18,7 +18,7 @@
     },
     {
       "id": "3",
-      "price": 120.00,
+      "price": 120,
       "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/3f3e7049-5c99-428c-abcd-e246b086f2ed/AIR+FORCE+1+%2707.png",
       "name": "Nike Air Force 1",
       "brand": "Nike",
@@ -34,7 +34,7 @@
     },
     {
       "id": "5",
-      "price": 115.00,
+      "price": 115,
       "img": "https://www.superkicks.in/cdn/shop/files/1_6c6a2a75-68df-4bf1-9288-b6b9e3c3aefa.jpg?v=1713793427&width=600",
       "name": "New Balance",
       "brand": "New Balance",
@@ -42,7 +42,7 @@
     },
     {
       "id": "6",
-      "price": 65.00,
+      "price": 65,
       "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0d26b559-372c-4d03-8169-fa1d70d67ebf/JORDAN+SPIZIKE+LOW.png",
       "name": "Jordan Spizike Low",
       "brand": "Nike",
@@ -50,7 +50,7 @@
     },
     {
       "id": "7",
-      "price": 110.00,
+      "price": 110,
       "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/05d712c8-6a44-43aa-88fc-0f36a36c505a/JORDAN+LUKA+3+TB+PF.png",
       "name": "NLuka 3 PF Team Bank",
       "brand": "Nike",
@@ -58,7 +58,7 @@
     },
     {
       "id": "8",
-      "price": 140.00,
+      "price": 140,
       "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/93ca90bff2984e27a8b0ae2b0050402f_9366/Grand_Court_TD_Lifestyle_Court_Casual_Shoes_Black_GW9251_01_standard.jpg",
       "name": "Men Round-Toe Lace-Up Shoes",
       "brand": "Adidas",
@@ -66,7 +66,7 @@
     },
     {
       "id": "9",
-      "price": 105.00,
+      "price": 105,
       "img": "https://www.kickscrew.com/cdn/shop/files/0B030ECDBD-SP-15096698_28d19a95-e1ec-4973-a9bd-527e3db513ce_540x.jpg?v=1715594213",
       "name": "New Balance 9060 'Black Castlerock'",
       "brand": "New Balance",
@@ -74,7 +74,7 @@
     },
     {
       "id": "10",
-      "price": 85.00,
+      "price": 85,
       "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/400996/01/sv01/fnd/IND/fmt/png/Mayze-UT-Reflect-Women's-Sneakers",
       "name": "Mayze UT Reflect Women's Sneakers",
       "brand": "Puma",
@@ -82,7 +82,7 @@
     },
     {
       "id": "11",
-      "price": 98.00,
+      "price": 98,
       "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/381168/04/sv01/fnd/IND/fmt/png/Camo-Women's-Sneakers",
       "name": "Camo Women's Sneakers",
       "brand": "Puma",
@@ -90,7 +90,7 @@
     },
     {
       "id": "12",
-      "price": 75.00,
+      "price": 75,
       "img": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a751495d-1cb9-4976-ab4f-9a2189464e8f/blazer-mid-77-shoes-pDwZfH.png",
       "name": "Nike Blazer Mid '77",
       "brand": "Nike",
@@ -98,7 +98,7 @@
     },
     {
       "id": "13",
-      "price": 125.00,
+      "price": 125,
       "img": "https://media-us.landmarkshops.in/cdn-cgi/image/h=831,w=615,q=85,fit=cover/max-new/1000013391879-White-WHITE-1000013391879_01-2100.jpg",
       "name": "Women Colourblocked Lace-Up Sneakers",
       "brand": "Landmark",
@@ -106,7 +106,7 @@
     },
     {
       "id": "14",
-      "price": 60.00,
+      "price": 60,
       "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0f492b03-ba89-4908-8095-2844cbf3347b/WMNS+AIR+JORDAN+1+LOW+SE.png",
       "name": "Air Jordan 1 Low SE",
       "brand": "Nike",
@@ -114,7 +114,7 @@
     },
     {
       "id": "15",
-      "price": 130.00,
+      "price": 130,
       "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e745acb29cd248e8994a6820a4ac6a29_9366/GAZELLE_BOLD_SHOES_Yellow_IF5937_01_standard.jpg",
       "name": "Gazelle Bold Shoe",
       "brand": "Adidas",
@@ -122,7 +122,7 @@
     },
     {
       "id": "16",
-      "price": 70.00,
+      "price": 70,
       "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/97c6d020-831f-400b-b9a6-176671f89a19/JORDAN+1+RETRO+HIGH+OG+%28TD%29.png",
       "name": "Jordan 1 Retro High OG 'Latte'",
       "brand": "Nike",
@@ -130,7 +130,7 @@
     },
     {
       "id": "17",
-      "price": 90.00,
+      "price": 90,
       "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c852da49-18c8-4548-80f6-c5dbcdfc5363/FORCE+1+LOW+EASYON+%28TD%29.png",
       "name": "Nike Force 1 Low EasyOn",
       "brand": "Nike",
@@ -138,7 +138,7 @@
     },
     {
       "id": "18",
-      "price": 82.00,
+      "price": 82,
       "img": "https://nb.scene7.com/is/image/NB/psb480gh_nb_02_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440",
       "name": "kids 480",
       "brand": "Hoka One One",
@@ -146,7 +146,7 @@
     },
     {
       "id": "19",
-      "price":150.00,
+      "price": 150,
       "img": "https://example.com/images/shoe19.jpg",
       "name": "Balenciaga Triple ",
       "brand": "Gray",
@@ -154,12 +154,20 @@
     },
     {
       "id": "20",
-      "price":77.00,
+      "price": 77,
       "img": "https://example.com/images/shoe20.jpg",
       "name": "Dr. Martens 1460",
       "brand": "Cherry Red",
       "category": "8"
     }
+  ],
+  "users": [
+    {
+      "id": "bd44",
+      "username": "mohdaman",
+      "email": "mohd@gmail.com",
+      "password": "@Mohdaman7",
+      "cpassword": "@Mohdaman7"
+    }
   ]
 }
-  
