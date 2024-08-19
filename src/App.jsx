@@ -14,15 +14,20 @@ import Womens from "./pages/Womens";
 import Collections from "./pages/collections";
 import Footer from "./component/Footer";
 import Kids from "./pages/Kids";
+import { Toaster } from "sonner";
+
+
 
 export const contexts = createContext();
 
 function App() {
   const [data, setData] = useState([]);
+  const [search,setSearch] = useState('')
   return (
     <>
-    <Navibar/>
-      <contexts.Provider value={{ data, setData }}>
+    <Toaster richColors position="bottom-right" />
+      <contexts.Provider value={{ data, setData ,search,setSearch}}>
+      <Navibar/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

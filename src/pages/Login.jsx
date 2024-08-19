@@ -1,18 +1,50 @@
-import React, { useState } from "react";
+import { data } from "autoprefixer";
+import React, { useState , useEffect} from "react";
+import axios from "axios";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [rvalue,setrvalue]=useState([])
 
-  const handleSubmit = (event) => {
+  const navigate = useNavigate()
+
+  // useEffect(()=>{
+  //   const fn=async()=>{
+  //     const response = await axios.get("http://localhost:3000/users")
+  //     // console.log(response.data);
+  //     setrvalue(response.data)
+  //   //  const data = response.data
+  //   // set
+
+  //   }
+  //  fn() 
+  // },[])
+
+  console.log(rvalue)
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const errors = validate();
+    const response = await axios.get("http://localhost:3000/users")
+    const data = response.data.find((item)=>item.email===email && item.password===password)
+    if(!data){
+      toast.warning("User Invalid")
+    }else{
+      navigate('/')
+      toast.success("Login Successful")
+    }
     setErrors(errors);
     if (Object.keys(errors).length === 0) {
       alert("Done");
     }
+    
   };
+
 
   const validate = () => {
     const error = {};

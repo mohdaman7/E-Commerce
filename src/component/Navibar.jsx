@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { contexts } from "../App";
 
 function Navibar() {
+  const {setSearch} = useContext(contexts)
   return (
     <div>
       <div className="flex flex-wrap ">
@@ -51,6 +53,7 @@ function Navibar() {
                 <input
                   type="text"
                   placeholder="Search..."
+                  onChange={(e)=>setSearch(e.target.value)}
                   className="w-full px-4 py-2 bg-gray-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-gray-600"
                 />
                 <svg
@@ -109,7 +112,7 @@ function Navibar() {
                   </span>
                 </NavLink>
                 {/* <!-- Sign In / Register      --> */}
-                <NavLink className="flex items-center hover:text-gray-200" href="#">
+                <NavLink to="/register" className="flex items-center hover:text-gray-200" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 hover:text-gray-200"
@@ -128,7 +131,7 @@ function Navibar() {
               </div>
             </div>
             {/* <!-- Responsive navbar --> */}
-            <NavLink className="xl:hidden flex mr-6 items-center" href="#">
+            <NavLink  className="xl:hidden flex mr-6 items-center" href="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 hover:text-gray-200"
@@ -148,7 +151,7 @@ function Navibar() {
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
               </span>
             </NavLink>
-            <NavLink className="navbar-burger self-center mr-12 xl:hidden" href="#">
+            <NavLink className="navbar-burger self-center mr-12 xl:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 hover:text-gray-200"
