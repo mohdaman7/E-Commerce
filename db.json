@@ -5,7 +5,7 @@
       "price": 99.99,
       "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/1b1785a7-b7b2-4b09-915f-257fd37b7653/AIR+JORDAN+1+MID.png",
       "name": "Air Jordan 1 Mid SE",
-      "brand": "Nike",
+      "brand": "Jordan",
       "category": "men"
     },
     {
@@ -45,7 +45,7 @@
       "price": 65,
       "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0d26b559-372c-4d03-8169-fa1d70d67ebf/JORDAN+SPIZIKE+LOW.png",
       "name": "Jordan Spizike Low",
-      "brand": "Nike",
+      "brand": "Jordan",
       "category": "men"
     },
     {
@@ -109,7 +109,7 @@
       "price": 60,
       "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0f492b03-ba89-4908-8095-2844cbf3347b/WMNS+AIR+JORDAN+1+LOW+SE.png",
       "name": "Air Jordan 1 Low SE",
-      "brand": "Nike",
+      "brand": "Jordan",
       "category": "women"
     },
     {
@@ -125,7 +125,7 @@
       "price": 70,
       "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/97c6d020-831f-400b-b9a6-176671f89a19/JORDAN+1+RETRO+HIGH+OG+%28TD%29.png",
       "name": "Jordan 1 Retro High OG 'Latte'",
-      "brand": "Nike",
+      "brand": "Jordan",
       "category": "kids"
     },
     {
@@ -160,6 +160,12 @@
       "brand": "Cherry Red",
       "category": "8"
     }
+
+
+
+
+
+    
   ],
   "users": [
     {

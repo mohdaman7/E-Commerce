@@ -15,6 +15,10 @@ import Collections from "./pages/collections";
 import Footer from "./component/Footer";
 import Kids from "./pages/Kids";
 import { Toaster } from "sonner";
+import Jordan from "./pages/Jordan";
+import Nike from "./pages/Nike";
+import NewBalance from "./pages/NewBalance";
+import Adidas from "./pages/Adidas";
 
 
 
@@ -37,6 +41,10 @@ function App() {
           <Route path="/womens" element={<Womens />} />
           <Route path="/collections" element={<Collections />} />
           <Route path="/kids" element={<Kids/>}/>
+          <Route path="/jordan" element={<Jordan/>}/>
+          <Route path="/nike" element={<Nike/>}/>
+          <Route path="/new-balance" element={<NewBalance/>}/>
+          <Route path="/adidas" element={<Adidas/>}/>
         </Routes>
       </contexts.Provider>
       <Footer/>
