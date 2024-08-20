@@ -75,7 +75,7 @@ function Navibar() {
 
               {/* <!-- Header Icons --> */}
               <div className="hidden xl:flex items-center space-x-5">
-                <NavLink className="hover:text-gray-200" href="#">
+                <NavLink to="cart" className="hover:text-gray-200" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -91,7 +91,7 @@ function Navibar() {
                     />
                   </svg>
                 </NavLink>
-                <NavLink className="flex items-center hover:text-gray-200" href="#">
+                <NavLink to="cart" className="flex items-center hover:text-gray-200" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"

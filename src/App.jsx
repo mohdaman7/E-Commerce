@@ -1,6 +1,4 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import Navibar from "./component/Navibar";
 import Home from "./pages/Home";
@@ -19,6 +17,9 @@ import Jordan from "./pages/Jordan";
 import Nike from "./pages/Nike";
 import NewBalance from "./pages/NewBalance";
 import Adidas from "./pages/Adidas";
+import { CartProvider } from "./CartContext";
+import Cart from "./component/Cart";
+
 
 
 
@@ -30,6 +31,7 @@ function App() {
   return (
     <>
     <Toaster richColors position="bottom-right" />
+    <CartProvider>
       <contexts.Provider value={{ data, setData ,search,setSearch}}>
       <Navibar/>
         <Routes>
@@ -45,9 +47,11 @@ function App() {
           <Route path="/nike" element={<Nike/>}/>
           <Route path="/new-balance" element={<NewBalance/>}/>
           <Route path="/adidas" element={<Adidas/>}/>
+          <Route path="/cart" element={<Cart/>}/>
         </Routes>
       </contexts.Provider>
       <Footer/>
+      </CartProvider>
     </>
   );
 }

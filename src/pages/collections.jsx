@@ -19,7 +19,7 @@ function Collections() {
       setData(response.data);
     };
     fn();
-  }, []);
+  },[]);
 
 
   useEffect(() => {
@@ -31,6 +31,7 @@ function Collections() {
     } else {
       setData(data);
     }
+    
   }, [search,data]);
 
 

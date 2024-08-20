@@ -1,8 +1,13 @@
 import React, { useContext, useState } from "react";
 import { contexts } from "../App";
+import { useCart } from "../CartContext";
+
+
 
 const ProductCard = () => {
-  const { data, setData } = useContext(contexts);
+  
+  const { data } = useContext(contexts);
+  const { addToCart } = useCart();
 
   return (
     <>
@@ -98,6 +103,7 @@ const ProductCard = () => {
                     <a
                       href="#"
                       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      onClick={()=>addToCart(item)}
                     >
                       Add to cart
                     </a>
