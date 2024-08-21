@@ -21,6 +21,7 @@ import Adidas from "./pages/Adidas";
 import Cart from "./component/Cart";
 import axios from "axios";
 import Contect from "./pages/contect";
+import DetailProduct from "./component/DetailProduct";
 
 
 
@@ -69,6 +70,7 @@ function App() {
           <Route path="/adidas" element={<Adidas/>}/>
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/contact" element={<Contect/>}/>
+          <Route path="/detail/:userId" element={<DetailProduct/>}/>
         </Routes>
       </contexts.Provider>
       <Footer/>

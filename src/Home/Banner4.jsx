@@ -42,7 +42,7 @@ function Banner4() {
   };
 
   return (
-    <div className="dark:bg-gray-800 h-[80vh] py-6 sm:py-8 lg:py-12 m-6 mt-32">
+    <div className="dark:bg-gray-800 h-[80vh] py-6 sm:py-8 lg:py-12 m-6 mt-14">
       <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
         <div className="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
           <div className="flex items-center gap-12">

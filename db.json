@@ -190,22 +190,22 @@
       "cpassword": "@Mohdaman7",
       "cart": [
         {
-          "id": "7",
-          "price": 110,
-          "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/05d712c8-6a44-43aa-88fc-0f36a36c505a/JORDAN+LUKA+3+TB+PF.png",
-          "name": "NLuka 3 PF Team Bank",
-          "brand": "Nike",
-          "category": "men",
-          "quantity": 2
-        },
-        {
           "id": "1",
           "price": 99.99,
           "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/1b1785a7-b7b2-4b09-915f-257fd37b7653/AIR+JORDAN+1+MID.png",
           "name": "Air Jordan 1 Mid SE",
           "brand": "Jordan",
           "category": "men",
-          "quantity": 2
+          "quantity": 1
+        },
+        {
+          "id": "2",
+          "price": 79.99,
+          "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/4848a516-211f-4069-9c24-b70066adb8ba/AIR+MORE+UPTEMPO+%2796.png",
+          "name": "Nike Air More Uptempo",
+          "brand": "Nike",
+          "category": "men",
+          "quantity": 1
         }
       ]
     }

@@ -37,6 +37,8 @@ function Register() {
     cpassword:''
   })
 
+  const [emails,setEmails] = useState([])
+
 
   const [focus,setFocus] = useState({
     errName : false,
@@ -44,6 +46,19 @@ function Register() {
     errPass : false,
     errCpass : false
   })
+
+  useEffect(()=>{
+    const fetchmail = async () => {
+      const response = await axios.get("http://localhost:3000/users");
+      try{
+        setEmails(response.data);
+        console.log(emails)
+      }catch(error){
+        toast.error("not fetched")
+      }
+    }
+    fetchmail()
+  },[])
   
   const handleChange = (e) => {
     const name = e.target.name;
@@ -51,14 +66,23 @@ function Register() {
     setInputs({...inputs,[name]:value,cart:[]})
   }
 
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:3000/users",inputs)
-    toast.success("Registration Successful")
-    navigate('/login ')
+    const finduser = emails.find((user)=>user.email === inputs.email)
+    
+    if(finduser){
+      toast.warning("User already exists")
+    }else{
+      await axios.post("http://localhost:3000/users",inputs)
+      toast.success("Registration Successful")
+      navigate('/login ')
+    }
+    
   }
   console.log(inputs)
-
 
 
 

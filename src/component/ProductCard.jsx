@@ -1,19 +1,22 @@
 import React, { useContext, useState } from "react";
 import { contexts } from "../App";
+import { Link, useNavigate } from "react-router-dom";
 // import { useCart } from "../CartContext";
+
 
 
 
 const ProductCard = () => {
   
   const { data,addToCart } = useContext(contexts);
+  const navigate = useNavigate()
+  const [isLiked, setIsLiked] = useState(false);
   // const { addToCart } = useContext(contexts);
 
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-center">
         {data.slice(0, 9).map((item) => {
-          const [isLiked, setIsLiked] = useState(false);
 
           const handleHeartClick = () => {
             setIsLiked(!isLiked);
@@ -22,13 +25,12 @@ const ProductCard = () => {
           return (
             <div key={item.id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 max-w-sm relative">
               <div className="bg-white shadow-md rounded-lg h-full flex flex-col dark:bg-gray-800 dark:border-gray-700">
-                <a href="#">
                   <img
                     className="rounded-t-lg object-cover h-56 w-full"
                     src={item.img}
                     alt="product image"
-                  />
-                </a>
+                    onClick={()=>navigate(`/detail/${item.id}`)}
+                  /> 
                 <div
                   className={`absolute top-2 right-2 cursor-pointer ${
                     isLiked ? "text-red-500" : "text-gray-500"

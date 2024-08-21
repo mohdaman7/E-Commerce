@@ -6,7 +6,7 @@ function Banner2() {
   const navigate = useNavigate()
 
   return (
-    <div className="flex flex-wrap gap-4 p-4 rounded-lg shadow-md mt-10">
+    <div className="flex flex-wrap gap-4 rounded-lg shadow-md mt-6 ">
       <div className="flex-1 min-w-[200px] h-[750px] ">
         <div className="bg-men-bg w-full h-4/5 object-cover bg-center bg-no-repeat rounded-sm ">
           <div className="flex flex-col items-center justify-center h-[100vh]">
