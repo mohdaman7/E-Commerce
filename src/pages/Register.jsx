@@ -48,7 +48,7 @@ function Register() {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setInputs({...inputs,[name]:value})
+    setInputs({...inputs,[name]:value,cart:[]})
   }
 
   const handleSubmit = async (e) => {

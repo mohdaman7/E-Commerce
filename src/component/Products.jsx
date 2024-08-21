@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { contexts } from "../App";
-import { useCart } from "../CartContext";
+// import { useCart } from "../CartContext";
 
 
 const Products = () => {
-  const { data, setData , search, setSearch} = useContext(contexts);
-  const {addToCart} = useCart();
+  const { data, setData , search, setSearch,addToCart} = useContext(contexts);
+  // const {addToCart} = useCart();
   
   useEffect(() => {
     if (search) {

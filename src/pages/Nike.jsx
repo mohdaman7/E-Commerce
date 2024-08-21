@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { contexts } from "../App";
 import axios from "axios";
-import { useCart } from "../CartContext";
+// import { useCart } from "../CartContext";
 
 function Nike() {
   // const { data, setData } = useContext(contexts);
   // const [state, setState] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
   const [data, setData] = useState([]);
-  const {addToCart} = useCart();
+  const {addToCart } = useContext(contexts);
   const handleHeartClick = () => {
     setIsLiked(!isLiked);
   };

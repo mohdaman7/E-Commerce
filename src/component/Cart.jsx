@@ -1,21 +1,72 @@
-import React from "react";
-import { useCart } from "../CartContext";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
+// import { useCart } from "../CartContext";
 
 const Cart = () => {
-    const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
+    
+    const [cart,setCart] = useState([])
+    // console.log(cart);
+    
+    const uId = localStorage.getItem("id")
+    const fn = async () => {
+        const response = await axios.get(`http://localhost:3000/users/${uId}`)
+        setCart(response.data.cart)
+       
+    }
+    useEffect(()=>{
+        // const fn = async () => {
+        //     const response = await axios.get(`http://localhost:3000/users/${uId}`)
+        //     setCart(response.data.cart)
+        // }
+        fn()
+    })
 
-    const calculateTotal = () => {
+    const removeFromCart = async (id) => {
+        const del = cart.filter((item)=>item.id!=id)
+        await axios.patch(`http://localhost:3000/users/${uId}`,{cart:del})
+        fn()
+        toast.success("Item removed")
+    }
+
+    const increaseQuantity = async (id) => {
+        const updatedCart = cart.map((item) =>
+            item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+        await axios.patch(`http://localhost:3000/users/${uId}`, { cart: updatedCart });
+        setCart(updatedCart);
+        toast.success("Quantity increased");
+    };
+    
+    const decreaseQuantity = async (id) => {
+        const updatedCart = cart.map((item) =>
+            item.id === id
+                ? { ...item, quantity: Math.max(1, item.quantity - 1) } // Ensure quantity doesn't go below 1
+                : item
+        );
+        await axios.patch(`http://localhost:3000/users/${uId}`, { cart: updatedCart });
+        setCart(updatedCart);
+        toast.success("Quantity decreased");
+    };
+
+
+    const calculateSubtotal = () => {
         return cart.reduce((total, item) => total + item.price * item.quantity, 0);
     };
 
     const calculateTaxes = (subtotal) => {
-        return subtotal * 0.1; 
+        return subtotal * 0.1;
     };
 
-    const subtotal = calculateTotal();
+    const calculateShipping = () => {
+        return 0;
+    };
+
+    const subtotal = calculateSubtotal();
     const taxes = calculateTaxes(subtotal);
-    const shipping = 0; // Example shipping cost
+    const shipping = calculateShipping();
     const total = subtotal + taxes + shipping;
+
 
     return (
         <div className="bg-gray-100 h-screen py-8">
@@ -56,7 +107,7 @@ const Cart = () => {
                                                         >
                                                             -
                                                         </button>
-                                                        <span className="text-center w-8">{item.quantity}</span>
+                                                        {/* <span className="text-center w-8">{item.quantity}</span> */}
                                                         <h1>{item.quantity}</h1>
                                                         <button
                                                             onClick={() => increaseQuantity(item.id)}
@@ -86,21 +137,21 @@ const Cart = () => {
                         <div className="bg-white rounded-lg shadow-md p-6">
                             <h2 className="text-lg font-semibold mb-4">Summary</h2>
                             <div className="flex justify-between mb-2">
-                                <span>Subtotal</span>
-                                <span>${subtotal.toFixed(2)}</span>
+                                <h1>Subtotal</h1>
+                                <h1>${subtotal.toFixed(2)}</h1>
                             </div>
                             <div className="flex justify-between mb-2">
-                                <span>Taxes</span>
-                                <span>${taxes.toFixed(2)}</span>
+                                <h1>Taxes</h1>
+                                <h1>${taxes.toFixed(2)}</h1>
                             </div>
                             <div className="flex justify-between mb-2">
-                                <span>Shipping</span>
-                                <span>${shipping.toFixed(2)}</span>
+                                <h1>Shipping</h1>
+                                <h1>${shipping.toFixed(2)}</h1>
                             </div>
                             <hr className="my-2" />
                             <div className="flex justify-between mb-2">
-                                <span className="font-semibold">Total</span>
-                                <span className="font-semibold">${total.toFixed(2)}</span>
+                                <h1 className="font-semibold">Total</h1>
+                                <h1 className="font-semibold">${total.toFixed(2)}</h1>
                             </div>
                             <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
                         </div>

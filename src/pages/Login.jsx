@@ -37,6 +37,7 @@ function Login() {
     }else{
       navigate('/')
       toast.success("Login Successful")
+      localStorage.setItem("id",data.id)
     }
     setErrors(errors);
     if (Object.keys(errors).length === 0) {

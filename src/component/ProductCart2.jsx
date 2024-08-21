@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { contexts } from "../App";
-import { useCart } from "../CartContext";
+// import { useCart } from "../CartContext";
 
 
 const ProductCard2 = () => {
-  const { data } = useContext(contexts);
-  const {addToCart} = useCart();
+  const { data,addToCart } = useContext(contexts);
+  // const {addToCart} = useCart();
 
 
   return (

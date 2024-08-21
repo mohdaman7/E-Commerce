@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { contexts } from "../App";
 import axios from "axios";
-import { useCart } from "../CartContext";
+// import { useCart } from "../CartContext";
 
 function Collections() {
 
   // const [data, setData] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
-
+  const {addToCart } = useContext(contexts);
   const { data, setData , search, setSearch} = useContext(contexts);
-  const {addToCart} = useCart();
+  // const {addToCart} = useCart();
 
   const handleHeartClick = () => {
     setIsLiked(!isLiked);

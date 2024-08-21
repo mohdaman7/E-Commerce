@@ -1,58 +1,71 @@
-import React, { createContext, useContext, useState } from "react";
+// import axios from "axios";
+// import React, { createContext, useContext, useState } from "react";
+// import { toast } from "sonner";
 
-// Create a Cart Context
-const CartContext = createContext();
+// // Create a Cart Context
+// const CartContext = createContext();
 
-// Create a provider component
-export const CartProvider = ({ children }) => {
-  const [cart,setCart] = useState([])
+// // Create a provider component
+// export const CartProvider = ({ children }) => {
+//   const [cart,setCart] = useState([])
+//   const uId = localStorage.getItem("id")
+//   const addToCart = async (product) => {
 
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-        const existingProduct = prevCart.find((item) => item.id === product.id);
-        if (existingProduct) {
-            return prevCart.map((item) =>
-                item.id === product.id
-                    ? { ...item, quantity: item.quantity + 1 }
-                    : item
-            );
-        } else {
-            return [...prevCart, { ...product, quantity: 1 }];
-        }
-    });
-};
+//     const response = await axios.get(`http://localhost:3000/users/${uId}`)
+//     const data = response.data.cart
+//     const res = data.filter((item)=>item.id===product.id)
+//     if(res){
+//       toast.warning("Product alredy exist")
+//     }else{
+//       const updateCart = [...data,product]
+//       await axios.patch(`http://localhost:3000/users/${uId}`,{cart:updateCart})
+//     }
 
-  const removeFromCart = (id) => {
-    setCart((prevCart)=>prevCart.filter((item)=>item.id !== id));
-  }
+//     // setCart((prevCart) => {
+//     //     const existingProduct = prevCart.find((item) => item.id === product.id);
+//     //     if (existingProduct) {
+//     //         return prevCart.map((item) =>
+//     //             item.id === product.id
+//     //                 ? { ...item, quantity: item.quantity + 1 }
+//     //                 : item
+//     //         );
+//     //     } else {
+//     //         return [...prevCart, { ...product, quantity: 1 }];
+//     //     }
+//     // });
+// };
 
-  const increaseQuantity = (id) => {
-    console.log('Increasing quantity for:', id);
-    setCart((prevCart)=>
-        prevCart.map((item)=>
-            item.id === id ? {...item,quantity:item.quantity+1} : item
-        )
-    )
-}
+//   const removeFromCart = (id) => {
+//     setCart((prevCart)=>prevCart.filter((item)=>item.id !== id));
+//   }
 
-const decreaseQuantity = (id) => {
-  console.log('Decreasing quantity for:', id);
-    setCart((prevCart)=>
-        prevCart.map((item)=>
-            item.id === id ? {...item,quantity:Math.max(item.quantity -1,1)} : item 
-        )
-    )
-}
+//   const increaseQuantity = (id) => {
+//     console.log('Increasing quantity for:', id);
+//     setCart((prevCart)=>
+//         prevCart.map((item)=>
+//             item.id === id ? {...item,quantity:item.quantity+1} : item
+//         )
+//     )
+// }
 
-  return (
-    <CartContext.Provider value={{cart,addToCart,removeFromCart,increaseQuantity,decreaseQuantity}}>
-      {children}
-    </CartContext.Provider>
-  );
+// const decreaseQuantity = (id) => {
+//   console.log('Decreasing quantity for:', id);
+//     setCart((prevCart)=>
+//         prevCart.map((item)=>
+//             item.id === id ? {...item,quantity:Math.max(item.quantity -1,1)} : item 
+//         )
+//     )
+// }
 
-};
+//   return (
+//     <CartContext.Provider value={{cart,addToCart,removeFromCart,increaseQuantity,decreaseQuantity}}>
+//       {children}
+//     </CartContext.Provider>
+//   );
+
+// };
 
 
 
-// Custom hook to use cart context
-export const useCart = () => useContext(CartContext);
+// // Custom hook to use cart context
+// export const useCart = () => useContext(CartContext);

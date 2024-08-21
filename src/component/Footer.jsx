@@ -6,7 +6,7 @@ import React from "react";
 function Footer() {
   return (
     <div className="m-4 mt-20">
-      <div class="w-full min-h-screen flex items-center justify-center bg-black p-4">
+      {/* <div class="w-full min-h-screen flex items-center justify-center bg-black p-4">
         <div class="md:w-2/3 w-full px-4 text-white flex flex-col">
           <div class="text-7xl font-bold mb-8">
             <h1>How can we help you? Get in touch</h1>
@@ -46,7 +46,7 @@ function Footer() {
             ></svg>
           </div>
         </div>
-      </div>
+      </div> */}
       
       <section className="bg-white">
             <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">

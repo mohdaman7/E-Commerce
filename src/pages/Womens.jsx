@@ -1,7 +1,7 @@
 import { useContext, useState ,useEffect} from "react";
 import { contexts } from "../App";
 import axios from "axios";
-import { useCart } from "../CartContext";
+// import { useCart } from "../CartContext";
 
 
 function Womens() {
@@ -10,7 +10,7 @@ function Womens() {
 
   const [data, setData] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
-  const {addToCart} = useCart();
+  const {addToCart } = useContext(contexts);
 
   const handleHeartClick = () => {
     setIsLiked(!isLiked);

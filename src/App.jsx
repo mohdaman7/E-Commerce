@@ -12,13 +12,15 @@ import Womens from "./pages/Womens";
 import Collections from "./pages/collections";
 import Footer from "./component/Footer";
 import Kids from "./pages/Kids";
-import { Toaster } from "sonner";
+import { toast, Toaster } from "sonner";
 import Jordan from "./pages/Jordan";
 import Nike from "./pages/Nike";
 import NewBalance from "./pages/NewBalance";
 import Adidas from "./pages/Adidas";
-import { CartProvider } from "./CartContext";
+// import { CartProvider } from "./CartContext";
 import Cart from "./component/Cart";
+import axios from "axios";
+import Contect from "./pages/contect";
 
 
 
@@ -28,11 +30,29 @@ export const contexts = createContext();
 function App() {
   const [data, setData] = useState([]);
   const [search,setSearch] = useState('')
+  const uId = localStorage.getItem("id")
+
+
+  const addToCart = async (items) => {
+   const response = await axios.get(`http://localhost:3000/users/${uId}`)
+    const datass = response.data.cart
+    const res = datass.find((item)=>item.id===items.id)
+    console.log(res);
+    if(res){
+      toast.warning("Product alredy exist")
+    }else{
+      const updateCart = [...datass,items]
+      await axios.patch(`http://localhost:3000/users/${uId}`,{cart:updateCart})
+      toast.success("Product added")
+    }
+  };
+
+
   return (
     <>
     <Toaster richColors position="bottom-right" />
-    <CartProvider>
-      <contexts.Provider value={{ data, setData ,search,setSearch}}>
+    {/* <CartProvider> */}
+      <contexts.Provider value={{ data, setData ,search,setSearch , addToCart}}>
       <Navibar/>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -48,10 +68,11 @@ function App() {
           <Route path="/new-balance" element={<NewBalance/>}/>
           <Route path="/adidas" element={<Adidas/>}/>
           <Route path="/cart" element={<Cart/>}/>
+          <Route path="/contact" element={<Contect/>}/>
         </Routes>
       </contexts.Provider>
       <Footer/>
-      </CartProvider>
+      {/* </CartProvider> */}
     </>
   );
 }

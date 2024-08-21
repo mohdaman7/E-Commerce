@@ -17,11 +17,11 @@ function Navibar() {
               {/* <!-- Nav Links --> */}
 
               <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-                <li>
+                {/* <li>
                   <NavLink to="latest" className="hover:text-gray-200" href="#">
                     LATEST
                   </NavLink>
-                </li>
+                </li> */}
                 <li>
                   <NavLink to="mens" className="hover:text-gray-200" href="#">
                     MENS
@@ -75,7 +75,7 @@ function Navibar() {
 
               {/* <!-- Header Icons --> */}
               <div className="hidden xl:flex items-center space-x-5">
-                <NavLink to="cart" className="hover:text-gray-200" href="#">
+                <NavLink className="hover:text-gray-200" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
