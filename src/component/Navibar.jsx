@@ -1,9 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext,useState,useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { contexts } from "../App";
+import axios from "axios";
+import { Badge } from "@material-tailwind/react";
 
 function Navibar() {
   const {setSearch} = useContext(contexts)
+
+
+  
+  const [cart,setCart] = useState([])
+  
+  const uId = localStorage.getItem("id")
+  const fn = async () => {
+    const response = await axios.get(`http://localhost:3000/users/${uId}`)
+    setCart(response.data.cart)
+  }
+  useEffect(()=>{
+      fn()
+  })
+
+
   return (
     <div>
       <div className="flex flex-wrap ">
@@ -91,6 +108,7 @@ function Navibar() {
                     />
                   </svg>
                 </NavLink>
+                <Badge content={cart.length} overlap="circular" className="w-3 h-3 text-xs">
                 <NavLink to="cart" className="flex items-center hover:text-gray-200" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -106,11 +124,13 @@ function Navibar() {
                       d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                     />
                   </svg>
+                  
                   <span className="flex absolute -mt-5 ml-4">
                     <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
                   </span>
                 </NavLink>
+                </Badge>
                 {/* <!-- Sign In / Register      --> */}
                 <NavLink to="/register" className="flex items-center hover:text-gray-200" href="#">
                   <svg

@@ -128,7 +128,7 @@ export default DetailProduct;
 
 
 
-f// for extra img 
+// for extra imge
 
 // <div className="flex gap-4 py-4 justify-center overflow-x-auto">
 //               {/* Thumbnail Images */}

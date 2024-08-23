@@ -17,11 +17,11 @@ import Jordan from "./pages/Jordan";
 import Nike from "./pages/Nike";
 import NewBalance from "./pages/NewBalance";
 import Adidas from "./pages/Adidas";
-// import { CartProvider } from "./CartContext";
 import Cart from "./component/Cart";
 import axios from "axios";
 import Contect from "./pages/contect";
 import DetailProduct from "./component/DetailProduct";
+
 
 
 
@@ -52,7 +52,6 @@ function App() {
   return (
     <>
     <Toaster richColors position="bottom-right" />
-    {/* <CartProvider> */}
       <contexts.Provider value={{ data, setData ,search,setSearch , addToCart}}>
       <Navibar/>
         <Routes>
@@ -74,7 +73,6 @@ function App() {
         </Routes>
       </contexts.Provider>
       <Footer/>
-      {/* </CartProvider> */}
     </>
   );
 }

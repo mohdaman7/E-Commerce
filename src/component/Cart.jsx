@@ -1,7 +1,7 @@
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
-// import { useCart } from "../CartContext";
 
 const Cart = () => {
     
@@ -20,6 +20,7 @@ const Cart = () => {
         //     setCart(response.data.cart)
         // }
         fn()
+        
     })
 
     const removeFromCart = async (id) => {
