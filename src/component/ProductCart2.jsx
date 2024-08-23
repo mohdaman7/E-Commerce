@@ -1,10 +1,13 @@
 import React, { useContext, useState } from "react";
 import { contexts } from "../App";
+import { useNavigate } from "react-router-dom";
 // import { useCart } from "../CartContext";
 
 
 const ProductCard2 = () => {
   const { data,addToCart } = useContext(contexts);
+  const [isLiked, setIsLiked] = useState(false);
+  const navigate = useNavigate()
   // const {addToCart} = useCart();
 
 
@@ -12,7 +15,6 @@ const ProductCard2 = () => {
     <>
       <div className="flex flex-wrap gap-5 justify-center">
         {data.slice(9, 15).map((item) => {
-          const [isLiked, setIsLiked] = useState(false);
 
           const handleHeartClick = () => {
             setIsLiked(!isLiked);
@@ -26,6 +28,7 @@ const ProductCard2 = () => {
                     className="rounded-t-lg object-cover h-56 w-full"
                     src={item.img}
                     alt="product image"
+                    onClick={()=>navigate(`/detail/${item.id}`)}
                   />
                 </a>
                 <div

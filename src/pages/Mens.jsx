@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { contexts } from "../App";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // import { useCart } from "../CartContext";
 
 function Mens() {
@@ -10,6 +11,7 @@ function Mens() {
   const [data, setData] = useState([]);
   // const {addToCart} = useCart();
   const {addToCart } = useContext(contexts);
+  const navigate = useNavigate()
   const handleHeartClick = () => {
     setIsLiked(!isLiked);
   };
@@ -48,6 +50,7 @@ function Mens() {
                     className="rounded-t-lg object-cover h-56 w-full"
                     src={item.img}
                     alt="product image"
+                    onClick={()=>navigate(`/detail/${item.id}`)}
                   />
                 </a>
                 <div
