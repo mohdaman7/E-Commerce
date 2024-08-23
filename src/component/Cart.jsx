@@ -41,7 +41,7 @@ const Cart = () => {
     const decreaseQuantity = async (id) => {
         const updatedCart = cart.map((item) =>
             item.id === id
-                ? { ...item, quantity: Math.max(1, item.quantity - 1) } // Ensure quantity doesn't go below 1
+                ? { ...item, quantity: Math.max(1, item.quantity - 1) } 
                 : item
         );
         await axios.patch(`http://localhost:3000/users/${uId}`, { cart: updatedCart });

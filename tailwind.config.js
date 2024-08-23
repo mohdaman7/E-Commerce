@@ -16,7 +16,8 @@ module.exports = withMT({
         'kid-bg':"url('https://marcusandmack.com/wp-content/uploads/2024/05/Screen-Shot-2024-05-13-at-4.31.09-PM.png')",
         'classic-bg':"url('https://images.footlocker.com/content/dam/final/footlocker/site/homepage/2024/august/240819-fl-rec8oglnf-classics-multivendor/240819-fl-rec8oGLnf-classics-multivendor-1up.jpg')",
         'home-bg6':"url('https://www.bata.com/dw/image/v2/BCLG_PRD/on/demandware.static/-/Sites-bata-in-Library/default/dw32d7d46c/Hero%20Banner%20Slider/Everyday.jpg?sw=1403&q=100')",
-        'home-bg7':"url('https://www.footasylum.com/images/categories/catHeader-MustHave-060319.jpg')"
+        'home-bg7':"url('https://www.footasylum.com/images/categories/catHeader-MustHave-060319.jpg')",
+        'home-bg8':"url('https://bizweb.dktcdn.net/100/413/756/collections/jordan-2.jpg?v=1617462460240')"
 
       }
     },

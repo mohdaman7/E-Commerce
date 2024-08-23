@@ -190,21 +190,21 @@
       "cpassword": "@Mohdaman7",
       "cart": [
         {
-          "id": "1",
-          "price": 99.99,
-          "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/1b1785a7-b7b2-4b09-915f-257fd37b7653/AIR+JORDAN+1+MID.png",
-          "name": "Air Jordan 1 Mid SE",
-          "brand": "Jordan",
-          "category": "men",
-          "quantity": 1
-        },
-        {
-          "id": "2",
-          "price": 79.99,
-          "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/4848a516-211f-4069-9c24-b70066adb8ba/AIR+MORE+UPTEMPO+%2796.png",
-          "name": "Nike Air More Uptempo",
+          "id": "3",
+          "price": 120,
+          "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/3f3e7049-5c99-428c-abcd-e246b086f2ed/AIR+FORCE+1+%2707.png",
+          "name": "Nike Air Force 1",
           "brand": "Nike",
           "category": "men",
+          "quantity": 7
+        },
+        {
+          "id": "11",
+          "price": 98,
+          "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/381168/04/sv01/fnd/IND/fmt/png/Camo-Women's-Sneakers",
+          "name": "Camo Women's Sneakers",
+          "brand": "Puma",
+          "category": "women",
           "quantity": 1
         }
       ]
