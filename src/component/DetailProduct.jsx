@@ -1,59 +1,61 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-;
-
-
+import { contexts } from "../App";
+import axios from "axios";
 const DetailProduct = () => {
+  //   const [mainImage, setMainImage] = useState("https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080");
 
-//   const [mainImage, setMainImage] = useState("https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080");
+  //   const images = [
+  //     "https://images.unsplash.com/photo-1505751171710-1f6d0ace5a85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMnx8aGVhZHBob25lfGVufDB8MHx8fDE3MjEzMDM2OTB8MA&ixlib=rb-4.0.3&q=80&w=1080",
+  //     "https://images.unsplash.com/photo-1484704849700-f032a568e944?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw0fHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080",
+  //     "https://images.unsplash.com/photo-1496957961599-e35b69ef5d7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080",
+  //     "https://images.unsplash.com/photo-1528148343865-51218c4a13e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwzfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080",
+  //   ];
 
-//   const images = [
-//     "https://images.unsplash.com/photo-1505751171710-1f6d0ace5a85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMnx8aGVhZHBob25lfGVufDB8MHx8fDE3MjEzMDM2OTB8MA&ixlib=rb-4.0.3&q=80&w=1080",
-//     "https://images.unsplash.com/photo-1484704849700-f032a568e944?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw0fHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080",
-//     "https://images.unsplash.com/photo-1496957961599-e35b69ef5d7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080",
-//     "https://images.unsplash.com/photo-1528148343865-51218c4a13e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwzfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080",
-//   ];
+  //   const handleImageChange = (src) => {
+  //     setMainImage(src);
+  //   };
 
-//   const handleImageChange = (src) => {
-//     setMainImage(src);
-//   };
+  const { data, setData } = useContext(contexts);
+  const [datas, setDatas] = useState([]);
+  const { userId } = useParams();
 
-    const {userId} = useParams()
-    console.log(userId)
+  useEffect(() => {
+    const fn = async () => {
+      const response = await axios.get("http://localhost:3000/datass");
+      const res = response.data.filter((item) => item.id == userId);
 
+      setDatas(res);
+    };
+    fn();
+  }, []);
 
+  console.log(
+    datas.map((item) => item.name),
+    "name"
+  );
 
   return (
-
     <div className="bg-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-wrap -mx-4">
-          {/* Product Images */}
-          <div className="w-full md:w-1/2 px-4 mb-8">
-            <img
-              src={product.img}
-              alt={product.name}
-              className="w-full h-auto rounded-lg shadow-md mb-4"
-            />
-            <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white mt-4">
-              {product.name}
-            </h3>
-            <div className="flex gap-4 py-4 justify-center overflow-x-auto">
-              {images.map((img, index) => (
+      {datas.map((item) => {
+        return (
+          <div className="container mx-auto px-4 py-8">
+            <div className="flex flex-wrap -mx-4">
+              {/* Product Images */}
+              <div className="w-full md:w-1/2 px-4 mb-8">
                 <img
-                  key={index}
-                  src={img}
-                  alt={`Thumbnail ${index + 1}`}
-                  className="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
-                  onClick={() => handleImageChange(img)}
+                  src={item.img}
+                  alt={item.name}
+                  className="w-full h-auto rounded-lg shadow-md mb-4"
                 />
-              ))}
-            </div>
-          </div>
+                <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white mt-4">
+                  {item.name}
+                </h3>
+              </div>
 
-          {/* Product Details */}
-          <div className="w-full md:w-1/2 px-4">
+              {/* Product Details */}
+              <div className="w-full md:w-1/2 px-4">
             <h2 className="text-3xl font-bold mb-2">
               Premium Wireless Headphones
             </h2>
@@ -162,8 +164,10 @@ const DetailProduct = () => {
               </ul>
             </div>
           </div>
-        </div>
-      </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
