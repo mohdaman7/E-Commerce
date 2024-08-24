@@ -101,6 +101,9 @@ const ProductCard = () => {
                     </span>
                   </div>
                   <div className="flex items-center justify-between mt-auto">
+                  {/* <h3 className="text-sm text-gray-500 line-through dark:text-gray-400">
+                    ${item.marketRate}
+                  </h3> */}
                     <h3 className="text-1xl font-bold">${item.price}</h3>
                     <a
                       href="#"
