@@ -78,7 +78,7 @@ function Register() {
     }else{
       await axios.post("http://localhost:3000/users",inputs)
       toast.success("Registration Successful")
-      navigate('/login ')
+      navigate('/login')
     }
     
   }

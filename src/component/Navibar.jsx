@@ -87,16 +87,17 @@ function Navibar() {
                 </li>
               </ul>
 
-              <div className="relative mx-4 hidden md:block">
+              <div className="relative mx-4 hidden md:block pr-10">
                 <input
                   type="text"
                   placeholder="Search..."
                   onChange={(e) => setSearch(e.target.value)}
+                  onClick={()=>navigate('/collections')}
                   className="w-full px-4 py-2 bg-gray-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-gray-600"
                 />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="absolute top-2 right-4 h-5 w-5 text-gray-400"
+                  className="absolute top-2 right-14 h-5 w-5 text-gray-400"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -115,7 +116,7 @@ function Navibar() {
                 <NavLink className="hover:text-gray-200" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className="h-7 w-7"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -129,18 +130,17 @@ function Navibar() {
                   </svg>
                 </NavLink>
                 <Badge
-                  content={cart.length}
+                  content={cart.length > 0?cart.length:''}
                   overlap="circular"
-                  className="w-3 h-3 text-xs"
+                  className="w-3 h-3 text-xs font-semibold"
                 >
                   <NavLink
-                    to="cart"
+                    to="/cart"
                     className="flex items-center hover:text-gray-200"
-                    href="#"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
+                      className="h-7 w-7"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -168,7 +168,7 @@ function Navibar() {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
+                      className="h-7 w-7"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -182,14 +182,14 @@ function Navibar() {
                     </svg>
                   </button>
                   {dropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
-                      <ul>
+                    <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg ring-1 ring-gray-900/5 transition-transform transform scale-100 origin-top-right">
+                      <ul className="divide-y divide-gray-200">
                         {!user ? (
                           <>
                             <li>
                               <NavLink
                                 to="/register"
-                                className="block px-4 py-2 hover:bg-gray-200"
+                                className="block px-4 py-2 hover:bg-gray-100 rounded-md text-gray-900 transition-colors duration-150 ease-in-out font-semibold"
                               >
                                 Register
                               </NavLink>
@@ -197,7 +197,7 @@ function Navibar() {
                             <li>
                               <NavLink
                                 to="/login"
-                                className="block px-4 py-2 hover:bg-gray-200"
+                                className="block px-4 py-2 hover:bg-gray-100 rounded-md text-gray-900 transition-colors duration-150 ease-in-out font-semibold"
                               >
                                 Login
                               </NavLink>
@@ -205,13 +205,13 @@ function Navibar() {
                           </>
                         ) : (
                           <>
-                            <li className="px-4 py-2 font-semibold">
+                            <li className="px-4 py-2 font-semibold text-gray-900">
                               {user.username}
                             </li>
                             <li>
                               <button
                                 onClick={handleLogout}
-                                className="block px-4 py-2 w-full text-left hover:bg-gray-200"
+                                className="block px-4 py-2 w-full text-left text-red-600 hover:bg-gray-100 rounded-md transition-colors duration-150 ease-in-out font-semibold"
                               >
                                 Logout
                               </button>

@@ -21,6 +21,10 @@ import Cart from "./component/Cart";
 import axios from "axios";
 import Contect from "./pages/contect";
 import DetailProduct from "./component/DetailProduct";
+import ProductSection from "./adminSide/ProductSection";
+import UserSection from "./adminSide/UserSection";
+import Dashboard from "./adminSide/Dashboard";
+import Orders from "./adminSide/Orders";
 
 
 
@@ -70,6 +74,10 @@ function App() {
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/contact" element={<Contect/>}/>
           <Route path="/detail/:userId" element={<DetailProduct/>}/>
+          <Route path="/products" element={<ProductSection/>}/>
+          <Route path="/users" element={<UserSection/>}/>
+          <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/orders" element={<Orders/>}/>
         </Routes>
       </contexts.Provider>
       <Footer/>
