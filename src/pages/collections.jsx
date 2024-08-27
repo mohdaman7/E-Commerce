@@ -9,7 +9,7 @@ function Collections() {
   // const [data, setData] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
   const {addToCart } = useContext(contexts);
-  const { data, setData , search, setSearch} = useContext(contexts);
+  const { data, setData , search} = useContext(contexts);
   const navigate = useNavigate()
   // const {addToCart} = useCart();
 

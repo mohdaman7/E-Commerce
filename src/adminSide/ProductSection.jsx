@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
+import AdminNavbar from './AdminNavbar';
 
 const ProductSection = () => {
   const [products, setProducts] = useState([]);
@@ -18,6 +19,10 @@ const ProductSection = () => {
   };
 
   return (
+    <div>
+      <div>
+        <AdminNavbar/>
+      </div>
     <div className='flex'>
         <Sidebar />
     <div className="flex-1 p-6">
@@ -67,6 +72,7 @@ const ProductSection = () => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
     </div>
   );

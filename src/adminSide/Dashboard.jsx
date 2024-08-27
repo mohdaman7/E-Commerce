@@ -2,9 +2,14 @@ import React from 'react';
 import StatsCard from './StatsCard';
 import { FaBox, FaUsers, FaDollarSign } from 'react-icons/fa';
 import Sidebar from './Sidebar';
+import AdminNavbar from './AdminNavbar';
 
 const Dashboard = () => {
   return (
+    <div>
+      <div>
+        <AdminNavbar/>
+      </div>
     <div className="flex">
       <Sidebar />
       <div className="flex-1 p-6 bg-gray-100">
@@ -19,6 +24,7 @@ const Dashboard = () => {
           {/* Add recent activity components here */}
         </div>
       </div>
+    </div>
     </div>
   );
 };

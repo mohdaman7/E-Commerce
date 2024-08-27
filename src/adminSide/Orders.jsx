@@ -1,8 +1,13 @@
 import React from 'react';
 import Sidebar from './Sidebar';
+import AdminNavbar from './AdminNavbar';
 
 const Orders = () => {
   return (
+    <div>
+      <div>
+        <AdminNavbar/>
+      </div>
     <div className="flex">
         <Sidebar />
     <div className="flex-1 p-6">
@@ -33,6 +38,7 @@ const Orders = () => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
     </div>
   );

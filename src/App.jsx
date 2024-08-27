@@ -25,6 +25,7 @@ import ProductSection from "./adminSide/ProductSection";
 import UserSection from "./adminSide/UserSection";
 import Dashboard from "./adminSide/Dashboard";
 import Orders from "./adminSide/Orders";
+import Admin from "./pages/Admin";
 
 
 
@@ -76,8 +77,9 @@ function App() {
           <Route path="/detail/:userId" element={<DetailProduct/>}/>
           <Route path="/products" element={<ProductSection/>}/>
           <Route path="/users" element={<UserSection/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/admin" element={<Admin/>}/>
           <Route path="/orders" element={<Orders/>}/>
+          <Route path="dashboard" element={<Dashboard/>}/>
         </Routes>
       </contexts.Provider>
       <Footer/>
