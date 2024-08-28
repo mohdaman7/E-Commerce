@@ -2,6 +2,7 @@ import { useContext, useState ,useEffect} from "react";
 import { contexts } from "../App";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Navibar from "../component/Navibar";
 // import { useCart } from "../CartContext";
 
 
@@ -27,6 +28,8 @@ function Womens() {
   }, []);
 
   return (
+    <div>
+      {/* <Navibar/> */}
     <div className="bg-white m-10">
        <h1 className="text-2xl font-bold leading-7 m-10 ml-40">Women's</h1>
       <div className="flex flex-wrap gap-5 justify-center">
@@ -122,6 +125,7 @@ function Womens() {
             );
           })}
       </div>
+    </div>
     </div>
   );
 }
