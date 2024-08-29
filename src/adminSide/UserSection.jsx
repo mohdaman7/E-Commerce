@@ -4,6 +4,7 @@ import AdminNavbar from './AdminNavbar';
 import Sidebar from './Sidebar';
 
 
+
 const UserSection = () => {
   const [users, setUsers] = useState([]);
   
@@ -25,31 +26,34 @@ const UserSection = () => {
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-800 text-white">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">ID</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Username</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Email</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Cart Items</th>
-                  </tr>
-                </thead>
+
                 <tbody className="bg-white divide-y divide-gray-200">
                   {users.map((user) => (
                     <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.id}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.username}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.email}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex items-center">
+                        <span className="material-icons mr-2 text-gray-500">badge</span>
+                        {user.id}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex items-center">
+                        <span className="material-icons mr-2 text-gray-500">person</span>
+                        {user.username}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex items-center">
+                        <span className="material-icons mr-2 text-gray-500">email</span>
+                        {user.email}
+                      </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {user.cart.length > 0 ? (
                           <ul className="list-disc pl-4 space-y-1">
                             {user.cart.map((item) => (
-                              <li key={item.id} className="text-gray-600">
+                              <li key={item.id} className="flex items-center text-gray-600">
+                                <span className="material-icons mr-2 text-gray-400">shopping_cart</span>
                                 {item.name} (${item.price.toFixed(2)})
                               </li>
                             ))}
                           </ul>
                         ) : (
-                          <span className="text-gray-500">No items</span>
+                          <h3 className="text-gray-500">No items</h3>
                         )}
                       </td>
                     </tr>
