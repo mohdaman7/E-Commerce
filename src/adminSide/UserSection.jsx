@@ -1,57 +1,64 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import AdminNavbar from './AdminNavbar';
+import Sidebar from './Sidebar';
+
 
 const UserSection = () => {
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
+  
+  useEffect(()=>{
+    const fetchUsers = async () => {
+      const response = await axios.get("http://localhost:3000/users")
+      setUsers(response.data)
+    }
+    fetchUsers()
+  },[])
 
   return (
-    <div className="flex-1 p-6">
-      <h1 className="text-2xl font-semibold mb-4">User Section</h1>
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Registration Date</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {users.map((user) => (
-              <tr key={user.id}>
-                <td className="px-6 py-4 whitespace-nowrap">{user.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.registrationDate}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <button
-                    onClick={() => setSelectedUser(user)}
-                    className="text-blue-500 hover:text-blue-700"
-                  >
-                    View Details
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {selectedUser && (
-          <div className="p-6 mt-4 bg-gray-50 border rounded-lg">
-            <h2 className="text-xl font-semibold">User Details</h2>
-            <p><strong>Name:</strong> {selectedUser.name}</p>
-            <p><strong>Email:</strong> {selectedUser.email}</p>
-            <p><strong>Order Details:</strong></p>
-            <ul>
-              <li>Order ID: 001</li>
-              <li>Product Name: Example Product</li>
-              <li>Quantity: 2</li>
-              <li>Total Price: $29.99</li>
-              <li>Order Date: [Date]</li>
-            </ul>
+    <div className="min-h-screen bg-gray-100">
+      <AdminNavbar />
+      <div className="flex">
+        <Sidebar />
+        <main className="flex-1 p-6">
+          <h1 className="text-4xl font-bold text-gray-900 mb-6">User Management</h1>
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-800 text-white">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">ID</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Username</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Email</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Cart Items</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {users.map((user) => (
+                    <tr key={user.id} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.id}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.username}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.email}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {user.cart.length > 0 ? (
+                          <ul className="list-disc pl-4 space-y-1">
+                            {user.cart.map((item) => (
+                              <li key={item.id} className="text-gray-600">
+                                {item.name} (${item.price.toFixed(2)})
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <span className="text-gray-500">No items</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        )}
+        </main>
       </div>
     </div>
   );

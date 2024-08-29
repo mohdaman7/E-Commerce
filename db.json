@@ -156,7 +156,7 @@
     },
     {
       "id": "15",
-      "price": 130,
+      "price": 112,
       "marketRate": 140,
       "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e745acb29cd248e2a5a2ae600f8b132b_9366/Ultraboost-24-Women%27s-Running-Shoes-White-GW9564_01_standard.jpg",
       "name": "Ultraboost 24 Women's Running Shoes",
@@ -211,7 +211,7 @@
     },
     {
       "id": "20",
-      "price": 77,
+      "price": 99,
       "marketRate": 85,
       "img": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/b4f34969-b968-47ac-aca8-d0b780ad8b2f/air-flight-lite-mid-shoes-wNrQDg.png",
       "name": "Nike Air Flight Lite Mid",
@@ -239,6 +239,17 @@
           "category": "men",
           "quantity": 1,
           "rating": 4
+        },
+        {
+          "id": "3",
+          "price": 120,
+          "marketRate": 130,
+          "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/3f3e7049-5c99-428c-abcd-e246b086f2ed/AIR+FORCE+1+%2707.png",
+          "name": "Nike Air Force 1",
+          "brand": "Nike",
+          "category": "men",
+          "quantity": 1,
+          "rating": 5
         }
       ]
     },

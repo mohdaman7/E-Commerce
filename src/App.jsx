@@ -82,6 +82,7 @@ function App() {
           <Route path="/orders" element={<Orders/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/addproduct" element={<AddProduct/>}/>
+          <Route path="users" element={<UserSection/>}/>
         </Routes>
       </contexts.Provider>
       <Footer/>
