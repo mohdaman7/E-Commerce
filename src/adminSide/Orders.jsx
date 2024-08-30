@@ -1,8 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import AdminNavbar from './AdminNavbar';
+import axios from 'axios';
+
 
 const Orders = () => {
+
+  const [orders,setOrders] = useState([])
+
+  useEffect(()=>{
+    const fn = async () => {
+      const response = await axios.get("http://localhost:3000/users")
+      const data = response.data
+
+      const userOrders = data.users.map(user => ({
+        userId: user.id,
+        email: user.email,
+        fullName: user.order.fullName,
+        address: user.order.address,
+        city: user.order.city,
+        state: user.order.state,
+        zipCode: user.order.zipCode,
+        cardName: user.order.cardName,
+        cardNumber: user.order.cardNumber,
+        expirationDate: user.order.expirationDate,
+        securityCode: user.order.securityCode,
+        items: user.order.items,
+        subtotal: user.order.subtotal,
+        taxes: user.order.taxes,
+        shipping: user.order.shipping,
+        total: user.order.total
+      }));
+      setOrders(userOrders)
+    }
+
+    fn()
+
+  },[])
+
   return (
     <div>
       <div>

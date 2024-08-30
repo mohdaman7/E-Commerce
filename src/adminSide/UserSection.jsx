@@ -35,7 +35,7 @@ const UserSection = () => {
                         {user.id}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex items-center">
-                        <span className="material-icons mr-2 text-gray-500">person</span>
+                        <h1 className="material-icons mr-2 text-gray-500">person</h1>
                         {user.username}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex items-center">
@@ -47,7 +47,7 @@ const UserSection = () => {
                           <ul className="list-disc pl-4 space-y-1">
                             {user.cart.map((item) => (
                               <li key={item.id} className="flex items-center text-gray-600">
-                                <span className="material-icons mr-2 text-gray-400">shopping_cart</span>
+                                <h3 className="material-icons mr-2 text-gray-400">shopping_cart</h3>
                                 {item.name} (${item.price.toFixed(2)})
                               </li>
                             ))}

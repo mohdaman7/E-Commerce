@@ -27,6 +27,7 @@ import Dashboard from "./adminSide/Dashboard";
 import Orders from "./adminSide/Orders";
 import Admin from "./pages/Admin";
 import AddProduct from "./adminSide/AddProduct";
+import Checkout from "./component/Checkout";
 
 
 
@@ -82,7 +83,8 @@ function App() {
           <Route path="/orders" element={<Orders/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/addproduct" element={<AddProduct/>}/>
-          <Route path="users" element={<UserSection/>}/>
+          <Route path="/users" element={<UserSection/>}/>
+          <Route path="/checkout" element={<Checkout/>}/>
         </Routes>
       </contexts.Provider>
       <Footer/>

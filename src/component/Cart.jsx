@@ -1,10 +1,11 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const Cart = () => {
-    
+    const navigate = useNavigate()
     const [cart,setCart] = useState([])
     // console.log(cart);
     
@@ -154,7 +155,9 @@ const Cart = () => {
                                 <h1 className="font-semibold">Total</h1>
                                 <h1 className="font-semibold">${total.toFixed(2)}</h1>
                             </div>
-                            <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
+                            <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full" 
+                                    onClick={()=>navigate('/checkout')}
+                             >Checkout</button>
                         </div>
                     </div>
                 </div>
