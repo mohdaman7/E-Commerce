@@ -42,7 +42,7 @@ const Checkout = () => {
     event.preventDefault(); // Prevent the default form submission
 
     const formData = new FormData(event.target);
-    const orderData = {
+    const orderData = [{
       email: formData.get("email-address"),
       fullName: formData.get("full-name"),
       address: formData.get("address"),
@@ -58,7 +58,7 @@ const Checkout = () => {
       taxes,
       shipping,
       total,
-    };
+   } ];
 
     try {
       await axios.patch(`http://localhost:3000/users/${uId}`,{ order: orderData });

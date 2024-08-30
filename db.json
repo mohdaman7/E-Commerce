@@ -228,24 +228,77 @@
       "email": "mohd@gmail.com",
       "password": "@Mohdaman7",
       "cpassword": "@Mohdaman7",
+      "admin":true,
       "cart": [],
-      "order": {
-        "email": "assasa@gadf",
-        "fullName": "adasdadadf",
-        "address": "dasdsda",
-        "city": "fddsda",
-        "state": "djshje",
-        "zipCode": "jshdiuhw",
-        "cardName": "muhammed aman",
-        "cardNumber": "2342343",
-        "expirationDate": "14/23",
-        "securityCode": "1234",
-        "items": [],
-        "subtotal": 0,
-        "taxes": 0,
-        "shipping": 0,
-        "total": 0
-      }
+      "order": [
+        {
+          "email": "assasa@gadf",
+          "fullName": "adasdadadf",
+          "address": "dasdsda",
+          "city": "fddsda",
+          "state": "djshje",
+          "zipCode": "jshdiuhw",
+          "cardName": "muhammed aman",
+          "cardNumber": "2342343",
+          "expirationDate": "14/23",
+          "securityCode": "1234",
+          "items": [],
+          "subtotal": 0,
+          "taxes": 0,
+          "shipping": 0,
+          "total": 0
+        }
+      ]
+    },
+    {
+      "id": "95d4",
+      "username": "aman ",
+      "email": "muhammedaman2.oaman@gmail.com",
+      "password": "@Mohdaman7",
+      "cpassword": "@Mohdaman7",
+      "cart": [],
+      "order": [
+        {
+          "email": "assasa@gadf",
+          "fullName": "adasdadadf",
+          "address": "dasdsda",
+          "city": "fddsda",
+          "state": "djshje",
+          "zipCode": "jshdiuhw",
+          "cardName": "muhammed aman",
+          "cardNumber": "2342343",
+          "expirationDate": "14/23",
+          "securityCode": "465446",
+          "items": [
+            {
+              "id": "1",
+              "price": 99.99,
+              "marketRate": 105,
+              "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/1b1785a7-b7b2-4b09-915f-257fd37b7653/AIR+JORDAN+1+MID.png",
+              "name": "Air Jordan 1 Mid SE",
+              "brand": "Jordan",
+              "category": "men",
+              "quantity": 1,
+              "rating": 4
+            },
+            {
+              "id": "3",
+              "price": 120,
+              "marketRate": 130,
+              "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/3f3e7049-5c99-428c-abcd-e246b086f2ed/AIR+FORCE+1+%2707.png",
+              "name": "Nike Air Force 1",
+              "brand": "Nike",
+              "category": "men",
+              "quantity": 1,
+              "rating": 5
+            }
+          ],
+          "subtotal":219.99,
+          "taxes":21.999000000000002,
+          "shipping":0,
+          "total":241.989
+        }
+      ]
     }
   ]
 }

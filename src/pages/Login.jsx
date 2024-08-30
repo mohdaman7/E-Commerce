@@ -32,7 +32,11 @@ function Login() {
     const errors = validate();
     const response = await axios.get("http://localhost:3000/users")
     const data = response.data.find((item)=>item.email===email && item.password===password)
-    if(!data){
+
+    if(data.admin === true){
+      navigate('/admin')
+    }
+    else if(!data){
       toast.warning("User Invalid")
     }else{
       navigate('/')
