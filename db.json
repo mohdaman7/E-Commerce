@@ -230,9 +230,7 @@
       "cpassword": "@Mohdaman7",
       "admin": true,
       "cart": [],
-      "order": [
-  
-      ]
+      "order": []
     },
     {
       "id": "95d4",
@@ -292,6 +290,67 @@
           "taxes": 28.998000000000005,
           "shipping": 0,
           "total": 318.978
+        }
+      ]
+    },
+    {
+      "id": "99fc",
+      "username": "mohd ",
+      "email": "mohdamanpc123@gmail.com",
+      "password": "@Mohdaman7",
+      "cpassword": "@Mohdaman7",
+      "cart": [],
+      "order": [
+        {
+          "email": "adadaa@gadf",
+          "fullName": "Aman",
+          "address": "dasdsda",
+          "city": "fddsda",
+          "state": "djshje",
+          "zipCode": "jshdiuhw",
+          "cardName": "muhammed aman",
+          "cardNumber": "2342343",
+          "expirationDate": "14/23",
+          "securityCode": "111",
+          "items": [
+            {
+              "id": "5",
+              "price": 115,
+              "marketRate": 125,
+              "img": "https://www.superkicks.in/cdn/shop/files/1_6c6a2a75-68df-4bf1-9288-b6b9e3c3aefa.jpg?v=1713793427&width=600",
+              "name": "New Balance",
+              "brand": "New Balance",
+              "category": "men",
+              "quantity": 1,
+              "rating": 4
+            },
+            {
+              "id": "6",
+              "price": 65,
+              "marketRate": 70,
+              "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0d26b559-372c-4d03-8169-fa1d70d67ebf/JORDAN+SPIZIKE+LOW.png",
+              "name": "Jordan Spizike Low",
+              "brand": "Jordan",
+              "category": "men",
+              "quantity": 1,
+              "rating": 3
+            },
+            {
+              "id": "20",
+              "price": 99,
+              "marketRate": 85,
+              "img": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/b4f34969-b968-47ac-aca8-d0b780ad8b2f/air-flight-lite-mid-shoes-wNrQDg.png",
+              "name": "Nike Air Flight Lite Mid",
+              "brand": "Nike",
+              "category": "men",
+              "quantity": 1,
+              "rating": 4
+            }
+          ],
+          "subtotal": 279,
+          "taxes": 27.900000000000002,
+          "shipping": 0,
+          "total": 306.9
         }
       ]
     }
