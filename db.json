@@ -231,23 +231,7 @@
       "admin": true,
       "cart": [],
       "order": [
-        {
-          "email": "assasa@gadf",
-          "fullName": "adasdadadf",
-          "address": "dasdsda",
-          "city": "fddsda",
-          "state": "djshje",
-          "zipCode": "jshdiuhw",
-          "cardName": "muhammed aman",
-          "cardNumber": "2342343",
-          "expirationDate": "14/23",
-          "securityCode": "1234",
-          "items": [],
-          "subtotal": 0,
-          "taxes": 0,
-          "shipping": 0,
-          "total": 0
-        }
+  
       ]
     },
     {
@@ -259,8 +243,8 @@
       "cart": [],
       "order": [
         {
-          "email": "assasa@gadf",
-          "fullName": "adasdadadf",
+          "email": "adadaa@gadf",
+          "fullName": "Aman",
           "address": "dasdsda",
           "city": "fddsda",
           "state": "djshje",
@@ -268,24 +252,46 @@
           "cardName": "muhammed aman",
           "cardNumber": "2342343",
           "expirationDate": "14/23",
-          "securityCode": "111",
+          "securityCode": "1",
           "items": [
             {
-              "id": "4",
-              "price": 89.99,
-              "marketRate": 95,
-              "img": "https://www.superkicks.in/cdn/shop/files/1_655b3af1-cea0-4ab6-878c-eff7097d0f82.jpg?v=1720439145&width=600",
-              "name": "Sizike Low",
-              "brand": "Sizike",
+              "id": "1",
+              "price": 99.99,
+              "marketRate": 105,
+              "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/1b1785a7-b7b2-4b09-915f-257fd37b7653/AIR+JORDAN+1+MID.png",
+              "name": "Air Jordan 1 Mid SE",
+              "brand": "Jordan",
               "category": "men",
               "quantity": 1,
-              "rating": 2
+              "rating": 4
+            },
+            {
+              "id": "2",
+              "price": 79.99,
+              "marketRate": 85,
+              "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/4848a516-211f-4069-9c24-b70066adb8ba/AIR+MORE+UPTEMPO+%2796.png",
+              "name": "Nike Air More Uptempo",
+              "brand": "Nike",
+              "category": "men",
+              "quantity": 1,
+              "rating": 3
+            },
+            {
+              "id": "7",
+              "price": 110,
+              "marketRate": 120,
+              "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/05d712c8-6a44-43aa-88fc-0f36a36c505a/JORDAN+LUKA+3+TB+PF.png",
+              "name": "NLuka 3 PF Team Bank",
+              "brand": "Nike",
+              "category": "men",
+              "quantity": 1,
+              "rating": 4
             }
           ],
-          "subtotal": 89.99,
-          "taxes": 8.999,
+          "subtotal": 289.98,
+          "taxes": 28.998000000000005,
           "shipping": 0,
-          "total": 98.98899999999999
+          "total": 318.978
         }
       ]
     }
