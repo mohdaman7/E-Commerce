@@ -27,7 +27,7 @@ function Home() {
 
   return (
     <div className="bg-gray-200">
-      {/* <Navibar /> */}
+      <Navibar />
       <Banner />
       <Banner2 />
       <div className=""> 

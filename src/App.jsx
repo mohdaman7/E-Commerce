@@ -60,31 +60,31 @@ function App() {
     <>
     <Toaster richColors position="bottom-right" />
       <contexts.Provider value={{ data, setData ,search,setSearch , addToCart}}>
-      <Navibar/>
+      {/* <Navibar/> */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/latest" element={<Latest />} />
-          <Route path="/mens" element={<Mens />} />
-          <Route path="/womens" element={<Womens />} />
-          <Route path="/collections" element={<Collections />} />
-          <Route path="/kids" element={<Kids/>}/>
-          <Route path="/jordan" element={<Jordan/>}/>
-          <Route path="/nike" element={<Nike/>}/>
-          <Route path="/new-balance" element={<NewBalance/>}/>
-          <Route path="/adidas" element={<Adidas/>}/>
-          <Route path="/cart" element={<Cart/>}/>
-          <Route path="/contact" element={<Contect/>}/>
-          <Route path="/detail/:userId" element={<DetailProduct/>}/>
-          <Route path="/products" element={<ProductSection/>}/>
-          <Route path="/users" element={<UserSection/>}/>
-          <Route path="/admin" element={<Admin/>}/>
-          <Route path="/orders" element={<Orders/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}/>
-          <Route path="/addproduct" element={<AddProduct/>}/>
-          <Route path="/users" element={<UserSection/>}/>
-          <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="latest" element={<Latest />} />
+          <Route path="mens" element={<Mens />} />
+          <Route path="womens" element={<Womens />} />
+          <Route path="collections" element={<Collections />} />
+          <Route path="kids" element={<Kids/>}/>
+          <Route path="jordan" element={<Jordan/>}/>
+          <Route path="nike" element={<Nike/>}/>
+          <Route path="new-balance" element={<NewBalance/>}/>
+          <Route path="adidas" element={<Adidas/>}/>
+          <Route path="cart" element={<Cart/>}/>
+          <Route path="contact" element={<Contect/>}/>
+          <Route path="detail/:userId" element={<DetailProduct/>}/>
+          <Route path="products" element={<ProductSection/>}/>
+          <Route path="users" element={<UserSection/>}/>
+          <Route path="admin" element={<Admin/>}/>
+          <Route path="orders" element={<Orders/>}/>
+          <Route path="dashboard" element={<Dashboard/>}/>
+          <Route path="addproduct" element={<AddProduct/>}/>
+          <Route path="users" element={<UserSection/>}/>
+          <Route path="checkout" element={<Checkout/>}/>
         </Routes>
       </contexts.Provider>
       <Footer/>

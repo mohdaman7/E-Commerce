@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { contexts } from "../App";
 import axios from "axios";
+import Navibar from "./Navibar";
 const DetailProduct = () => {
   const { addToCart } = useContext(contexts);
   const [datas, setDatas] = useState([]);
@@ -23,6 +24,8 @@ const DetailProduct = () => {
   );
 
   return (
+    <div>
+      <Navibar/>
     <div className="bg-gray-100">
       {datas.map((item) => {
         return (
@@ -135,6 +138,7 @@ const DetailProduct = () => {
           </div>
         );
       })}
+    </div>
     </div>
   );
 };

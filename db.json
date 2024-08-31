@@ -228,7 +228,7 @@
       "email": "mohd@gmail.com",
       "password": "@Mohdaman7",
       "cpassword": "@Mohdaman7",
-      "admin":true,
+      "admin": true,
       "cart": [],
       "order": [
         {
@@ -268,35 +268,24 @@
           "cardName": "muhammed aman",
           "cardNumber": "2342343",
           "expirationDate": "14/23",
-          "securityCode": "465446",
+          "securityCode": "111",
           "items": [
             {
-              "id": "1",
-              "price": 99.99,
-              "marketRate": 105,
-              "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/1b1785a7-b7b2-4b09-915f-257fd37b7653/AIR+JORDAN+1+MID.png",
-              "name": "Air Jordan 1 Mid SE",
-              "brand": "Jordan",
+              "id": "4",
+              "price": 89.99,
+              "marketRate": 95,
+              "img": "https://www.superkicks.in/cdn/shop/files/1_655b3af1-cea0-4ab6-878c-eff7097d0f82.jpg?v=1720439145&width=600",
+              "name": "Sizike Low",
+              "brand": "Sizike",
               "category": "men",
               "quantity": 1,
-              "rating": 4
-            },
-            {
-              "id": "3",
-              "price": 120,
-              "marketRate": 130,
-              "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/3f3e7049-5c99-428c-abcd-e246b086f2ed/AIR+FORCE+1+%2707.png",
-              "name": "Nike Air Force 1",
-              "brand": "Nike",
-              "category": "men",
-              "quantity": 1,
-              "rating": 5
+              "rating": 2
             }
           ],
-          "subtotal":219.99,
-          "taxes":21.999000000000002,
-          "shipping":0,
-          "total":241.989
+          "subtotal": 89.99,
+          "taxes": 8.999,
+          "shipping": 0,
+          "total": 98.98899999999999
         }
       ]
     }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import Navibar from "./Navibar";
 
 const Checkout = () => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -72,6 +73,8 @@ const Checkout = () => {
   };
 
   return (
+    <div>
+      <Navibar/>
     <div className="bg-white">
       <main className="relative grid grid-cols-1 gap-x-16 max-w-7xl mx-auto lg:px-8 lg:grid-cols-2 xl:gap-x-48">
         <h1 className="sr-only">Order information</h1>
@@ -415,6 +418,7 @@ const Checkout = () => {
           </div>
         </form>
       </main>
+    </div>
     </div>
   );
 };

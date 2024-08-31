@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { contexts } from "../App";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Navibar from "../component/Navibar";
 // import { useCart } from "../CartContext";
 
 function Adidas() {
@@ -34,7 +35,8 @@ function Adidas() {
   // }, [data]);
   // console.log(state,"jajhfdkajdf");
   return (
-   
+   <div>
+    <Navibar/>
     <div className="bg-white m-10">
       <h1 className="text-2xl font-bold leading-7 m-10 ml-40">ADIDAS</h1>
       <div className="flex flex-wrap gap-5 justify-center">
@@ -137,6 +139,7 @@ function Adidas() {
           );
         })}
       </div>
+    </div>
     </div>
   );
 }

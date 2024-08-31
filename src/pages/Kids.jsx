@@ -3,6 +3,7 @@ import { contexts } from "../App";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "@material-tailwind/react";
+import Navibar from "../component/Navibar";
 // import { useCart } from "../CartContext";
 
 function Kids() {
@@ -34,7 +35,8 @@ function Kids() {
   // console.log(state,"jajhfdkajdf");
   return (
     <div>
-      <div className="bg-white m-10">
+      <div className="bg-white ">
+        <Navibar/>
         <h1 className="text-2xl font-bold leading-7 m-10 ml-40">Kid's</h1>
         <div className="flex flex-wrap gap-5 justify-center">
           {data

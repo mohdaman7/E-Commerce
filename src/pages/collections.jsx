@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { contexts } from "../App";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Navibar from "../component/Navibar";
 // import { useCart } from "../CartContext";
 
 function Collections() {
@@ -40,6 +41,8 @@ function Collections() {
 
 
   return (
+    <div>
+      <Navibar/>
     <div className="bg-white m-10">
       <div className="flex flex-wrap gap-5 justify-center">
         {data.map((item) => {
@@ -141,6 +144,7 @@ function Collections() {
           );
         })}
       </div>
+    </div>
     </div>
   )
 }

@@ -53,23 +53,23 @@ function Navibar() {
                   </NavLink>
                 </li> */}
                 <li>
-                  <NavLink to="mens" className="hover:text-gray-200" href="#">
+                  <NavLink to="/mens" className="hover:text-gray-200" href="#">
                     MENS
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="womens" className="hover:text-gray-200" href="#">
+                  <NavLink to="/womens" className="hover:text-gray-200" href="#">
                     WOMENS
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="kids" className="hover:text-gray-200" href="#">
+                  <NavLink to="/kids" className="hover:text-gray-200" href="#">
                     KIDS
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    to="collections"
+                    to="/collections"
                     className="hover:text-gray-200"
                     href="#"
                   >
@@ -78,7 +78,7 @@ function Navibar() {
                 </li>
                 <li>
                   <NavLink
-                    to="contact"
+                    to="/contact"
                     className="hover:text-gray-200"
                     href="#"
                   >
