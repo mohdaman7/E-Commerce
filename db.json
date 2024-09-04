@@ -238,7 +238,19 @@
       "email": "muhammedaman2.oaman@gmail.com",
       "password": "@Mohdaman7",
       "cpassword": "@Mohdaman7",
-      "cart": [],
+      "cart": [
+        {
+          "id": "7",
+          "price": 110,
+          "marketRate": 120,
+          "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/05d712c8-6a44-43aa-88fc-0f36a36c505a/JORDAN+LUKA+3+TB+PF.png",
+          "name": "NLuka 3 PF Team Bank",
+          "brand": "Nike",
+          "category": "men",
+          "quantity": 1,
+          "rating": 4
+        }
+      ],
       "order": [
         {
           "email": "adadaa@gadf",
@@ -299,7 +311,41 @@
       "email": "mohdamanpc123@gmail.com",
       "password": "@Mohdaman7",
       "cpassword": "@Mohdaman7",
-      "cart": [],
+      "cart": [
+        {
+          "id": "5",
+          "price": 115,
+          "marketRate": 125,
+          "img": "https://www.superkicks.in/cdn/shop/files/1_6c6a2a75-68df-4bf1-9288-b6b9e3c3aefa.jpg?v=1713793427&width=600",
+          "name": "New Balance",
+          "brand": "New Balance",
+          "category": "men",
+          "quantity": 1,
+          "rating": 4
+        },
+        {
+          "id": "6",
+          "price": 65,
+          "marketRate": 70,
+          "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0d26b559-372c-4d03-8169-fa1d70d67ebf/JORDAN+SPIZIKE+LOW.png",
+          "name": "Jordan Spizike Low",
+          "brand": "Jordan",
+          "category": "men",
+          "quantity": 1,
+          "rating": 3
+        },
+        {
+          "id": "20",
+          "price": 99,
+          "marketRate": 85,
+          "img": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/b4f34969-b968-47ac-aca8-d0b780ad8b2f/air-flight-lite-mid-shoes-wNrQDg.png",
+          "name": "Nike Air Flight Lite Mid",
+          "brand": "Nike",
+          "category": "men",
+          "quantity": 1,
+          "rating": 4
+        }
+      ],
       "order": [
         {
           "email": "adadaa@gadf",

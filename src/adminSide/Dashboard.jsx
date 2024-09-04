@@ -24,13 +24,13 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  // users.map((item)=>{
-  //   setProfit(item.order)
-  // })
-  // console.log(profit,'pr');
-  
-  // const sum = profit.reduce((acc,val)=>acc+val.total,0)
-   
+//   users.flatMap((item)=>console.log(item.order,"order") || [])
+
+// console.log(users,"us");
+
+// const allOrders = users.flatMap(user => user.order || []);
+
+// console.log(allOrders,'allOrd');
 
 
   return (
@@ -65,7 +65,7 @@ const Dashboard = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold">Total Sales</h3>
-                <p className="text-2xl font-bold ">{sum}</p>
+                <p className="text-2xl font-bold ">{}</p>
               </div>
             </div> */}
           </div>

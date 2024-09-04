@@ -23,6 +23,18 @@ const DetailProduct = () => {
     "name"
   );
 
+  const handleAddToCart = (item) => {
+    const isLoggedIn = !!localStorage.getItem("id");
+
+    if (!isLoggedIn) {
+      toast.warning("Please login to add items to your cart");
+      navigate('/login');
+    } else {
+      addToCart(item);
+      toast.success("Item added to cart");
+    }
+  };
+
   return (
     <div>
       <Navibar/>
@@ -107,7 +119,7 @@ const DetailProduct = () => {
                   <div className="flex space-x-4 mb-6">
                     <button
                       className="bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                      onClick={() => addToCart(item)}
+                      onClick={() => handleAddToCart(item)}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

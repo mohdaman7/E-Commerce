@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { contexts } from "../App";
 import { Link, useNavigate } from "react-router-dom";
 // import { useCart } from "../CartContext";
+import { toast } from "sonner"; 
 
 
 
@@ -12,6 +13,18 @@ const ProductCard = () => {
   const navigate = useNavigate()
   const [isLiked, setIsLiked] = useState(false);
   // const { addToCart } = useContext(contexts);
+
+  const handleAddToCart = (item) => {
+    const isLoggedIn = !!localStorage.getItem("id");
+
+    if (!isLoggedIn) {
+      toast.warning("Please login to add items to your cart");
+      navigate('/login');
+    } else {
+      addToCart(item);
+      toast.success("Item added to cart");
+    }
+  };
 
   return (
     <>
@@ -108,9 +121,7 @@ const ProductCard = () => {
                     <a
                       href="#"
                       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                      onClick={()=>{
-                        addToCart(item)
-                      }}
+                      onClick={()=>handleAddToCart(item)}
                     >
                       Add to cart
                     </a>
