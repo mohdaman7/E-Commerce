@@ -1,20 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import AdminNavbar from './AdminNavbar';
 import Sidebar from './Sidebar';
 
-
-
 const UserSection = () => {
   const [users, setUsers] = useState([]);
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const fetchUsers = async () => {
-      const response = await axios.get("http://localhost:3000/users")
-      setUsers(response.data)
-    }
-    fetchUsers()
-  },[])
+      const response = await axios.get("http://localhost:3000/users");
+      setUsers(response.data);
+    };
+    fetchUsers();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -26,7 +25,6 @@ const UserSection = () => {
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
-
                 <tbody className="bg-white divide-y divide-gray-200">
                   {users.map((user) => (
                     <tr key={user.id} className="hover:bg-gray-50 transition-colors">
@@ -55,6 +53,9 @@ const UserSection = () => {
                         ) : (
                           <h3 className="text-gray-500">No items</h3>
                         )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <Link to={`/users/${user.id}`} className="text-blue-500 hover:underline">View Details</Link>
                       </td>
                     </tr>
                   ))}

@@ -28,6 +28,7 @@ import Orders from "./adminSide/Orders";
 import Admin from "./pages/Admin";
 import AddProduct from "./adminSide/AddProduct";
 import Checkout from "./component/Checkout";
+import UserDetails from "./adminSide/UserDetails";
 
 
 
@@ -85,6 +86,7 @@ function App() {
           <Route path="addproduct" element={<AddProduct/>}/>
           <Route path="users" element={<UserSection/>}/>
           <Route path="checkout" element={<Checkout/>}/>
+          <Route path="users/:userId" element={<UserDetails/>}/>
         </Routes>
       </contexts.Provider>
       <Footer/>
