@@ -155,17 +155,6 @@
       "rating": 5
     },
     {
-      "id": "15",
-      "price": 112,
-      "marketRate": 140,
-      "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e745acb29cd248e2a5a2ae600f8b132b_9366/Ultraboost-24-Women%27s-Running-Shoes-White-GW9564_01_standard.jpg",
-      "name": "Ultraboost 24 Women's Running Shoes",
-      "brand": "Adidas",
-      "category": "women",
-      "quantity": 1,
-      "rating": 5
-    },
-    {
       "id": "16",
       "price": 70,
       "marketRate": 75,
@@ -230,7 +219,8 @@
       "cpassword": "@Mohdaman7",
       "admin": true,
       "cart": [],
-      "order": []
+      "order": [],
+      "block": true
     },
     {
       "id": "95d4",
@@ -303,7 +293,8 @@
           "shipping": 0,
           "total": 318.978
         }
-      ]
+      ],
+      "block": false
     },
     {
       "id": "99fc",
@@ -311,41 +302,8 @@
       "email": "mohdamanpc123@gmail.com",
       "password": "@Mohdaman7",
       "cpassword": "@Mohdaman7",
-      "cart": [
-        {
-          "id": "5",
-          "price": 115,
-          "marketRate": 125,
-          "img": "https://www.superkicks.in/cdn/shop/files/1_6c6a2a75-68df-4bf1-9288-b6b9e3c3aefa.jpg?v=1713793427&width=600",
-          "name": "New Balance",
-          "brand": "New Balance",
-          "category": "men",
-          "quantity": 1,
-          "rating": 4
-        },
-        {
-          "id": "6",
-          "price": 65,
-          "marketRate": 70,
-          "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0d26b559-372c-4d03-8169-fa1d70d67ebf/JORDAN+SPIZIKE+LOW.png",
-          "name": "Jordan Spizike Low",
-          "brand": "Jordan",
-          "category": "men",
-          "quantity": 1,
-          "rating": 3
-        },
-        {
-          "id": "20",
-          "price": 99,
-          "marketRate": 85,
-          "img": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/b4f34969-b968-47ac-aca8-d0b780ad8b2f/air-flight-lite-mid-shoes-wNrQDg.png",
-          "name": "Nike Air Flight Lite Mid",
-          "brand": "Nike",
-          "category": "men",
-          "quantity": 1,
-          "rating": 4
-        }
-      ],
+      "blocked": false,
+      "cart": [],
       "order": [
         {
           "email": "adadaa@gadf",
@@ -398,7 +356,8 @@
           "shipping": 0,
           "total": 306.9
         }
-      ]
+      ],
+      "block": false
     }
   ]
 }

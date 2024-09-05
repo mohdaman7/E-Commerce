@@ -56,7 +56,7 @@ function Collections() {
   return (
     <div>
       <Navibar/>
-    <div className="bg-white m-10">
+    <div className="bg-white m-20">
       <div className="flex flex-wrap gap-5 justify-center">
         {data.map((item) => {
 

@@ -20,6 +20,7 @@ const ProductSection = () => {
     quantity: "",
     rating: "",
   });
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -59,6 +60,7 @@ const ProductSection = () => {
 
       setProducts((prevProducts) => [...prevProducts, addedProduct]);
       resetForm();
+      setShowForm(false);
     } catch (error) {
       console.error("Error adding product:", error);
     }
@@ -95,6 +97,7 @@ const ProductSection = () => {
         )
       );
       resetForm();
+      setShowForm(false); 
     } catch (error) {
       console.error("Error updating product:", error);
     }
@@ -122,6 +125,7 @@ const ProductSection = () => {
     });
     setSelectedProduct(product);
     setEditMode(true);
+    setShowForm(true); 
   };
 
   const resetForm = () => {
@@ -152,59 +156,76 @@ const ProductSection = () => {
         <main className="flex-1 p-6">
           <h1 className="text-4xl font-bold text-gray-800 mb-6">Product Management</h1>
 
-          {/* Form for adding or editing product */}
-          <div className="bg-white shadow-md rounded-lg p-8 mb-8">
-            <h2 className="text-3xl font-semibold text-gray-900 mb-6 flex items-center">
-              {editMode ? (
-                <>
-                  <span className="material-icons align-middle text-gray-700">edit</span>
-                  <span className="ml-2">Edit Product</span>
-                </>
-              ) : (
-                <>
-                  <span className="material-icons align-middle text-gray-700">add_circle</span>
-                  <span className="ml-2">Add New Product</span>
-                </>
-              )}
-            </h2>
-            <form className="space-y-6">
-              {Object.keys(formData).map((key) => (
-                <div className="flex flex-col" key={key}>
-                  <label className="text-sm font-medium text-gray-700 mb-1 capitalize">
-                    {key}
-                  </label>
-                  <input
-                    type={key === 'price' || key === 'marketRate' || key === 'quantity' || key === 'rating' ? 'number' : 'text'}
-                    name={key}
-                    value={formData[key]}
-                    onChange={handleChange}
-                    className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    step={key === 'price' || key === 'marketRate' ? '0.01' : '1'}
-                  />
-                </div>
-              ))}
-              <div className="flex gap-4">
-                <button
-                  type="button"
-                  onClick={handleSaveProduct}
-                  className="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center"
-                >
-                  <span className="material-icons mr-2 text-white">save</span>
-                  {editMode ? 'Update Product' : 'Add Product'}
-                </button>
-                <button
-                  type="button"
-                  onClick={resetForm}
-                  className="bg-gray-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 flex items-center"
-                >
-                  <span className="material-icons mr-2 text-white">cancel</span>
-                  Cancel
-                </button>
-              </div>
-            </form>
+          
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={() => setShowForm(!showForm)}
+              className="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center"
+            >
+              <span className="material-icons mr-2 text-white">add_circle</span>
+              {showForm ? 'Hide Form' : 'Add New Product'}
+            </button>
           </div>
 
-          {/* Products Table */}
+         
+
+          {showForm && (
+            <div className="bg-white shadow-md rounded-lg p-8 mb-8">
+              <h2 className="text-3xl font-semibold text-gray-900 mb-6 flex items-center">
+                {editMode ? (
+                  <>
+                    <span className="material-icons align-middle text-gray-700">edit</span>
+                    <span className="ml-2">Edit Product</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="material-icons align-middle text-gray-700">add_circle</span>
+                    <span className="ml-2">Add New Product</span>
+                  </>
+                )}
+              </h2>
+              <form className="space-y-6">
+                {Object.keys(formData).map((key) => (
+                  <div className="flex flex-col" key={key}>
+                    <label className="text-sm font-medium text-gray-700 mb-1 capitalize">
+                      {key}
+                    </label>
+                    <input
+                      type={key === 'price' || key === 'marketRate' || key === 'quantity' || key === 'rating' ? 'number' : 'text'}
+                      name={key}
+                      value={formData[key]}
+                      onChange={handleChange}
+                      className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      step={key === 'price' || key === 'marketRate' ? '0.01' : '1'}
+                    />
+                  </div>
+                ))}
+                <div className="flex gap-4">
+                  <button
+                    type="button"
+                    onClick={handleSaveProduct}
+                    className="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center"
+                  >
+                    <span className="material-icons mr-2 text-white">save</span>
+                    {editMode ? 'Update Product' : 'Add Product'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      resetForm();
+                      setShowForm(false); 
+                    }}
+                    className="bg-gray-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 flex items-center"
+                  >
+                    <span className="material-icons mr-2 text-white">cancel</span>
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+
+          
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
             <div className="p-4 border-b border-gray-200">
               <select
@@ -227,32 +248,40 @@ const ProductSection = () => {
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Image</th>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name</th>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Category</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Brand</th>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Price</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Market Rate</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Quantity</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Rating</th>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredProducts.map((product) => (
                   <tr key={product.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{product.id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      <img src={product.img} alt={product.name} className="h-16 w-16 object-cover rounded-md" />
+                    <td className="px-6 py-4 text-sm text-gray-900">{product.id}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">
+                      <img src={product.img} alt={product.name} className="w-16 h-16 object-cover"/>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{product.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{product.category}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${product.price.toFixed(2)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <button
+                    <td className="px-6 py-4 text-sm text-gray-900">{product.name}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">{product.category}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">{product.brand}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">${product.price.toFixed(2)}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">${product.marketRate.toFixed(2)}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">{product.quantity}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">{product.rating}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">
+                    <button
                         onClick={() => handleEditClick(product)}
-                        className="text-blue-600 hover:text-blue-700 mr-4 flex items-center"
+                        className=" text-black px-4 py-2 rounded-md shadow-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 m-3 transition duration-150 ease-in-out"
                       >
-                        <span className="material-icons mr-1">edit</span> Edit
+                        <span className="material-icons">edit</span>
                       </button>
                       <button
                         onClick={() => handleDeleteProduct(product.id)}
-                        className="text-red-600 hover:text-red-700 flex items-center"
+                        className=" text-black px-4 py-2 rounded-md shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 ml-3 transition duration-150 ease-in-out "
                       >
-                        <span className="material-icons mr-1">delete</span> Delete
+                        <span className="material-icons">delete</span>
                       </button>
                     </td>
                   </tr>

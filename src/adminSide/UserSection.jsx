@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AdminNavbar from './AdminNavbar';
 import Sidebar from './Sidebar';
+import { toast } from 'sonner';
 
 const UserSection = () => {
   const [users, setUsers] = useState([]);
+  const [blockUsers, setBlockUsers] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -14,6 +16,37 @@ const UserSection = () => {
     };
     fetchUsers();
   }, []);
+
+  const handleUser = async (id) => {
+    const response = await axios.get(`http://localhost:3000/users/${id}`);
+    const blocks = response.data.block;
+    setBlockUsers(response.data.block);
+    try {
+      if (blocks === true && response.data.admin === true) {
+        toast.warning("This is a pro admin");
+      } else if (blocks === true) {
+        await axios.patch(`http://localhost:3000/users/${id}`, {
+          block: false,
+        });
+        toast.success("User unblocked");
+        // Update users state to reflect changes
+        setUsers(users.map(user => 
+          user.id === id ? { ...user, blocked: false } : user
+        ));
+      } else {
+        await axios.patch(`http://localhost:3000/users/${id}`, {
+          block: true,
+        });
+        toast.warning("User blocked");
+        // Update users state to reflect changes
+        setUsers(users.map(user => 
+          user.id === id ? { ...user, blocked: true } : user
+        ));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -54,8 +87,14 @@ const UserSection = () => {
                           <h3 className="text-gray-500">No items</h3>
                         )}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        <Link to={`/users/${user.id}`} className="text-blue-500 hover:underline">View Details</Link>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex items-center">
+                        <Link to={`/users/${user.id}`} className="text-blue-500 hover:underline mr-4">View Details</Link>
+                        <button
+                          onClick={() => handleUser(user.id)}
+                          className={`px-4 py-2 rounded-md shadow-md focus:outline-none focus:ring-2 ${user.blocked ? 'bg-green-500 text-white hover:bg-green-600 focus:ring-green-500' : 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-500'}`}
+                        >
+                          {user.blocked ? 'Unblock' : 'Block'}
+                        </button>
                       </td>
                     </tr>
                   ))}
