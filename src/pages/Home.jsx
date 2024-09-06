@@ -13,72 +13,72 @@ import ProductCard2 from "../component/ProductCart2";
 import Logos from "../Home/Logos";
 
 function Home() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { data, setData } = useContext(contexts);
-  // const [data, setData] = useState();
+
   useEffect(() => {
     const fn = async () => {
       const response = await axios.get("http://localhost:3000/datass");
       setData(response.data);
     };
     fn();
-  }, []);
-  // console.log(data);
+  }, [setData]);
 
   return (
     <div className="bg-gray-200">
       <Navibar />
       <Banner />
       <Banner2 />
-      <div className=""> 
-        <h1 className="font-bold text-2xl m-14 pl-24">
-          {" "}
+      
+      <section className="container mx-auto px-4">
+        <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl my-8">
           Best-Selling Men's Shoes
         </h1>
         <ProductCard />
-      </div>
-      <div onClick={()=>navigate('collections')} className="bg-classic-bg h-[80vh] w-[190vh] bg-no-repeat mx-7 mt-24 "></div>
+      </section>
+      
+      <div 
+        onClick={() => navigate('collections')} 
+        className="bg-classic-bg h-[40vh] sm:h-[60vh] lg:h-[80vh] bg-no-repeat mx-4 my-8 cursor-pointer"
+      ></div>
+
       <div>
         <Banner4 />
       </div>
 
-
-      <div className="bg-home-bg6 h-[80vh] w-[190vh] bg-no-repeat mx-7 mt-14 flex flex-col items-center justify-center space-y-4 ">
-        {/* Button Container */}
-        <div className="flex space-x-4 mt-96">
+      <section className="bg-home-bg6 h-[40vh] sm:h-[60vh] lg:h-[80vh] bg-no-repeat mx-4 my-8 flex flex-col items-center justify-center space-y-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <button
             onClick={() => navigate('/mens')}
-            className="btn hover:bg-transparent"
+            className="btn hover:bg-transparent text-center py-2 px-4"
           >
             SHOP MEN CASUAL SHOES
           </button>
           <button
             onClick={() => navigate('/womens')}
-            className="btn hover:bg-transparent"
+            className="btn hover:bg-transparent text-center py-2 px-4"
           >
             SHOP WOMEN CASUAL SHOES
           </button>
         </div>
-      </div>
+      </section>
 
-
-      {/* <div className="m-auto">
-        <Banner3/>
-      </div> */}
-
-      <div className="">
-        <h1 className="font-bold text-2xl m-14 pl-24">
-          {" "}
+      <section className="container mx-auto px-4">
+        <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl my-8">
           Best-Selling Women's Shoes
         </h1>
-        <ProductCard2/>
+        <ProductCard2 />
+      </section>
+
+      <div className="bg-white py-8">
+        <Logos />
       </div>
-      <div className="bg-white"> 
-      <Logos/>
-      </div>
-      {/* <Footer/> */}
+
+      {/* <Footer /> */}
     </div>
   );
 }
 
 export default Home;
+
+

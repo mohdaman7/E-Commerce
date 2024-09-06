@@ -35,6 +35,9 @@ function Login() {
 
     if(data.admin === true){
       navigate('/admin')
+    }else if(data.block === false){
+      toast.warning("Your accound is blocked")
+      navigate('/register')
     }
     else if(!data){
       toast.warning("User Invalid")

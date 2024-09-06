@@ -36,7 +36,7 @@ const Checkout = () => {
   const total = subtotal + taxes + shipping;
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault();
 
     const formData = new FormData(event.target);
     const orderData = [
@@ -65,7 +65,7 @@ const Checkout = () => {
         order: orderData,
       });
       toast.success("Order placed successfully!");
-      setCart([]); // Clear the cart
+      setCart([]);
       await axios.patch(`http://localhost:3000/users/${uId}`, { cart: [] });
     } catch (error) {
       console.error("Error placing order:", error);

@@ -29,7 +29,6 @@ const UserSection = () => {
           block: false,
         });
         toast.success("User unblocked");
-        // Update users state to reflect changes
         setUsers(users.map(user => 
           user.id === id ? { ...user, blocked: false } : user
         ));
@@ -38,7 +37,6 @@ const UserSection = () => {
           block: true,
         });
         toast.warning("User blocked");
-        // Update users state to reflect changes
         setUsers(users.map(user => 
           user.id === id ? { ...user, blocked: true } : user
         ));

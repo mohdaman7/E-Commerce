@@ -48,7 +48,7 @@ function Kids() {
   // console.log(state,"jajhfdkajdf");
   return (
     <div>
-      <div className="bg-white ">
+      <div className="bg-white">
         <Navibar/>
         <h1 className="text-2xl font-bold leading-7 m-10 ml-40">Kid's</h1>
         <div className="flex flex-wrap gap-5 justify-center">

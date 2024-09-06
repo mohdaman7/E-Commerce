@@ -21,6 +21,7 @@ const ProductSection = () => {
     rating: "",
   });
   const [showForm, setShowForm] = useState(false);
+  const [showProduct, setShowProduct] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -61,6 +62,7 @@ const ProductSection = () => {
       setProducts((prevProducts) => [...prevProducts, addedProduct]);
       resetForm();
       setShowForm(false);
+      setShowProduct(true); 
     } catch (error) {
       console.error("Error adding product:", error);
     }
@@ -97,7 +99,8 @@ const ProductSection = () => {
         )
       );
       resetForm();
-      setShowForm(false); 
+      setShowForm(false);
+      setShowProduct(true);
     } catch (error) {
       console.error("Error updating product:", error);
     }
@@ -125,7 +128,8 @@ const ProductSection = () => {
     });
     setSelectedProduct(product);
     setEditMode(true);
-    setShowForm(true); 
+    setShowForm(true);
+    setShowProduct(false); 
   };
 
   const resetForm = () => {
@@ -156,18 +160,18 @@ const ProductSection = () => {
         <main className="flex-1 p-6">
           <h1 className="text-4xl font-bold text-gray-800 mb-6">Product Management</h1>
 
-          
           <div className="flex justify-end mb-4">
             <button
-              onClick={() => setShowForm(!showForm)}
+              onClick={() => {
+                setShowForm(!showForm);
+                setShowProduct(prev => !prev); 
+              }}
               className="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center"
             >
               <span className="material-icons mr-2 text-white">add_circle</span>
               {showForm ? 'Hide Form' : 'Add New Product'}
             </button>
           </div>
-
-         
 
           {showForm && (
             <div className="bg-white shadow-md rounded-lg p-8 mb-8">
@@ -213,7 +217,8 @@ const ProductSection = () => {
                     type="button"
                     onClick={() => {
                       resetForm();
-                      setShowForm(false); 
+                      setShowForm(false);
+                      setShowProduct(true); // Show products list again
                     }}
                     className="bg-gray-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 flex items-center"
                   >
@@ -225,70 +230,63 @@ const ProductSection = () => {
             </div>
           )}
 
-          
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <div className="p-4 border-b border-gray-200">
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center"
-              >
-                <option value="">All Categories</option>
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Image</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Category</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Brand</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Price</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Market Rate</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Quantity</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Rating</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {filteredProducts.map((product) => (
-                  <tr key={product.id}>
-                    <td className="px-6 py-4 text-sm text-gray-900">{product.id}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">
-                      <img src={product.img} alt={product.name} className="w-16 h-16 object-cover"/>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{product.name}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{product.category}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{product.brand}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">${product.price.toFixed(2)}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">${product.marketRate.toFixed(2)}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{product.quantity}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{product.rating}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">
-                    <button
-                        onClick={() => handleEditClick(product)}
-                        className=" text-black px-4 py-2 rounded-md shadow-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 m-3 transition duration-150 ease-in-out"
-                      >
-                        <span className="material-icons">edit</span>
-                      </button>
-                      <button
-                        onClick={() => handleDeleteProduct(product.id)}
-                        className=" text-black px-4 py-2 rounded-md shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 ml-3 transition duration-150 ease-in-out "
-                      >
-                        <span className="material-icons">delete</span>
-                      </button>
-                    </td>
+          {showProduct && (
+            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+              <div className="p-4 border-b border-gray-200">
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center"
+                >
+                  <option value="">All Categories</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-100">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Image</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Price</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Category</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {filteredProducts.map((product) => (
+                    <tr key={product.id}>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">{product.id}</td>
+                      <td className="px-6 py-4 text-sm text-gray-500">
+                        <img src={product.img} alt={product.name} className="w-16 h-16 object-cover rounded" />
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-900">{product.name}</td>
+                      <td className="px-6 py-4 text-sm text-gray-500">${product.price.toFixed(2)}</td>
+                      <td className="px-6 py-4 text-sm text-gray-500">{product.category}</td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-500">
+                        <button
+                          onClick={() => handleEditClick(product)}
+                          className="text-blue-600 hover:text-blue-800"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteProduct(product.id)}
+                          className="text-red-600 hover:text-red-800 ml-4"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </main>
       </div>
     </div>

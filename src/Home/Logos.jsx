@@ -11,7 +11,7 @@ function Logos() {
       ];
 
   return (
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 place-items-center m-3 h-64">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 place-items-center m-3 h-64 mt-10">
       {imageUrls.map((url, index) => (
         <img
           key={index}
