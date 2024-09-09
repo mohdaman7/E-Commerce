@@ -9,6 +9,7 @@ const UserDetails = () => {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
   
+  
 
   useEffect(() => {
     const fetchUser = async () => {

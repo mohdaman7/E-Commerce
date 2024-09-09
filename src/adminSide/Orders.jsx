@@ -7,7 +7,7 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const fetchOrders = async () => {
+    const fn = async () => {
       try {
         const response = await axios.get('http://localhost:3000/users');
         const users = response.data;
@@ -24,7 +24,7 @@ const Orders = () => {
       }
     };
 
-    fetchOrders();
+    fn();
   }, []);
 
   return (

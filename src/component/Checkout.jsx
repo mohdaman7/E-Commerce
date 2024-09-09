@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Navibar from "./Navibar";
 
+
 const Checkout = () => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
   const [cart, setCart] = useState([]);
@@ -58,7 +59,6 @@ const Checkout = () => {
         total,
       },
     ];
-
     
     try {
       await axios.patch(`http://localhost:3000/users/${uId}`,{
@@ -66,7 +66,7 @@ const Checkout = () => {
       });
       toast.success("Order placed successfully!");
       setCart([]);
-      await axios.patch(`http://localhost:3000/users/${uId}`, { cart: [] });
+      await axios.patch(`http://localhost:3000/users/${uId}`,{ cart:[] });
     } catch (error) {
       console.error("Error placing order:", error);
       toast.error("Failed to place order. Please try again.");
@@ -138,7 +138,7 @@ const Checkout = () => {
                 </div>
               </dl>
 
-              {/* Mobile Popover */}
+              
               <div className="fixed bottom-0 inset-x-0 flex flex-col-reverse text-sm font-medium text-gray-900 lg:hidden">
                 <div className="relative z-10 bg-white border-t border-gray-200 px-4 sm:px-6">
                   <div className="max-w-lg mx-auto">
