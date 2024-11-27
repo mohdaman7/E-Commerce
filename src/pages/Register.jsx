@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // import Validation from "../Validation";
 import './Register.css'
 import axios from "axios";
@@ -116,7 +116,7 @@ function Register() {
                   onBlur={()=>{
                     setFocus({...focus,errName:true})
                   }}
-                  focus = {focus.errName.toString()}
+                  // focus = {focus.errName.toString()}
                   required
                  
                 />
@@ -143,7 +143,7 @@ function Register() {
                   onBlur={()=>{
                     setFocus({...focus,errEmail:true})
                   }}
-                  focus = {focus.errEmail.toString()}
+                  // focus = {focus.errEmail.toString()}
                   required
                 />
                  <span>Enter a valid Email ID</span>
@@ -169,7 +169,7 @@ function Register() {
                   onBlur={()=>{
                     setFocus({...focus,errPass:true})
                   }}
-                  focus = {focus.errPass.toString()}
+                  // focus = {focus.errPass.toString()}
                   required
                   
                 />
@@ -197,7 +197,7 @@ function Register() {
                   onBlur={()=>{
                     setFocus({...focus,errCpass:true})
                   }}
-                  focus = {focus.errCpass.toString()} 
+                  // focus = {focus.errCpass.toString()} 
                   required 
                 />
                 <span>Password is not matching</span>
