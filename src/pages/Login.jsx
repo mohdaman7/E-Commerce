@@ -1,5 +1,5 @@
-import { data } from "autoprefixer";
-import React, { useState , useEffect} from "react";
+import { d  ata } from "autoprefixer";
+import { useState , useEffect} from "react";
 import axios from "axios";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";

@@ -1,231 +1,209 @@
-import { useEffect, useState } from "react";
-// import Validation from "../Validation";
-import './Register.css'
+import { useState } from "react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Input,
+  Checkbox,
+  Button,
+} from "@material-tailwind/react";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
-import { Link, useNavigate } from "react-router-dom";
 
+const signupValidation = yup.object({
+  username: yup.string().min(3).required("Please enter your name"),
+  email: yup
+    .string()
+    .email("Please enter a valid email")
+    .required("Please enter your email"),
+  password: yup.string().min(5).required("Please enter your password"),
+  cpassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords do not match")
+    .required("Please confirm your password"),
+});
 
-function Register() {
-  // const [values,setValues] = useState({
-  //   name:'',
-  //   email:'',
-  //   password:'',
-  //   cpassword:''
-  // })
+const initialValues = {
+  username: "",
+  email: "",
+  password: "",
+  cpassword: "",
+};
 
+const Register = () => {
+  const [profileimage, setProfile] = useState(null);
+  let navigate = useNavigate();
 
-  // const [errors,setErrors] = useState({})
-
-  // function handleInput(event) {
-  //   const newObj = {...values,[event.target.name]: event.target.value}
-  //   setValues(newObj)
-  // }
-
-  // function handleValidation(event){
-  //   event.preventDefault();
-  //   setErrors(Validation(values));
-  // }
-
-  const navigate = useNavigate()
-
-
-  const [inputs,setInputs] = useState({
-    username:'',
-    email:'',
-    password:'',
-    cpassword:''
-  })
-
-  const [emails,setEmails] = useState([])
-
-
-  const [focus,setFocus] = useState({
-    errName : false,
-    errEmail : false,
-    errPass : false,
-    errCpass : false
-  })
-
-  useEffect(()=>{
-    const fetchmail = async () => {
-      const response = await axios.get("http://localhost:3000/users");
-      try{
-        setEmails(response.data);
-        console.log(emails)
-      }catch(error){
-        toast.error("not fetched")
+  const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
+    initialValues,
+    validationSchema: signupValidation,
+    onSubmit: async (values) => {
+      const formData = new FormData();
+      formData.append("username", values.username);
+      formData.append("email", values.email);
+      formData.append("password", values.password);
+      if (profileimage) {
+        formData.append("image", profileimage);
       }
-    }
-    fetchmail()
-  },[])
-  
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setInputs({...inputs,[name]:value,cart:[],order:[]})
-  }
 
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/api/users/register",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        toast.success(response.data.message, "success");
+        navigate("/login");
+      } catch (error) {
+        toast.error(error, "error");
+      }
+    },
+  });
 
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const finduser = emails.find((user)=>user.email === inputs.email)
-    
-    if(finduser){
-      toast.warning("User already exists")
-    }else{
-      await axios.post("http://localhost:3000/users",inputs)
-      toast.success("Registration Successful")
-      navigate('/login')
-    }
-    
-  }
-  console.log(inputs)
-
-
+  const handleImageChange = (e) => {
+    setProfile(e.target.files[0]);
+  };
 
   return (
-    <div>
-      <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
-        <div>
-          <a href="/">
-            <h3 className="text-4xl font-bold text-black">FOOTZONE</h3>
-          </a>
-        </div>
-        <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700 undefined"
-  
-              >
-                Username
-              </label>
-              <div className="flex flex-col items-start">
-                <input
-                  type="text"
-                  pattern="^[A-Za-z0-9].{4,}"
-                  name="username"
-                  placeholder="username"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-black focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border 2px solid black"
-                  onChange={handleChange}
-                  value={inputs.username}
-                  onBlur={()=>{
-                    setFocus({...focus,errName:true})
-                  }}
-                  // focus = {focus.errName.toString()}
-                  required
-                 
-                />
-                 <span>Username should have 3-16 characters</span>   
-                {/* {errors.name && <p style={{color:"red"}}>{errors.name}</p>} */}
-              </div>
-            </div>
-            <div className="mt-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 undefined"
-              >
-                Email
-              </label>
-              <div className="flex flex-col items-start">
-                <input
-                  type="email"
-                  pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
-                  name="email"
-                  placeholder="Email ID"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border 2px solid blac"
-                  onChange={handleChange}
-                  value={inputs.email}
-                  onBlur={()=>{
-                    setFocus({...focus,errEmail:true})
-                  }}
-                  // focus = {focus.errEmail.toString()}
-                  required
-                />
-                 <span>Enter a valid Email ID</span>
-                {/* {errors.email && <p style={{color:"red"}}>{errors.email}</p>} */}
-              </div>
-            </div>
-            <div className="mt-4">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700 undefined"
-              >
-                Password
-              </label>
-              <div className="flex flex-col items-start">
-                <input
-                  type="password"
-                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                  name="password"
-                  placeholder="password"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border 2px solid blac"
-                  onChange={handleChange}
-                  value={inputs.password}
-                  onBlur={()=>{
-                    setFocus({...focus,errPass:true})
-                  }}
-                  // focus = {focus.errPass.toString()}
-                  required
-                  
-                />
-                 <span>Password must have minimum 8 characters and include atleast 1 uppercase, 1 digit and 1 special character</span>
-                {/* {errors.password && <p style={{color:"red"}}>{errors.password}</p>}  */}
-              </div>
-            </div>
-            <div className="mt-4">
-              <label
-                htmlFor="password_confirmation"
-                className="block text-sm font-medium text-gray-700 undefined"
-              >
-                Confirm Password
-              </label>
-              <div className="flex flex-col items-start">
-                <input
-                  type="password"
-                  pattern={inputs.password}
-                  name="cpassword"
-                  placeholder="Confirm Password"
-                  // pattern={values.password}
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border 2px solid blac"
-                  onChange={handleChange}
-                  value={inputs.cpassword}
-                  onBlur={()=>{
-                    setFocus({...focus,errCpass:true})
-                  }}
-                  // focus = {focus.errCpass.toString()} 
-                  required 
-                />
-                <span>Password is not matching</span>
-                 {/* {errors.cpassword && <p style={{color:"red"}}>{errors.cpassword}</p>}  */}
-              </div>
-            </div>
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center relative "
+      style={{
+        backgroundImage:
+          "url('https://img.freepik.com/premium-photo/pair-sneakers-with-wings-made-glowing-neon-light-sneakers-are-blue-pink-wings-are-bright-white_14117-469513.jpg')",
+      }}
+    >
+      
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-            
-            <div className="flex items-center justify-end mt-4">
-              <Link 
-                to='/login'
-                className="text-sm text-gray-600 underline hover:text-gray-900"
-                href="#"
-              >
-                Already registered?
-              </Link>
-              <button
+      <div className="relative p-8 max-w-md w-full backdrop-blur-lg bg-black bg-opacity-10 rounded-xl shadow-lg m-6">
+        <form onSubmit={handleSubmit} className="w-full">
+          <Card className="bg-transparent shadow-none">
+            <CardHeader className="text-center">
+              <div className="relative mt-6">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzS5uEf6jL79Yqu7wKePDUk_4LiX5AKax0TQ&s"
+                  alt="Shoe Showcase"
+                  className="w-32 h-32 mx-auto mb-3 rounded-full shadow-lg border-4 border-black"
+                />
+              </div>
+              <Typography variant="h2" className="text-black font-bold mt-4">
+                FOOTZONE
+              </Typography>
+              <Typography variant="small" className="text-gray-800 font-semibold">
+                Discover the perfect fit and elevate your style!
+              </Typography>
+            </CardHeader>
+
+            <CardBody className="space-y-4">
+              <Input
+                label="Username"
+                size="lg"
+                name="username"
+                value={values.username}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                error={errors.username}
+                className="text-white"
+              />
+              {errors.username && (
+                <small className="text-red-500">{errors.username}</small>
+              )}
+              <Input
+                label="Email"
+                size="lg"
+                type="email"
+                name="email"
+                value={values.email}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                error={errors.email}
+                className="text-white"
+              />
+              {errors.email && (
+                <small className="text-red-500">{errors.email}</small>
+              )}
+              <Input
+                label="Password"
+                size="lg"
+                type="password"
+                name="password"
+                value={values.password}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                error={errors.password}
+                className="text-white"
+              />
+              {errors.password && (
+                <small className="text-red-500">{errors.password}</small>
+              )}
+              <Input
+                label="Confirm Password"
+                size="lg"
+                type="password"
+                name="cpassword"
+                value={values.cpassword}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                error={errors.cpassword}
+                className="text-white"
+              />
+              {errors.cpassword && (
+                <small className="text-red-500">{errors.cpassword}</small>
+              )}
+              <Input
+                label="Upload Profile Image"
+                size="lg"
+                type="file"
+                name="image"
+                onChange={handleImageChange}
+                className="text-white"
+              />
+              <Checkbox
+                label="I agree to the Terms and Conditions"
+                className="text-gray-300"
+              />
+            </CardBody>
+            <CardFooter className="flex flex-col gap-4">
+              <Button
+                variant="gradient"
+                fullWidth
                 type="submit"
-                className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
+                className="bg-yellow-500 hover:bg-yellow-600"
               >
-                Register
-              </button>
-            </div>
-          </form>
-        </div>
+                Sign Up
+              </Button>
+              <Typography className="text-center text-gray-300">
+                Already have an account?{" "}
+                <a
+                  href="/login"
+                  className="text-yellow-500 font-bold hover:underline"
+                >
+                  Sign In
+                </a>
+              </Typography>
+              <Button
+                variant="outlined"
+                fullWidth
+                onClick={() => navigate(-1)}
+                className="text-white border-white"
+              >
+                Go Back
+              </Button>
+            </CardFooter>
+          </Card>
+        </form>
       </div>
     </div>
   );
-}
+};
 
 export default Register;

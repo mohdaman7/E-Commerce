@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Navibar from "./Navibar";
@@ -22,11 +22,30 @@ const Cart = () => {
     fn();
   });
 
-  const removeFromCart = async (id) => {
-    const del = cart.filter((item) => item.id != id);
-    await axios.patch(`http://localhost:3000/users/${uId}`, { cart: del });
-    fn();
-    toast.success("Item removed");
+  const removeFromCart = async (item) => {
+
+    let userlocalStorage = localStorage.getItem('user')
+    const user = JSON.parse(userlocalStorage)
+    const token = localStorage.getItem('token')
+
+
+    try {
+      await axios.delete(`http://localhost:5000/api/users/${user._id}/cart/${item}/remove`,{
+        headers:{
+          Authorization:`${token}`
+        }
+      })
+      
+      toast.success("item removed success fully", "success")
+
+    } catch (err) {
+      console.log(err,'error to delete cart')
+    }
+
+    // const del = cart.filter((item) => item.id != id);
+    // await axios.patch(`http://localhost:3000/users/${uId}`, { cart: del });
+    // fn();
+    // toast.success("Item removed");
   };
 
   const increaseQuantity = async (id) => {
@@ -132,7 +151,7 @@ const Cart = () => {
                         </td>
                         <td className="py-4">
                           <button
-                            onClick={() => removeFromCart(item.id)}
+                            onClick={() => removeFromCart(item.productId._id)}
                             className="text-red-500 hover:text-red-700"
                           >
                             Remove
