@@ -1,14 +1,4 @@
 import { useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Input,
-  Checkbox,
-  Button,
-} from "@material-tailwind/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -36,8 +26,8 @@ const initialValues = {
 };
 
 const Register = () => {
-  const [profileimage, setProfile] = useState(null);
-  let navigate = useNavigate();
+  const [profileImage, setProfileImage] = useState(null);
+  const navigate = useNavigate();
 
   const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
     initialValues,
@@ -47,8 +37,8 @@ const Register = () => {
       formData.append("username", values.username);
       formData.append("email", values.email);
       formData.append("password", values.password);
-      if (profileimage) {
-        formData.append("image", profileimage);
+      if (profileImage) {
+        formData.append("image", profileImage);
       }
 
       try {
@@ -56,150 +46,152 @@ const Register = () => {
           "http://localhost:3000/api/users/register",
           formData,
           {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
+            headers: { "Content-Type": "multipart/form-data" },
           }
         );
-        toast.success(response.data.message, "success");
+        toast.success(response.data.message);
         navigate("/login");
       } catch (error) {
-        toast.error(error, "error");
+        toast.error("Registration failed. Try again.");
       }
     },
   });
 
   const handleImageChange = (e) => {
-    setProfile(e.target.files[0]);
+    setProfileImage(e.target.files[0]);
   };
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center relative "
+      className="min-h-screen flex items-center justify-center bg-cover bg-left relative"
       style={{
         backgroundImage:
           "url('https://img.freepik.com/premium-photo/pair-sneakers-with-wings-made-glowing-neon-light-sneakers-are-blue-pink-wings-are-bright-white_14117-469513.jpg')",
       }}
     >
-      
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+      <div className="absolute inset-0 bg-black bg-opacity-20"></div>
 
-      <div className="relative p-8 max-w-md w-full backdrop-blur-lg bg-black bg-opacity-10 rounded-xl shadow-lg m-6">
-        <form onSubmit={handleSubmit} className="w-full">
-          <Card className="bg-transparent shadow-none">
-            <CardHeader className="text-center">
-              <div className="relative mt-6">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzS5uEf6jL79Yqu7wKePDUk_4LiX5AKax0TQ&s"
-                  alt="Shoe Showcase"
-                  className="w-32 h-32 mx-auto mb-3 rounded-full shadow-lg border-4 border-black"
-                />
-              </div>
-              <Typography variant="h2" className="text-black font-bold mt-4">
-                FOOTZONE
-              </Typography>
-              <Typography variant="small" className="text-gray-800 font-semibold">
-                Discover the perfect fit and elevate your style!
-              </Typography>
-            </CardHeader>
+      <div className="relative z-10 w-96 max-w-lg p-6 bg-transparent bg-opacity-10 rounded-xl shadow-lg m-7">
+        <div className="text-center mb-6">
+          <img
+            src="https://i.pinimg.com/736x/68/8d/61/688d612e430fde6ad82c6f07ef893fa4.jpg"
+            alt="Brand Logo"
+            className="w-20 h-20 mx-auto rounded-full border-4 border-black shadow-lg"
+          />
+          <h1 className="text-3xl font-bold text-black">Footzone</h1>
+          <p className="text-sm text-gray-900">
+            Discover the perfect fit and elevate your style.
+          </p>
+        </div>
 
-            <CardBody className="space-y-4">
-              <Input
-                label="Username"
-                size="lg"
-                name="username"
-                value={values.username}
-                onBlur={handleBlur}
-                onChange={handleChange}
-                error={errors.username}
-                className="text-white"
-              />
-              {errors.username && (
-                <small className="text-red-500">{errors.username}</small>
-              )}
-              <Input
-                label="Email"
-                size="lg"
-                type="email"
-                name="email"
-                value={values.email}
-                onBlur={handleBlur}
-                onChange={handleChange}
-                error={errors.email}
-                className="text-white"
-              />
-              {errors.email && (
-                <small className="text-red-500">{errors.email}</small>
-              )}
-              <Input
-                label="Password"
-                size="lg"
-                type="password"
-                name="password"
-                value={values.password}
-                onBlur={handleBlur}
-                onChange={handleChange}
-                error={errors.password}
-                className="text-white"
-              />
-              {errors.password && (
-                <small className="text-red-500">{errors.password}</small>
-              )}
-              <Input
-                label="Confirm Password"
-                size="lg"
-                type="password"
-                name="cpassword"
-                value={values.cpassword}
-                onBlur={handleBlur}
-                onChange={handleChange}
-                error={errors.cpassword}
-                className="text-white"
-              />
-              {errors.cpassword && (
-                <small className="text-red-500">{errors.cpassword}</small>
-              )}
-              <Input
-                label="Upload Profile Image"
-                size="lg"
-                type="file"
-                name="image"
-                onChange={handleImageChange}
-                className="text-white"
-              />
-              <Checkbox
-                label="I agree to the Terms and Conditions"
-                className="text-gray-300"
-              />
-            </CardBody>
-            <CardFooter className="flex flex-col gap-4">
-              <Button
-                variant="gradient"
-                fullWidth
-                type="submit"
-                className="bg-yellow-500 hover:bg-yellow-600"
-              >
-                Sign Up
-              </Button>
-              <Typography className="text-center text-gray-300">
-                Already have an account?{" "}
-                <a
-                  href="/login"
-                  className="text-yellow-500 font-bold hover:underline"
-                >
-                  Sign In
-                </a>
-              </Typography>
-              <Button
-                variant="outlined"
-                fullWidth
-                onClick={() => navigate(-1)}
-                className="text-white border-white"
-              >
-                Go Back
-              </Button>
-            </CardFooter>
-          </Card>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Username */}
+          <div>
+            <label className="block text-black font-medium">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={values.username}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-black"
+            />
+            {errors.username && (
+              <p className="text-sm text-red-500">{errors.username}</p>
+            )}
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="block text-black font-medium">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={values.email}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-black"
+            />
+            {errors.email && (
+              <p className="text-sm text-red-500">{errors.email}</p>
+            )}
+          </div>
+
+          {/* Password */}
+          <div>
+            <label className="block text-black font-medium">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={values.password}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-black"
+            />
+            {errors.password && (
+              <p className="text-sm text-red-500">{errors.password}</p>
+            )}
+          </div>
+
+          {/* Confirm Password */}
+          <div>
+            <label className="block text-black font-medium">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              name="cpassword"
+              value={values.cpassword}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-black"
+            />
+            {errors.cpassword && (
+              <p className="text-sm text-red-500">{errors.cpassword}</p>
+            )}
+          </div>
+
+          {/* Profile Image */}
+          <div>
+            <label className="block text-black font-medium">
+              Profile Image
+            </label>
+            <input
+              type="file"
+              name="image"
+              onChange={handleImageChange}
+              className="w-full px-4 py-2"
+            />
+          </div>
+
+          {/* Terms */}
+          <div>
+            <label className="inline-flex items-center">
+              <input type="checkbox" className="form-checkbox focus:ring-black" />
+              <span className="ml-2 text-black">
+                I agree to the Terms and Conditions
+              </span>
+            </label>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full py-2 bg-blue-gray-900 text-white font-bold rounded-lg hover:bg-black"
+          >
+            Sign Up
+          </button>
+
+          {/* Sign In Link */}
+          <p className="text-center text-sm text-black">
+            Already have an account?{" "}
+            <a
+              href="/login"
+              className="text-white font-bold hover:underline"
+            >
+              Sign In
+            </a>
+          </p>
         </form>
       </div>
     </div>

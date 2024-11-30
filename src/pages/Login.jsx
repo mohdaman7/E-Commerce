@@ -1,152 +1,132 @@
-import { d  ata } from "autoprefixer";
-import { useState , useEffect} from "react";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { RiAdminFill } from "react-icons/ri";
 
+const signupValidation = yup.object({
+  email: yup.string().email("Enter a valid email").required("Email is required"),
+  password: yup.string().min(5, "Password must be at least 5 characters").required("Password is required"),
+});
 
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-  const [rvalue,setrvalue]=useState([])
+const initialValues = {
+  email: "",
+  password: "",
+};
 
-  const navigate = useNavigate()
+const Login = () => {
+  const navigate = useNavigate();
 
-  // useEffect(()=>{
-  //   const fn=async()=>{
-  //     const response = await axios.get("http://localhost:3000/users")
-  //     // console.log(response.data);
-  //     setrvalue(response.data)
-  //   //  const data = response.data
-  //   // set
-  
-  //   }
-  //  fn() 
-  // },[])
+  const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
+    initialValues,
+    validationSchema: signupValidation,
+    onSubmit: async (values) => {
+      try {
+        const response = await axios.post("http://localhost:3000/api/users/login", {
+          email: values.email,
+          password: values.password,
+        });
 
-  console.log(rvalue)
+        if (response.status === 200) {
+          const { token, user } = response.data;
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const errors = validate();
-    const response = await axios.get("http://localhost:3000/users")
-    const data = response.data.find((item)=>item.email===email && item.password===password)
+          localStorage.setItem("tocken", token);
+          localStorage.setItem("user", JSON.stringify(user));
 
-    if(data.admin === true){
-      navigate('/admin')
-    }else if(data.block === false){
-      toast.warning("Your accound is blocked")
-      navigate('/register')
-    }
-    else if(!data){
-      toast.warning("User Invalid")
-    }else{
-      navigate('/')
-      toast.success("Login Successful")
-      localStorage.setItem("id",data.id)
-    }
-    setErrors(errors);
-    if (Object.keys(errors).length === 0) {
-      alert("Done");
-    }
-    
-  };
-
-
-  const validate = () => {
-    const error = {};
-
-    if (!email) {
-      error.email = "Email is Required";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      error.email = "Email not Matched"
-    } else {
-      error.email = "";
-    }
-
-    if (!password) {
-      error.password = "Password is Required";
-    } else if (password.length < 8) {
-      error.password = "Password not Matched";
-    } else {
-      error.password = "";
-    }
-
-    return error;
-  };
+          toast.success("Login successful!");
+          navigate("/");
+        }
+      } catch (error) {
+        toast.error("Invalid email or password");
+        console.error(error);
+      }
+    },
+  });
 
   return (
-    <div>
-      <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl" />
-          <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-            <div className="max-w-md mx-auto">
-              <div>
-                <h1 className="text-2xl font-semibold">Login</h1>
-              </div>
-              <div className="divide-y divide-gray-200">
-                <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                  <form onSubmit={handleSubmit}>
-                    <div className="relative">
-                      <input
-                        autoComplete="off"
-                        id="email"
-                        name="email"
-                        type="text"
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                        }}
-                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600 m-4 ml-1"
-                        placeholder="Email address"
-                      />
-                      {errors.email && (
-                        <div className="text-red-500 text-sm pb-3">{errors.email}</div>
-                      )}
-                      <label
-                        htmlFor="email"
-                        className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-1 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                      >
-                        Email Address
-                      </label>
-                    </div>
-                    <div className="relative">
-                      <input
-                        autoComplete="off"
-                        id="password"
-                        name="password"
-                        type="password"
-                        onChange={(e) => {
-                          setPassword(e.target.value);
-                        }}
-                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600 mt-4"
-                        placeholder="Password"
-                      />
-                      {errors.password && (
-                        <div className="text-red-500 text-sm">{errors.password}</div>
-                      )}
-                      <label
-                        htmlFor="password"
-                        className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-1 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm "
-                      >
-                        Password
-                      </label>
-                    </div>
-                    <div className="relative">
-                      <button className="bg-blue-500 text-white rounded-md px-2 py-1 mt-5">
-                        Submit
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center relative text-white"
+      style={{
+        backgroundImage:
+          "url('https://dailycoin.com/wp-content/uploads/2022/01/Nike-Tries-on-NFTs-After-Acquiring-a-Virtual-Footwear-Maker_1600X630px_web-copy.jpg')",
+      }}
+    >
+      <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+      <form
+        onSubmit={handleSubmit}
+        className="relative z-10 w-full max-w-md p-8 bg-transparent bg-opacity-90 rounded-xl shadow-lg"
+      >
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold uppercase">Sign In</h1>
+          <p className="text-gray-400">Access your account to start shopping!</p>
         </div>
-      </div>
+
+        {/* Email Input */}
+        <div className="mb-4">
+          <label className="block text-gray-300 text-sm font-semibold mb-2">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={values.email}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            className="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
+          />
+          {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email}</p>}
+        </div>
+
+        {/* Password Input */}
+        <div className="mb-6">
+          <label className="block text-gray-300 text-sm font-semibold mb-2">Password</label>
+          <input
+            type="password"
+            name="password"
+            value={values.password}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            className="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
+          />
+          {errors.password && <p className="text-sm text-red-500 mt-1">{errors.password}</p>}
+        </div>
+
+       
+        <div className="flex items-center mb-6">
+          <input type="checkbox" id="remember" className="form-checkbox text-gray-300" />
+          <label htmlFor="remember" className="ml-2 text-sm text-gray-400">
+            Remember Me
+          </label>
+        </div>
+
+        
+        <button
+          type="submit"
+          className="w-full py-2 bg-white text-black font-bold uppercase rounded-lg hover:bg-gray-200 transition"
+        >
+          <p>Sign In</p>
+        </button>
+
+        
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-400">
+            <p>Dont have an account?{" "}</p>
+            <span
+              onClick={() => navigate("/register")}
+              className="text-white font-bold cursor-pointer hover:underline"
+            >
+              Sign Up
+            </span>
+          </p>
+          <p className="mt-4">
+            <Link to="/adminlogin" className="flex items-center justify-center text-gray-400 hover:text-white">
+              <RiAdminFill size={20} className="mr-2" /> Admin Login
+            </Link>
+          </p>
+        </div>
+      </form>
     </div>
   );
-}
+};
 
 export default Login;
