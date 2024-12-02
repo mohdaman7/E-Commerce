@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "sonner";
+import userApi from "../../api/userIntrceptor";
 
 const signupValidation = yup.object({
   username: yup.string().min(3).required("Please enter your name"),
@@ -42,9 +42,7 @@ const Register = () => {
       }
 
       try {
-        const response = await axios.post(
-          "http://localhost:3000/api/users/register",
-          formData,
+        const response = await userApi.post("/register",formData,
           {
             headers: { "Content-Type": "multipart/form-data" },
           }

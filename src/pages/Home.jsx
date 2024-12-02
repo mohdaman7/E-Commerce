@@ -1,20 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Banner from "../Home/Banner";
 import Navibar from "../component/Navibar";
-import ProductCard from "../component/ProductCard";
+// import ProductCard from "../component/ProductCard";
 import axios from "axios";
 import { contexts } from "../App";
 import Banner2 from "../Home/Banner2";
-import Banner3 from "../Home/Banner3";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Banner4 from "../Home/Banner4";
-import Footer from "../component/Footer";
-import ProductCard2 from "../component/ProductCart2";
+// import ProductCard2 from "../component/ProductCart2";
 import Logos from "../Home/Logos";
 
 function Home() {
   const navigate = useNavigate();
-  const { data, setData } = useContext(contexts);
+  const { setData } = useContext(contexts);
 
   useEffect(() => {
     const fn = async () => {
@@ -30,12 +28,12 @@ function Home() {
       <Banner />
       <Banner2 />
       
-      <section className="container mx-auto px-4">
+      {/* <section className="container mx-auto px-4">
         <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl my-8">
-          Best-Selling Men's Shoes
+          <p>Best-Selling Mens Shoes</p>
         </h1>
         <ProductCard />
-      </section>
+      </section> */}
       
       <div 
         onClick={() => navigate('collections')} 
@@ -52,23 +50,23 @@ function Home() {
             onClick={() => navigate('/mens')}
             className="btn hover:bg-transparent text-center py-2 px-4"
           >
-            SHOP MEN CASUAL SHOES
+            <p>SHOP MEN CASUAL SHOES</p>
           </button>
           <button
             onClick={() => navigate('/womens')}
             className="btn hover:bg-transparent text-center py-2 px-4"
           >
-            SHOP WOMEN CASUAL SHOES
+            <p>SHOP WOMEN CASUAL SHOES</p>
           </button>
         </div>
       </section>
 
-      <section className="container mx-auto px-4">
+      {/* <section className="container mx-auto px-4">
         <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl my-8">
-          Best-Selling Women's Shoes
+          <p>Best-Selling Womens Shoes</p>
         </h1>
         <ProductCard2 />
-      </section>
+      </section> */}
 
       <div className="bg-white py-8">
         <Logos />

@@ -1,54 +1,54 @@
-import { useContext, useState ,useEffect} from "react";
-import { contexts } from "../App";
-import axios from "axios";
+import { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import Navibar from "../component/Navibar";
-// import { useCart } from "../CartContext";
+import { toast } from "sonner";
+import userApi from "../../api/userIntrceptor";
 
 
 function Womens() {
-  // const { data, setData } = useContext(contexts);
-  // const women = data.filter((item)=>item.category==='women')
 
-  
-
-  const [data, setData] = useState([]);
-  const [isLiked, setIsLiked] = useState(false);
-  const {addToCart } = useContext(contexts);
-  const navigate = useNavigate()
-
-  const handleHeartClick = () => {
-    setIsLiked(!isLiked);
-  };
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fn = async () => {
-      const response = await axios.get("http://localhost:3000/datass");
-      setData(response.data);
+    const fetchProducts = async () => {
+      try {
+        const response = await userApi.get("/products");
+        setProducts(response?.data.data || []);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+        toast.error("Failed to load products");
+      }
     };
-    fn();
+
+    fetchProducts();
   }, []);
 
-  const handleAddToCart = (item) => {
+  const handleAddToCart = async (item) => {
     const isLoggedIn = !!localStorage.getItem("id");
 
     if (!isLoggedIn) {
       toast.warning("Please login to add items to your cart");
-      navigate('/login');
+      navigate("/login");
     } else {
-      addToCart(item);
-      toast.success("Item added to cart");
+      try {
+        const userId = localStorage.getItem("id"); // Retrieve user ID
+        await userApi.post(`/${userId}/cart/${item.id}`); // Add product to cart
+        toast.success("Item added to cart");
+      } catch (error) {
+        console.error("Failed to add item to cart:", error);
+        toast.error("Could not add item to cart");
+      }
     }
   };
-
 
   return (
     <div>
       <Navibar/>
     <div className="bg-white m-10">
-       <h1 className="text-2xl font-bold leading-7 m-10 ml-40">Women's</h1>
+       <h1 className="text-2xl font-bold leading-7 m-10 ml-40">Womens</h1>
       <div className="flex flex-wrap gap-5 justify-center">
-        {data
+        {products
           .filter((item) => item.category === "women")
           .map((item) => {
             return (
@@ -65,21 +65,7 @@ function Womens() {
                       onClick={()=>navigate(`/detail/${item.id}`)}
                     />
                   </a>
-                  <div
-                    className={`absolute top-2 right-2 cursor-pointer ${
-                      isLiked ? "text-red-500" : "text-gray-500"
-                    }`}
-                    onClick={handleHeartClick}
-                  >
-                    <svg
-                      className="w-6 h-6"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                    </svg>
-                  </div>
+                  
                   <div className="px-5 pb-5 flex flex-col flex-grow m-4">
                     <a href="#">
                       <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">

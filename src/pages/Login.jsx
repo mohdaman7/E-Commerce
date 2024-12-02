@@ -1,9 +1,9 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "sonner";
 import { RiAdminFill } from "react-icons/ri";
+import userApi from "../../api/userIntrceptor";
 
 const signupValidation = yup.object({
   email: yup.string().email("Enter a valid email").required("Email is required"),
@@ -23,7 +23,7 @@ const Login = () => {
     validationSchema: signupValidation,
     onSubmit: async (values) => {
       try {
-        const response = await axios.post("http://localhost:3000/api/users/login", {
+        const response = await userApi.post("/login", {
           email: values.email,
           password: values.password,
         });
