@@ -14,7 +14,7 @@ function Mens() {
         const response = await userApi.get("/products");
         setProducts(response?.data.data || []);
       } catch (error) {
-        console.error("Failed to fetch products:", error);
+        console.error("Failed to fetch products:",error);
         toast.error("Failed to load products");
       }
     };
@@ -58,7 +58,8 @@ function Mens() {
                     className="rounded-t-lg object-cover h-56 w-full"
                     src={item.img}
                     alt="product image"
-                    onClick={()=>navigate(`/detail/${item.id}`)}
+                    onClick={()=>navigate(`/detail/${item._id}`)}
+                    
                   />
                 </a>
                 

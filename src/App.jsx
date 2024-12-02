@@ -77,7 +77,7 @@ function App() {
           <Route path="adidas" element={<Adidas/>}/>
           <Route path="cart" element={<Cart/>}/>
           <Route path="contact" element={<Contect/>}/>
-          <Route path="detail/:userId" element={<DetailProduct/>}/>
+          <Route path="detail/:productid" element={<DetailProduct/>}/>
           <Route path="products" element={<ProductSection/>}/>
           <Route path="users" element={<UserSection/>}/>
           <Route path="admin" element={<Admin/>}/>

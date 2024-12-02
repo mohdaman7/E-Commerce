@@ -59,7 +59,7 @@ const Products = () => {
                   className="rounded-t-lg object-cover h-56 w-full cursor-pointer"
                   src={item?.img}
                   alt={item?.name}
-                  onClick={() => navigate(`/detail/${item?.id}`)}
+                  onClick={() => navigate(`/detail/${item?._id}`)}
                 />
                 <div className="px-5 pb-5 flex flex-col flex-grow m-4">
                   <h3 className="text-gray-900 font-semibold text-lg tracking-tight dark:text-white line-clamp-2">
