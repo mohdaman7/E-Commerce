@@ -31,9 +31,9 @@ const Login = () => {
         if (response.status === 200) {
           const { token, user } = response.data;
 
-          localStorage.setItem("tocken", token);
+          localStorage.setItem("token", token);
           localStorage.setItem("user", JSON.stringify(user));
-
+          console.log(token)
           toast.success("Login successful!");
           navigate("/");
         }

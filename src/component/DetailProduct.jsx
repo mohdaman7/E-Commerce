@@ -1,49 +1,43 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Navibar from "./Navibar";
 import { toast } from "sonner";
 import userApi from "../../api/userIntrceptor";
 
 const DetailProduct = () => {
   const [product, setProduct] = useState(null);
-  const navigate = useNavigate();
   const{productid}=useParams()
+
+  const id = localStorage.getItem("user");
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await userApi.get(`/products/${productid}`);
         setProduct(response?.data?.product)
-        
-   
        
       } catch (error) {
         console.error("Failed to fetch product details:", error);
         toast.error("Failed to load product details");
-        // navigate("/"); // Redirect to home on failure
       }
     };
 
     fetchProduct();
-  }, []);
+  }, [productid]);
 
-  const handleAddToCart = async () => {
-    const isLoggedIn = !!localStorage.getItem("id");
+  const handleAddToCart = async (productId) => {
+    try {
+      const user = JSON.parse(id); 
+      const userId = user._id;
 
-    if (!isLoggedIn) {
-      toast.warning("Please login to add items to your cart");
-      navigate("/login");
-    } else {
-      try {
-        const userId = localStorage.getItem("id");
-        await userApi.post(`/${userId}/cart/${product.id}`);
-        toast.success("Item added to cart");
-      } catch (error) {
-        console.error("Failed to add item to cart:", error);
-        toast.error("Could not add item to cart");
-      }
+      await userApi.post(`/${userId}/cart/${productId}`);
+      toast.success("Item added to cart");
+    } catch (error) {
+      console.error("Failed to add item to cart:", error);
+      toast.error("Could not add item to cart");
     }
   };
+
 
   if (!product) return <div>Loading...</div>;
 
@@ -67,7 +61,7 @@ const DetailProduct = () => {
             <p className="mt-2 text-lg font-semibold">${product.price}</p>
             <p className="mt-4">{product.description || "No description available."}</p>
             <button
-              onClick={handleAddToCart}
+              onClick={handleAddToCart(product._id)}
               className="bg-blue-500 text-white px-4 py-2 rounded mt-6"
             >
               Add to Cart

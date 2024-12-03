@@ -10,6 +10,8 @@ function Womens() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
+  const id = localStorage.getItem("user");
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -24,21 +26,16 @@ function Womens() {
     fetchProducts();
   }, []);
 
-  const handleAddToCart = async (item) => {
-    const isLoggedIn = !!localStorage.getItem("id");
+  const handleAddToCart = async (productId) => {
+    try {
+      const user = JSON.parse(id); 
+      const userId = user._id;
 
-    if (!isLoggedIn) {
-      toast.warning("Please login to add items to your cart");
-      navigate("/login");
-    } else {
-      try {
-        const userId = localStorage.getItem("id"); // Retrieve user ID
-        await userApi.post(`/${userId}/cart/${item.id}`); // Add product to cart
-        toast.success("Item added to cart");
-      } catch (error) {
-        console.error("Failed to add item to cart:", error);
-        toast.error("Could not add item to cart");
-      }
+      await userApi.post(`/${userId}/cart/${productId}`);
+      toast.success("Item added to cart");
+    } catch (error) {
+      console.error("Failed to add item to cart:", error);
+      toast.error("Could not add item to cart");
     }
   };
 
@@ -62,7 +59,7 @@ function Womens() {
                       className="rounded-t-lg object-cover h-56 w-full"
                       src={item.img}
                       alt="product image"
-                      onClick={()=>navigate(`/detail/${item.id}`)}
+                      onClick={()=>navigate(`/detail/${item._id}`)}
                     />
                   </a>
                   
@@ -115,7 +112,7 @@ function Womens() {
                       <a
                         href="#"
                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        onClick={()=>handleAddToCart(item)}
+                        onClick={()=>handleAddToCart(item._id)}
                       >
                         Add to cart
                       </a>

@@ -27,14 +27,14 @@ function Home() {
       <Navibar />
       <Banner />
       <Banner2 />
-      
-      {/* <section className="container mx-auto px-4">
+{/*       
+      <section className="container mx-auto px-4">
         <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl my-8">
           <p>Best-Selling Mens Shoes</p>
         </h1>
         <ProductCard />
-      </section> */}
-      
+      </section>
+       */}
       <div 
         onClick={() => navigate('collections')} 
         className="bg-classic-bg h-[40vh] sm:h-[60vh] lg:h-[80vh] bg-no-repeat mx-4 my-8 cursor-pointer"
