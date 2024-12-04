@@ -7,6 +7,7 @@ import Navibar from "./Navibar";
 const Checkout = () => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
   const [cart, setCart] = useState([]);
+console.log(cart,"aman");
 
   const uId = localStorage.getItem("id");
 

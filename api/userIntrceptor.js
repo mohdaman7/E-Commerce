@@ -12,8 +12,7 @@ userApi.interceptors.request.use(
         if (token) {
             config.headers.authorization = `Bearer ${token}`;
         }
-        // Log request details
-        console.log('Request:', config);
+     
         return config;
     },
     (error) => {

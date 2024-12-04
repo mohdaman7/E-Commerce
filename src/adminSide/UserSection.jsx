@@ -1,48 +1,52 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import AdminNavbar from './AdminNavbar';
-import Sidebar from './Sidebar';
-import { toast } from 'sonner';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import AdminNavbar from "./AdminNavbar";
+import Sidebar from "./Sidebar";
+import { toast } from "sonner";
 
 const UserSection = () => {
   const [users, setUsers] = useState([]);
-  const [blockUsers, setBlockUsers] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await axios.get("http://localhost:3000/users");
-      setUsers(response.data);
+      try {
+        const response = await axios.get("http://localhost:3000/api/admin/viewAllUsers");
+        setUsers(response?.data?.users);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        toast.error("Failed to fetch users.");
+      }
     };
+
     fetchUsers();
   }, []);
 
-  const handleUser = async (id) => {
-    const response = await axios.get(`http://localhost:3000/users/${id}`);
-    const blocks = response.data.block;
-    setBlockUsers(response.data.block);
+  const handleUser = async (id, isDeleted) => {
     try {
-      if (blocks === true && response.data.admin === true) {
-        toast.warning("This is a pro admin");
-      } else if (blocks === true) {
-        await axios.patch(`http://localhost:3000/users/${id}`, {
-          block: false,
-        });
-        toast.success("User unblocked");
-        setUsers(users.map(user => 
-          user.id === id ? { ...user, blocked: false } : user
-        ));
-      } else {
-        await axios.patch(`http://localhost:3000/users/${id}`, {
-          block: true,
-        });
-        toast.warning("User blocked");
-        setUsers(users.map(user => 
-          user.id === id ? { ...user, blocked: true } : user
-        ));
-      }
+      const endpoint = isDeleted
+        ? `http://localhost:3000/api/admin/user/unblock/${id}`
+        : `http://localhost:3000/api/admin/user/block/${id}`;
+  
+      // Make the PUT request
+      const response = await axios.put(endpoint);
+  
+      // Notify success
+      toast.success(response.data.message);
+  
+      // Update the local users state with the updated user object
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user._id === id ? { ...user, isDeleted: !isDeleted } : user
+        )
+      );
     } catch (error) {
-      console.log(error);
+      console.error("Error updating user block status:", error);
+      if (error.response) {
+        toast.error(error.response.data.message || 'Failed to update user status.');
+      } else {
+        toast.error('An unexpected error occurred.');
+      }
     }
   };
 
@@ -51,55 +55,49 @@ const UserSection = () => {
       <AdminNavbar />
       <div className="flex">
         <Sidebar />
-        <main className="flex-1 p-6">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">User Management</h1>
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {users.map((user) => (
-                    <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex items-center">
-                        <span className="material-icons mr-2 text-gray-500">badge</span>
-                        {user.id}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex items-center">
-                        <h1 className="material-icons mr-2 text-gray-500">person</h1>
-                        {user.username}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex items-center">
-                        <span className="material-icons mr-2 text-gray-500">email</span>
-                        {user.email}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {user.cart.length > 0 ? (
-                          <ul className="list-disc pl-4 space-y-1">
-                            {user.cart.map((item) => (
-                              <li key={item.id} className="flex items-center text-gray-600">
-                                <h3 className="material-icons mr-2 text-gray-400">shopping_cart</h3>
-                                {item.name} (${item.price.toFixed(2)})
-                              </li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <h3 className="text-gray-500">No items</h3>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex items-center">
-                        <Link to={`/users/${user.id}`} className="text-blue-500 hover:underline mr-4">View Details</Link>
-                        <button
-                          onClick={() => handleUser(user.id)}
-                          className={`px-4 py-2 rounded-md shadow-md focus:outline-none focus:ring-2 ${user.blocked ? 'bg-green-500 text-white hover:bg-green-600 focus:ring-green-500' : 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-500'}`}
-                        >
-                          {user.blocked ? 'Unblock' : 'Block'}
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+        <main className="flex-1 p-6 space-y-8">
+          <h1 className="text-4xl font-semibold text-gray-900 mb-4">User Management</h1>
+
+          {/* User Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {users.length > 0 ? (
+              users.map((user) => (
+                <div key={user._id} className="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition-all duration-300">
+                  <div className="flex items-center space-x-4">
+                    <div className="bg-gray-300 rounded-full w-16 h-16 flex items-center justify-center text-xl text-white">
+                      {user.username[0].toUpperCase()}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900">{user.username}</h3>
+                      <p className="text-sm text-gray-500">{user.email}</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex justify-between items-center">
+                    <Link to={`/users/${user._id}`} className="text-blue-500 hover:underline">
+                      View Details
+                    </Link>
+                    <button
+                      onClick={() => handleUser(user._id, user.isDeleted)}
+                      className={`px-4 py-2 rounded-md shadow-md focus:outline-none focus:ring-2 ${
+                        user.isDeleted
+                          ? "bg-green-500 text-white hover:bg-green-600 focus:ring-green-500"
+                          : "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500"
+                      }`}
+                    >
+                      {user.isDeleted ? "Unblock" : "Block"}
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full text-center text-gray-500">
+                No users found.
+              </div>
+            )}
           </div>
+
+          {/* Footer or additional content can go here */}
         </main>
       </div>
     </div>

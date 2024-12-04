@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { FaBox, FaUsers, FaDollarSign } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 import AdminNavbar from "./AdminNavbar";
@@ -24,13 +24,7 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-//   users.flatMap((item)=>console.log(item.order,"order") || [])
 
-// console.log(users,"us");
-
-// const allOrders = users.flatMap(user => user.order || []);
-
-// console.log(allOrders,'allOrd');
 
 
   return (

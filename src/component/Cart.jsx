@@ -1,200 +1,239 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Navibar from "./Navibar";
+import userApi from "../../api/userIntrceptor";
 
 const Cart = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
-  // console.log(cart);
+  const userId = JSON.parse(localStorage.getItem("user"))._id;
+  const userName = JSON.parse(localStorage.getItem("user")).username;
+  console.log(cart,'carttttttttttt')
 
-  const uId = localStorage.getItem("id");
-  const fn = async () => {
-    const response = await axios.get(`http://localhost:3000/users/${uId}`);
-    setCart(response.data.cart);
-  };
-  useEffect(() => {
-    // const fn = async () => {
-    //     const response = await axios.get(`http://localhost:3000/users/${uId}`)
-    //     setCart(response.data.cart)
-    // }
-    fn();
-  });
-
-  const removeFromCart = async (item) => {
-
-    let userlocalStorage = localStorage.getItem('user')
-    const user = JSON.parse(userlocalStorage)
-    const token = localStorage.getItem('token')
-
-
+  // Fetch cart items
+  const fetchCart = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/users/${user._id}/cart/${item}/remove`,{
-        headers:{
-          Authorization:`${token}`
-        }
-      })
-      
-      toast.success("item removed success fully", "success")
-
-    } catch (err) {
-      console.log(err,'error to delete cart')
+      const response = await userApi.get(`/${userId}/cart`);
+      console.log("Cart Response Data:", response.data);
+      setCart(response.data);
+    } catch (error) {
+      console.error("Error fetching cart:", error.response || error.message);
+      toast.error(error.response?.data?.message || "Failed to fetch cart items");
     }
+  };
+useEffect(()=>{
+ 
+  fetchCart()
+},[])
+  
 
-    // const del = cart.filter((item) => item.id != id);
-    // await axios.patch(`http://localhost:3000/users/${uId}`, { cart: del });
-    // fn();
-    // toast.success("Item removed");
+  // Add or remove item from the cart
+  const removeFromCart = async (productId) => {
+    try {
+      await userApi.delete(`/${userId}/cart/${productId}/remove`);
+      toast.success("Item removed successfully");
+      fetchCart(); // Refresh the cart
+    } catch (error) {
+      console.error("Error removing item:", error);
+      toast.error("Failed to remove item");
+    }
   };
 
-  const increaseQuantity = async (id) => {
-    const updatedCart = cart.map((item) =>
-      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-    );
-    await axios.patch(`http://localhost:3000/users/${uId}`, {
-      cart: updatedCart,
-    });
-    setCart(updatedCart);
-    toast.success("Quantity increased");
+  // Increase quantity
+  const increaseQuantity = async (productId) => {
+    try {
+      await userApi.patch(`/${userId}/cart/${productId}/increment`);
+      toast.success("Quantity increased");
+      fetchCart(); // Refresh the cart
+    } catch (error) {
+      console.error("Error increasing quantity:", error);
+      toast.error("Failed to increase quantity");
+    }
   };
 
-  const decreaseQuantity = async (id) => {
-    const updatedCart = cart.map((item) =>
-      item.id === id
-        ? { ...item, quantity: Math.max(1, item.quantity - 1) }
-        : item
-    );
-    await axios.patch(`http://localhost:3000/users/${uId}`, {
-      cart: updatedCart,
-    });
-    setCart(updatedCart);
-    toast.success("Quantity decreased");
+  // Decrease quantity
+  const decreaseQuantity = async (productId) => {
+  console.log("anas",productId);
+      try {
+      await userApi.put(`/${userId}/cart/${productId}/decrement`);
+      toast.success("Quantity decreased");
+      fetchCart(); // Refresh the cart
+    } catch (error) {
+      console.error("Error decreasing quantity:", error);
+      toast.error("Failed to decrease quantity");
+    }
   };
 
-  const calculateSubtotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
+  // Calculate totals
+  const calculateSubtotal = () =>
+    cart.reduce((total, item) => total + item.productId.price * item.quantity, 0);
 
-  const calculateTaxes = (subtotal) => {
-    return subtotal * 0.1;
-  };
-
-  const calculateShipping = () => {
-    return 0;
-  };
+  const calculateTaxes = (subtotal) => subtotal * 0.1;
+  const calculateShipping = () => (cart.length > 0 ? 10 : 0);
 
   const subtotal = calculateSubtotal();
   const taxes = calculateTaxes(subtotal);
   const shipping = calculateShipping();
   const total = subtotal + taxes + shipping;
 
+  const handleCheckout = async () => {
+    const razorpayScript = await loadRazorpayScript();
+    if (!razorpayScript) {
+      toast.error("Razorpay SDK failed to load");
+      return;
+    }
+  
+    const options = {
+      key: "rzp_test_lLKCq4tE7vs1RP", // Replace with your Razorpay API key
+      amount: Math.round(total * 100), // Amount in the smallest currency unit (paise)
+      currency: "INR",
+      name: "FOOTZONE",
+      description: "Purchase from FOOTZONE",
+      image: "https://example.com/logo.png", // Replace with your logo URL
+      handler: async function (response) {
+        console.log(response);
+        // On successful payment, clear the cart and navigate to the home page
+        try {
+
+          toast.success("Payment successful!").then(() => {
+            navigate("/"); 
+          });
+        } catch (error) {
+          toast.error("Failed to clear cart");
+        }
+      },
+      prefill: {
+        name: userName, // Replace with user's name
+        email: "johndoe@example.com", // Replace with user's email
+        contact: "9876543210", // Replace with user's contact
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+  
+    const razorpay = new Razorpay(options);
+    razorpay.open();
+  };
+  
+  
+
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+
   return (
     <div>
-        <Navibar/>
-    <div className="bg-gray-100 h-screen py-8">
-      <div className="container mx-auto px-4">
-        <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="md:w-3/4">
-            <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-              <table className="w-full">
-                <thead>
-                  <tr>
-                    <th className="text-left font-semibold">Product</th>
-                    <th className="text-left font-semibold">Price</th>
-                    <th className="text-left font-semibold">Quantity</th>
-                    <th className="text-left font-semibold">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cart.length === 0 ? (
+      <Navibar />
+      <div className="bg-gray-100 h-screen py-8">
+        <div className="container mx-auto px-4">
+          <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="md:w-3/4">
+              <div className="bg-white rounded-lg shadow-md p-6 mb-4">
+                <table className="w-full">
+                  <thead>
                     <tr>
-                      <td colSpan="4" className="py-4 text-center">
-                        Your cart is empty.
-                      </td>
+                      <th>Product</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Total</th>
+                      <th>Actions</th>
                     </tr>
-                  ) : (
-                    cart.map((item) => (
-                      <tr key={item.id}>
-                        <td className="py-4">
-                          <div className="flex items-center">
-                            <img
-                              className="h-16 w-16 mr-4"
-                              src={item.img}
-                              alt={item.name}
-                            />
-                            <span className="font-semibold">{item.name}</span>
-                          </div>
-                        </td>
-                        <td className="py-4">${item.price.toFixed(2)}</td>
-                        <td className="py-4">
-                          <div className="flex items-center">
-                            <button
-                              onClick={() => decreaseQuantity(item.id)}
-                              className="border rounded-md py-2 px-4 mr-2"
-                            >
-                              -
-                            </button>
-                            {/* <span className="text-center w-8">{item.quantity}</span> */}
-                            <h1>{item.quantity}</h1>
-                            <button
-                              onClick={() => increaseQuantity(item.id)}
-                              className="border rounded-md py-2 px-4 ml-2"
-                            >
-                              +
-                            </button>
-                          </div>
-                        </td>
-                        <td className="py-4">
-                          ${(item.price * item.quantity).toFixed(2)}
-                        </td>
-                        <td className="py-4">
-                          <button
-                            onClick={() => removeFromCart(item.productId._id)}
-                            className="text-red-500 hover:text-red-700"
-                          >
-                            Remove
-                          </button>
+                  </thead>
+                  <tbody>
+                    {cart.length === 0 ? (
+                      <tr>
+                        <td colSpan="5" className="py-4 text-center">
+                          Your cart is empty.
                         </td>
                       </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
+                    ) : (
+                      cart.map((item) => (
+                        <tr key={item._id}>
+                          <td>
+                            <div className="flex items-center">
+                              <img
+                                src={item.productId.image}
+                                alt={item.productId.name}
+                                className="h-16 w-16 mr-4"
+                              />
+                              <span>{item.productId.name}</span>
+                            </div>
+                          </td>
+                          <td>${item.productId.price.toFixed(2)}</td>
+                          <td>
+                            <div className="flex items-center">
+                              <button
+                                onClick={() => decreaseQuantity(item.productId._id)}
+                                className="border rounded-md py-2 px-4 mr-2"
+                              >
+                                -
+                              </button>
+                              <span>{item.quantity}</span>
+                              <button
+                                onClick={() => increaseQuantity(item.productId._id)}
+                                className="border rounded-md py-2 px-4 ml-2"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </td>
+                          <td>${(item.productId.price * item.quantity).toFixed(2)}</td>
+                          <td>
+                            <button
+                              onClick={() => removeFromCart(item.productId._id)}
+                              className="text-red-500 hover:text-red-700"
+                            >
+                              Remove
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <div className="md:w-1/4">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-lg font-semibold mb-4">Summary</h2>
-              <div className="flex justify-between mb-2">
-                <h1>Subtotal</h1>
-                <h1>${subtotal.toFixed(2)}</h1>
+            <div className="md:w-1/4">
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <h2 className="text-lg font-semibold mb-4">Summary</h2>
+                <div className="flex justify-between mb-2">
+                  <span>Subtotal</span>
+                  <span>${subtotal.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between mb-2">
+                  <span>Taxes</span>
+                  <span>${taxes.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between mb-2">
+                  <span>Shipping</span>
+                  <span>${shipping.toFixed(2)}</span>
+                </div>
+                <hr className="my-2" />
+                <div className="flex justify-between font-bold">
+                  <span>Total</span>
+                  <span>${total.toFixed(2)}</span>
+                </div>
+                <button
+                  className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full"
+                  onClick={handleCheckout}
+                >
+                  Checkout
+                </button>
               </div>
-              <div className="flex justify-between mb-2">
-                <h1>Taxes</h1>
-                <h1>${taxes.toFixed(2)}</h1>
-              </div>
-              <div className="flex justify-between mb-2">
-                <h1>Shipping</h1>
-                <h1>${shipping.toFixed(2)}</h1>
-              </div>
-              <hr className="my-2" />
-              <div className="flex justify-between mb-2">
-                <h1 className="font-semibold">Total</h1>
-                <h1 className="font-semibold">${total.toFixed(2)}</h1>
-              </div>
-              <button
-                className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full"
-                onClick={() => navigate("/checkout")}
-              >
-                Checkout
-              </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };

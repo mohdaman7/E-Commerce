@@ -1,290 +1,206 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import AdminNavbar from "./AdminNavbar";
 import axios from "axios";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { toast } from "sonner";
 
 const ProductSection = () => {
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState(["men", "women", "kids"]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
-    id: "",
-    price: "",
-    marketRate: "",
-    img: "",
+    _id: "",
     name: "",
-    brand: "",
+    description: "",
+    price: "",
+    image: "",
     category: "",
-    quantity: "",
-    rating: "",
   });
-  const [showForm, setShowForm] = useState(false);
-  const [showProduct, setShowProduct] = useState(true);
+  const [editMode, setEditMode] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/datass");
-        setProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
     fetchProducts();
   }, []);
 
-  const handleChange = (e) => {
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("http://localhost:3000/api/admin/products");
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      toast.error("Failed to load products!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
     }));
   };
 
-  const handleAddProduct = async () => {
-    const newProduct = {
-      ...formData,
-      price: parseFloat(formData.price),
-      marketRate: parseFloat(formData.marketRate),
-      quantity: parseInt(formData.quantity, 10),
-      rating: parseInt(formData.rating, 10),
-    };
+  const handleSaveProduct = async () => {
+    const { _id, ...data } = formData;
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/datass",
-        newProduct
-      );
-      const addedProduct = response.data;
-
-      setProducts((prevProducts) => [...prevProducts, addedProduct]);
+      if (editMode) {
+        await axios.put(`http://localhost:3000/api/admin/products/edit/${_id}`, data);
+        setProducts((prev) =>
+          prev.map((product) => (product._id === _id ? { ...product, ...data } : product))
+        );
+        toast.success("Product updated successfully!");
+      } else {
+        const response = await axios.post("http://localhost:3000/api/admin/createproducts", data);
+        setProducts((prev) => [...prev, response.data]);
+        toast.success("Product added successfully!");
+      }
       resetForm();
-      setShowForm(false);
-      setShowProduct(true); 
     } catch (error) {
-      console.error("Error adding product:", error);
+      console.error("Error saving product:", error);
+      toast.error("Failed to save product!");
     }
   };
 
-  const handleDeleteProduct = async (id) => {
+  const handleDeleteProduct = async (_id) => {
     try {
-      await axios.delete(`http://localhost:3000/datass/${id}`);
-      setProducts((prevProducts) =>
-        prevProducts.filter((product) => product.id !== id)
-      );
+      await axios.delete(`http://localhost:3000/api/admin/products/delete/${_id}`);
+      setProducts((prev) => prev.filter((product) => product._id !== _id));
+      toast.success("Product deleted successfully!");
     } catch (error) {
       console.error("Error deleting product:", error);
-    }
-  };
-
-  const handleEditProduct = async () => {
-    const updatedProduct = {
-      ...formData,
-      price: parseFloat(formData.price),
-      marketRate: parseFloat(formData.marketRate),
-      quantity: parseInt(formData.quantity, 10),
-      rating: parseInt(formData.rating, 10),
-    };
-
-    try {
-      await axios.put(
-        `http://localhost:3000/datass/${formData.id}`,
-        updatedProduct
-      );
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === formData.id ? updatedProduct : product
-        )
-      );
-      resetForm();
-      setShowForm(false);
-      setShowProduct(true);
-    } catch (error) {
-      console.error("Error updating product:", error);
-    }
-  };
-
-  const handleSaveProduct = () => {
-    if (editMode) {
-      handleEditProduct();
-    } else {
-      handleAddProduct();
+      toast.error("Failed to delete product!");
     }
   };
 
   const handleEditClick = (product) => {
-    setFormData({
-      id: product.id,
-      price: product.price.toString(),
-      marketRate: product.marketRate.toString(),
-      img: product.img,
-      name: product.name,
-      brand: product.brand,
-      category: product.category,
-      quantity: product.quantity.toString(),
-      rating: product.rating.toString()
-    });
-    setSelectedProduct(product);
+    setFormData({ ...product });
     setEditMode(true);
-    setShowForm(true);
-    setShowProduct(false); 
+    setModalOpen(true);
   };
 
   const resetForm = () => {
     setFormData({
-      id: '',
-      price: '',
-      marketRate: '',
-      img: '',
-      name: '',
-      brand: '',
-      category: '',
-      quantity: '',
-      rating: ''
+      _id: "",
+      name: "",
+      description: "",
+      price: "",
+      image: "",
+      category: "",
     });
     setEditMode(false);
-    setSelectedProduct(null);
+    setModalOpen(false);
   };
 
-  const filteredProducts = selectedCategory
-    ? products.filter((product) => product.category === selectedCategory)
-    : products;
-
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100">
       <AdminNavbar />
       <div className="flex">
         <Sidebar />
-        <main className="flex-1 p-6">
-          <h1 className="text-4xl font-bold text-gray-800 mb-6">Product Management</h1>
+        <main className="flex-1 p-6 space-y-8">
+          <h1 className="text-4xl font-semibold text-gray-900 mb-4">Product Management</h1>
 
-          <div className="flex justify-end mb-4">
+          {/* Add Product Button */}
+          <div className="flex justify-end">
             <button
-              onClick={() => {
-                setShowForm(!showForm);
-                setShowProduct(prev => !prev); 
-              }}
-              className="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center"
+              onClick={() => setModalOpen(true)}
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
             >
-              <span className="material-icons mr-2 text-white">add_circle</span>
-              {showForm ? 'Hide Form' : 'Add New Product'}
+              Add Product
             </button>
           </div>
 
-          {showForm && (
-            <div className="bg-white shadow-md rounded-lg p-8 mb-8">
-              <h2 className="text-3xl font-semibold text-gray-900 mb-6 flex items-center">
-                {editMode ? (
-                  <>
-                    <span className="material-icons align-middle text-gray-700">edit</span>
-                    <span className="ml-2">Edit Product</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="material-icons align-middle text-gray-700">add_circle</span>
-                    <span className="ml-2">Add New Product</span>
-                  </>
-                )}
-              </h2>
-              <form className="space-y-6">
-                {Object.keys(formData).map((key) => (
-                  <div className="flex flex-col" key={key}>
-                    <label className="text-sm font-medium text-gray-700 mb-1 capitalize">
-                      {key}
-                    </label>
-                    <input
-                      type={key === 'price' || key === 'marketRate' || key === 'quantity' || key === 'rating' ? 'number' : 'text'}
-                      name={key}
-                      value={formData[key]}
-                      onChange={handleChange}
-                      className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      step={key === 'price' || key === 'marketRate' ? '0.01' : '1'}
-                    />
+          {/* Product Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {loading ? (
+              <div className="col-span-full text-center py-6">Loading...</div>
+            ) : (
+              products.map((product) => (
+                <div
+                  key={product._id}
+                  className="bg-white shadow-lg rounded-lg p-4 hover:shadow-2xl transition-all duration-300"
+                >
+                  <img
+                    src={product.img || "/placeholder.jpg"}
+                    alt={product.name}
+                    className="w-full h-48 object-cover rounded-lg mb-4"
+                  />
+                  <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
+                  <p className="text-sm text-gray-600 my-2">{product.description}</p>
+                  <div className="flex justify-between items-center mt-4">
+                    <span className="text-lg font-bold text-gray-700">${product.price}</span>
+                    <div className="flex space-x-4">
+                      <button
+                        onClick={() => handleEditClick(product)}
+                        className="text-blue-500 hover:text-blue-600"
+                      >
+                        <FaEdit />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteProduct(product._id)}
+                        className="text-red-500 hover:text-red-600"
+                      >
+                        <FaTrashAlt />
+                      </button>
+                    </div>
                   </div>
-                ))}
-                <div className="flex gap-4">
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* Modal */}
+          {modalOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+              <div className="bg-white rounded-lg shadow-lg w-full max-w-md">
+                <div className="flex justify-between items-center p-4 border-b">
+                  <h2 className="text-lg font-semibold text-blue-600">
+                    {editMode ? "Edit Product" : "Add Product"}
+                  </h2>
                   <button
-                    type="button"
-                    onClick={handleSaveProduct}
-                    className="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center"
+                    onClick={resetForm}
+                    className="text-gray-400 hover:text-red-600 focus:outline-none"
                   >
-                    <span className="material-icons mr-2 text-white">save</span>
-                    {editMode ? 'Update Product' : 'Add Product'}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      resetForm();
-                      setShowForm(false);
-                      setShowProduct(true); // Show products list again
-                    }}
-                    className="bg-gray-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 flex items-center"
-                  >
-                    <span className="material-icons mr-2 text-white">cancel</span>
-                    Cancel
+                    ✖
                   </button>
                 </div>
-              </form>
-            </div>
-          )}
-
-          {showProduct && (
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
-              <div className="p-4 border-b border-gray-200">
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center"
-                >
-                  <option value="">All Categories</option>
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category.charAt(0).toUpperCase() + category.slice(1)}
-                    </option>
-                  ))}
-                </select>
+                <div className="p-4">
+                  <form className="space-y-4">
+                    {["name", "description", "price", "image", "category"].map((field) => (
+                      <div key={field}>
+                        <label className="block text-sm font-medium text-gray-700 capitalize">{field}</label>
+                        <input
+                          type={field === "price" ? "number" : "text"}
+                          name={field}
+                          value={formData[field]}
+                          onChange={handleInputChange}
+                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        />
+                      </div>
+                    ))}
+                    <div className="flex gap-4">
+                      <button
+                        type="button"
+                        onClick={handleSaveProduct}
+                        className="bg-green-600 text-white px-6 py-3 rounded-lg w-full hover:bg-green-700"
+                      >
+                        Save
+                      </button>
+                      <button
+                        type="button"
+                        onClick={resetForm}
+                        className="bg-gray-400 text-white px-6 py-3 rounded-lg w-full hover:bg-gray-500"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Image</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Price</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Category</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredProducts.map((product) => (
-                    <tr key={product.id}>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-900">{product.id}</td>
-                      <td className="px-6 py-4 text-sm text-gray-500">
-                        <img src={product.img} alt={product.name} className="w-16 h-16 object-cover rounded" />
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-900">{product.name}</td>
-                      <td className="px-6 py-4 text-sm text-gray-500">${product.price.toFixed(2)}</td>
-                      <td className="px-6 py-4 text-sm text-gray-500">{product.category}</td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-500">
-                        <button
-                          onClick={() => handleEditClick(product)}
-                          className="text-blue-600 hover:text-blue-800"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDeleteProduct(product.id)}
-                          className="text-red-600 hover:text-red-800 ml-4"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
             </div>
           )}
         </main>
