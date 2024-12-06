@@ -1,144 +1,159 @@
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Navibar from "./Navibar";
-import userApi from "../../api/userIntrceptor";
+import axios from "axios";
+// import userApi from "../../api/userIntrceptor";
 
 const Cart = () => {
-  const navigate = useNavigate();
   const [cart, setCart] = useState([]);
-  const userId = JSON.parse(localStorage.getItem("user"))._id;
-  const userName = JSON.parse(localStorage.getItem("user")).username;
-  console.log(cart,'carttttttttttt')
+  const [loading, setLoading] = useState(true); // State for loading
+  const [error, setError] = useState(null); // State for errors
+
+  const navigate = useNavigate();
+  const userId = JSON.parse(localStorage.getItem("user"))?._id;
+  const userName = JSON.parse(localStorage.getItem("user"))?.username;
+  const token = localStorage.getItem("token");
+
 
   // Fetch cart items
   const fetchCart = async () => {
+    setLoading(true);
+    setError(null);
     try {
-      const response = await userApi.get(`/${userId}/cart`);
-      console.log("Cart Response Data:", response.data);
-      setCart(response.data);
-    } catch (error) {
-      console.error("Error fetching cart:", error.response || error.message);
-      toast.error(error.response?.data?.message || "Failed to fetch cart items");
+      const response = await axios.get(
+        `http://localhost:3000/api/users/${userId}/cart`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setCart(response.data.data);
+    } catch (err) {
+      setError("Failed to fetch cart items. Please try again.");
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
-useEffect(()=>{
- 
-  fetchCart()
-},[])
-  
 
-  // Add or remove item from the cart
-  const removeFromCart = async (productId) => {
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  // Cart operations
+  const updateCart = async (endpoint, method, productId) => {
     try {
-      await userApi.delete(`/${userId}/cart/${productId}/remove`);
-      toast.success("Item removed successfully");
-      fetchCart(); // Refresh the cart
-    } catch (error) {
-      console.error("Error removing item:", error);
-      toast.error("Failed to remove item");
+      await axios({
+        url: `http://localhost:3000/api/users/${userId}/cart/${productId}/${endpoint}`,
+        method,
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchCart();
+      toast.success("Cart updated successfully");
+    } catch (err) {
+      toast.error("Failed to update cart");
+      console.error(err);
     }
   };
 
-  // Increase quantity
-  const increaseQuantity = async (productId) => {
-    try {
-      await userApi.patch(`/${userId}/cart/${productId}/increment`);
-      toast.success("Quantity increased");
-      fetchCart(); // Refresh the cart
-    } catch (error) {
-      console.error("Error increasing quantity:", error);
-      toast.error("Failed to increase quantity");
-    }
+  const removeFromCart = (productId) =>
+    updateCart("remove", "delete", productId);
+  const increaseQuantity = (productId) =>
+    updateCart("increment", "patch", productId);
+  const decreaseQuantity = (productId) =>
+    updateCart("decrement", "put", productId);
+
+  // Totals calculation
+
+  const calculateTotals = () => {
+    const subtotal = cart?.reduce(
+      (sum, item) => sum + item?.productId?.price * item?.quantity,
+      0
+    );
+    const taxes = subtotal * 0.1;
+    const shipping = cart.length > 0 ? 10 : 0;
+    return { subtotal, taxes, shipping, total: subtotal + taxes + shipping };
   };
 
-  // Decrease quantity
-  const decreaseQuantity = async (productId) => {
-  console.log("anas",productId);
-      try {
-      await userApi.put(`/${userId}/cart/${productId}/decrement`);
-      toast.success("Quantity decreased");
-      fetchCart(); // Refresh the cart
-    } catch (error) {
-      console.error("Error decreasing quantity:", error);
-      toast.error("Failed to decrease quantity");
-    }
-  };
+  const { subtotal, taxes, shipping, total } = calculateTotals();
 
-  // Calculate totals
-  const calculateSubtotal = () =>
-    cart.reduce((total, item) => total + item.productId.price * item.quantity, 0);
-
-  const calculateTaxes = (subtotal) => subtotal * 0.1;
-  const calculateShipping = () => (cart.length > 0 ? 10 : 0);
-
-  const subtotal = calculateSubtotal();
-  const taxes = calculateTaxes(subtotal);
-  const shipping = calculateShipping();
-  const total = subtotal + taxes + shipping;
-
+  // Razorpay Integration
   const handleCheckout = async () => {
-    const razorpayScript = await loadRazorpayScript();
-    if (!razorpayScript) {
-      toast.error("Razorpay SDK failed to load");
+    const loadScript = () =>
+      new Promise((resolve) => {
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.body.appendChild(script);
+      });
+
+    const razorpayLoaded = await loadScript();
+    if (!razorpayLoaded) {
+      toast.error("Failed to load Razorpay SDK");
       return;
     }
-  
-    const options = {
-      key: "rzp_test_lLKCq4tE7vs1RP", // Replace with your Razorpay API key
-      amount: Math.round(total * 100), // Amount in the smallest currency unit (paise)
-      currency: "INR",
-      name: "FOOTZONE",
-      description: "Purchase from FOOTZONE",
-      image: "https://example.com/logo.png", // Replace with your logo URL
-      handler: async function (response) {
-        console.log(response);
-        // On successful payment, clear the cart and navigate to the home page
-        try {
 
-          toast.success("Payment successful!").then(() => {
-            navigate("/"); 
-          });
-        } catch (error) {
-          toast.error("Failed to clear cart");
-        }
-      },
-      prefill: {
-        name: userName, // Replace with user's name
-        email: "johndoe@example.com", // Replace with user's email
-        contact: "9876543210", // Replace with user's contact
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
-  
-    const razorpay = new Razorpay(options);
-    razorpay.open();
+    try {
+      const { data } = await axios.post(
+        `http://localhost:3000/api/users/payment/${userId}`,
+        { amount: subtotal },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const options = {
+        key: "rzp_test_lLKCq4tE7vs1RP",
+        amount: data.amount,
+        currency: data.currency,
+        name: "Footzone",
+        description: "Purchase",
+        image: "/logo.png",
+        order_id: data.id,
+        handler: async (response) => {
+          const paymentData = {
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+          };
+
+          try {
+            await axios.post(
+              `http://localhost:3000/api/users/verifypayment`,
+              paymentData,
+              { headers: { Authorization: `Bearer ${token}` } }
+            );
+            toast.success("Payment successful!");
+            setCart([]);
+            navigate("/");
+          } catch (err) {
+            toast.error("Payment verification failed");
+            console.error(err);
+          }
+        },
+        prefill: {
+          name: userName,
+          email: "user@example.com",
+          contact: "1234567890",
+        },
+        theme: { color: "#3399cc" },
+      };
+
+      const razorpay = new Razorpay(options);
+      razorpay.open();
+    } catch (err) {
+      toast.error("Checkout failed");
+      console.error(err);
+    }
   };
-  
-  
-
-  const loadRazorpayScript = () => {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
-      document.body.appendChild(script);
-    });
-  };
-
 
   return (
     <div>
       <Navibar />
-      <div className="bg-gray-100 h-screen py-8">
+      <div className="bg-gray-100 py-8">
         <div className="container mx-auto px-4">
           <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
           <div className="flex flex-col md:flex-row gap-4">
+            {/* Cart Items Section */}
             <div className="md:w-3/4">
-              <div className="bg-white rounded-lg shadow-md p-6 mb-4">
+              <div className="bg-white rounded-lg shadow-md p-6">
                 <table className="w-full">
                   <thead>
                     <tr>
@@ -146,13 +161,31 @@ useEffect(()=>{
                       <th>Price</th>
                       <th>Quantity</th>
                       <th>Total</th>
-                      <th>Actions</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {cart.length === 0 ? (
+                    {loading ? (
                       <tr>
-                        <td colSpan="5" className="py-4 text-center">
+                        <td colSpan="5" className="text-center py-4">
+                          Loading...
+                        </td>
+                      </tr>
+                    ) : error ? (
+                      <tr>
+                        <td colSpan="5" className="text-center py-4">
+                          {error}{" "}
+                          <button
+                            onClick={fetchCart}
+                            className="text-blue-500 underline"
+                          >
+                            Retry
+                          </button>
+                        </td>
+                      </tr>
+                    ) : cart.length === 0 ? (
+                      <tr>
+                        <td colSpan="5" className="text-center py-4">
                           Your cart is empty.
                         </td>
                       </tr>
@@ -162,36 +195,40 @@ useEffect(()=>{
                           <td>
                             <div className="flex items-center">
                               <img
-                                src={item.productId.image}
-                                alt={item.productId.name}
+                                src={item?.productId?.img}
+                                alt={item?.productId?.name}
                                 className="h-16 w-16 mr-4"
                               />
-                              <span>{item.productId.name}</span>
+                              <span>{item?.productId?.title}</span>
                             </div>
                           </td>
-                          <td>${item.productId.price.toFixed(2)}</td>
+                          <td>${item?.productId?.price}</td>
                           <td>
                             <div className="flex items-center">
                               <button
-                                onClick={() => decreaseQuantity(item.productId._id)}
-                                className="border rounded-md py-2 px-4 mr-2"
+                                onClick={() =>
+                                  decreaseQuantity(item?.productId?._id)
+                                }
+                                className="px-2"
                               >
                                 -
                               </button>
-                              <span>{item.quantity}</span>
+                              <span>{item?.quantity}</span>
                               <button
-                                onClick={() => increaseQuantity(item.productId._id)}
-                                className="border rounded-md py-2 px-4 ml-2"
+                                onClick={() =>
+                                  increaseQuantity(item?.productId?._id)
+                                }
+                                className="px-2"
                               >
                                 +
                               </button>
                             </div>
                           </td>
-                          <td>${(item.productId.price * item.quantity).toFixed(2)}</td>
+                          <td>${item?.productId?.price * item?.quantity}</td>
                           <td>
                             <button
-                              onClick={() => removeFromCart(item.productId._id)}
-                              className="text-red-500 hover:text-red-700"
+                              onClick={() => removeFromCart(item?.productId?._id)}
+                              className="text-red-500"
                             >
                               Remove
                             </button>
@@ -203,31 +240,23 @@ useEffect(()=>{
                 </table>
               </div>
             </div>
+
+            {/* Summary Section */}
             <div className="md:w-1/4">
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h2 className="text-lg font-semibold mb-4">Summary</h2>
-                <div className="flex justify-between mb-2">
-                  <span>Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                  <span>Taxes</span>
-                  <span>${taxes.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                  <span>Shipping</span>
-                  <span>${shipping.toFixed(2)}</span>
-                </div>
-                <hr className="my-2" />
-                <div className="flex justify-between font-bold">
-                  <span>Total</span>
-                  <span>${total.toFixed(2)}</span>
+                <div>
+                  <p>Subtotal: ${subtotal.toFixed(2)}</p>
+                  <p>Taxes: ${taxes.toFixed(2)}</p>
+                  <p>Shipping: ${shipping.toFixed(2)}</p>
+                  <hr />
+                  <p>Total: ${total.toFixed(2)}</p>
                 </div>
                 <button
-                  className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full"
                   onClick={handleCheckout}
+                  className="bg-blue-500 text-white py-2 px-4 rounded-lg w-full mt-4"
                 >
-                  Checkout
+                  Proceed to Checkout
                 </button>
               </div>
             </div>

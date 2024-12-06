@@ -28,13 +28,13 @@ const UserSection = () => {
         ? `http://localhost:3000/api/admin/user/unblock/${id}`
         : `http://localhost:3000/api/admin/user/block/${id}`;
   
-      // Make the PUT request
+      
       const response = await axios.put(endpoint);
   
-      // Notify success
+    
       toast.success(response.data.message);
   
-      // Update the local users state with the updated user object
+      
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user._id === id ? { ...user, isDeleted: !isDeleted } : user
@@ -58,7 +58,7 @@ const UserSection = () => {
         <main className="flex-1 p-6 space-y-8">
           <h1 className="text-4xl font-semibold text-gray-900 mb-4">User Management</h1>
 
-          {/* User Cards */}
+        
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {users.length > 0 ? (
               users.map((user) => (

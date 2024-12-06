@@ -67,9 +67,9 @@ const Register = () => {
           "url('https://img.freepik.com/premium-photo/pair-sneakers-with-wings-made-glowing-neon-light-sneakers-are-blue-pink-wings-are-bright-white_14117-469513.jpg')",
       }}
     >
-      <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-      <div className="relative z-10 w-96 max-w-lg p-6 bg-transparent bg-opacity-10 rounded-xl shadow-lg m-7">
+      <div className="relative z-10 w-96 max-w-lg p-6 bg-transparent bg-opacity-70 rounded-xl shadow-lg m-7">
         <div className="text-center mb-6">
           <img
             src="https://i.pinimg.com/736x/68/8d/61/688d612e430fde6ad82c6f07ef893fa4.jpg"

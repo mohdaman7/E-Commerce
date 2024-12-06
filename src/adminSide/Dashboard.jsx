@@ -1,27 +1,38 @@
 import  { useEffect, useState } from "react";
-import { FaBox, FaUsers, FaDollarSign } from "react-icons/fa";
+import { FaBox, FaUsers } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 import AdminNavbar from "./AdminNavbar";
 import axios from "axios";
+import { toast } from "sonner";
 
 const Dashboard = () => {
-  const [stats, setStats] = useState({
-    totalProducts: 0,
-    totalUsers: 0,
-    totalSales: 0,
-  });
-  const [data, setData] = useState([]);
+  const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
-  const [profit,setProfit] = useState([])
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("http://localhost:3000/datass");
-      const res = await axios.get("http://localhost:3000/users");
-      setData(response.data);
-      setUsers(res.data);
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/admin/viewAllUsers");
+        setUsers(response?.data?.users);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        toast.error("Failed to fetch users.");
+      }
+    }
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/admin/products");
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        toast.error("Failed to load products!");
+      } 
     };
-    fetchData();
+    fetchProducts()
   }, []);
 
 
@@ -41,7 +52,7 @@ const Dashboard = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold">Total Products</h3>
-                <p className="text-2xl font-bold">{data.length}</p>
+                <p className="text-2xl font-bold">{products?.length}</p>
               </div>
             </div>
             <div className="bg-green-500 text-white shadow-md rounded-lg p-6 flex items-center">
@@ -50,7 +61,7 @@ const Dashboard = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold">Total Users</h3>
-                <p className="text-2xl font-bold">{users.length}</p>
+                <p className="text-2xl font-bold">{users?.length}</p>
               </div>
             </div>
             {/* <div className="bg-yellow-500 text-white shadow-md rounded-lg p-6 flex items-center">

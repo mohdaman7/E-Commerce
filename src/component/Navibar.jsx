@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { contexts } from "../App";
 import axios from "axios";
 import { Badge } from "@material-tailwind/react";
+import { RiBox3Line } from "react-icons/ri";
 
 function Navibar() {
   const { setSearch } = useContext(contexts);
@@ -85,6 +86,9 @@ function Navibar() {
                 />
               </div>
 
+              <NavLink to="/order" className="relative mx-4 hidden md:block pr-10">
+                <RiBox3Line/>
+              </NavLink>
               <div className="hidden xl:flex items-center space-x-5">
                 <Badge
                   content={cart?.length > 0 ? cart.length : ""}
